@@ -1,0 +1,506 @@
+{
+ "q05_ok.mp3": {
+  "hash": "bf5cc209",
+  "chars": 51,
+  "sec": 9.4,
+  "label": "Q5（B）講解-對",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:57"
+ },
+ "q01_ok.mp3": {
+  "hash": "88064525",
+  "chars": 42,
+  "sec": 11.2,
+  "label": "Q1（A）講解-對",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:57"
+ },
+ "q01_ng.mp3": {
+  "hash": "8425a4fd",
+  "chars": 60,
+  "sec": 13.1,
+  "label": "Q1（A）講解-錯",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:57"
+ },
+ "q02_ok.mp3": {
+  "hash": "f7ade9d3",
+  "chars": 37,
+  "sec": 10.1,
+  "label": "Q2（A）講解-對",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:57"
+ },
+ "q02_ng.mp3": {
+  "hash": "dc3c7109",
+  "chars": 47,
+  "sec": 10.5,
+  "label": "Q2（A）講解-錯",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:57"
+ },
+ "q03_ok.mp3": {
+  "hash": "d8f73967",
+  "chars": 30,
+  "sec": 7.7,
+  "label": "Q3（A）講解-對",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:57"
+ },
+ "q03_ng.mp3": {
+  "hash": "08491aef",
+  "chars": 46,
+  "sec": 10.7,
+  "label": "Q3（A）講解-錯",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:57"
+ },
+ "q04_ok.mp3": {
+  "hash": "b4ec5b31",
+  "chars": 28,
+  "sec": 8.3,
+  "label": "Q4（B）講解-對",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q04_ng.mp3": {
+  "hash": "1430bd60",
+  "chars": 45,
+  "sec": 9.9,
+  "label": "Q4（B）講解-錯",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q05_ng.mp3": {
+  "hash": "04a23abc",
+  "chars": 70,
+  "sec": 13.4,
+  "label": "Q5（B）講解-錯",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q06_ok.mp3": {
+  "hash": "ccff1515",
+  "chars": 48,
+  "sec": 11.7,
+  "label": "Q6（C）講解-對",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q06_ng.mp3": {
+  "hash": "ba7b8373",
+  "chars": 47,
+  "sec": 10.9,
+  "label": "Q6（C）講解-錯",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q07_ok.mp3": {
+  "hash": "8d7278fc",
+  "chars": 32,
+  "sec": 8.1,
+  "label": "Q7（C）講解-對",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q07_ng.mp3": {
+  "hash": "cd09e7c8",
+  "chars": 49,
+  "sec": 10.8,
+  "label": "Q7（C）講解-錯",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q08_ok.mp3": {
+  "hash": "b20085f4",
+  "chars": 38,
+  "sec": 9.7,
+  "label": "Q8（D）講解-對",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q08_ng.mp3": {
+  "hash": "887f8034",
+  "chars": 64,
+  "sec": 14.3,
+  "label": "Q8（D）講解-錯",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q09_ok.mp3": {
+  "hash": "3a4167cf",
+  "chars": 19,
+  "sec": 5.9,
+  "label": "Q9（D）講解-對",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q09_ng.mp3": {
+  "hash": "afb6f60f",
+  "chars": 38,
+  "sec": 9.0,
+  "label": "Q9（D）講解-錯",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q10_ok.mp3": {
+  "hash": "494f11b3",
+  "chars": 21,
+  "sec": 6.6,
+  "label": "Q10（D）講解-對",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q10_ng.mp3": {
+  "hash": "338329da",
+  "chars": 44,
+  "sec": 10.6,
+  "label": "Q10（D）講解-錯",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q11_ok.mp3": {
+  "hash": "35757076",
+  "chars": 37,
+  "sec": 8.8,
+  "label": "Q11（D）講解-對",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q11_ng.mp3": {
+  "hash": "cb05bb59",
+  "chars": 53,
+  "sec": 11.5,
+  "label": "Q11（D）講解-錯",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q12_ok.mp3": {
+  "hash": "cf561ea5",
+  "chars": 46,
+  "sec": 10.3,
+  "label": "Q12（E）講解-對",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q12_ng.mp3": {
+  "hash": "783164a8",
+  "chars": 39,
+  "sec": 9.0,
+  "label": "Q12（E）講解-錯",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q13_ok.mp3": {
+  "hash": "240ad81c",
+  "chars": 34,
+  "sec": 8.2,
+  "label": "Q13（E）講解-對",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q13_ng.mp3": {
+  "hash": "4d03b00a",
+  "chars": 41,
+  "sec": 9.2,
+  "label": "Q13（E）講解-錯",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q14_ok.mp3": {
+  "hash": "489a3580",
+  "chars": 40,
+  "sec": 8.8,
+  "label": "Q14（E）講解-對",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q14_ng.mp3": {
+  "hash": "2da047b2",
+  "chars": 43,
+  "sec": 9.4,
+  "label": "Q14（E）講解-錯",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q15_ok.mp3": {
+  "hash": "98e3f9e4",
+  "chars": 64,
+  "sec": 12.6,
+  "label": "Q15（E）講解-對",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q15_ng.mp3": {
+  "hash": "0dc1b0cf",
+  "chars": 65,
+  "sec": 13.6,
+  "label": "Q15（E）講解-錯",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q16_ok.mp3": {
+  "hash": "db8a1c7c",
+  "chars": 36,
+  "sec": 8.8,
+  "label": "Q16（E）講解-對",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q16_ng.mp3": {
+  "hash": "ee6b66db",
+  "chars": 39,
+  "sec": 8.6,
+  "label": "Q16（E）講解-錯",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q17_ok.mp3": {
+  "hash": "5e2ad795",
+  "chars": 36,
+  "sec": 10.1,
+  "label": "Q17（F）講解-對",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q17_ng.mp3": {
+  "hash": "b90a2daa",
+  "chars": 42,
+  "sec": 9.7,
+  "label": "Q17（F）講解-錯",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q18_ok.mp3": {
+  "hash": "7fe3ca13",
+  "chars": 28,
+  "sec": 7.8,
+  "label": "Q18（F）講解-對",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q18_ng.mp3": {
+  "hash": "460c6db3",
+  "chars": 36,
+  "sec": 8.3,
+  "label": "Q18（F）講解-錯",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q19_ok.mp3": {
+  "hash": "4b203830",
+  "chars": 46,
+  "sec": 10.3,
+  "label": "Q19（F）講解-對",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q19_ng.mp3": {
+  "hash": "0a1bac13",
+  "chars": 41,
+  "sec": 9.8,
+  "label": "Q19（F）講解-錯",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q20_ok.mp3": {
+  "hash": "0b2b588c",
+  "chars": 59,
+  "sec": 13.2,
+  "label": "Q20（F）講解-對",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:58"
+ },
+ "q20_ng.mp3": {
+  "hash": "0e969806",
+  "chars": 44,
+  "sec": 9.8,
+  "label": "Q20（F）講解-錯",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:59"
+ },
+ "q21_ok.mp3": {
+  "hash": "e3de64de",
+  "chars": 30,
+  "sec": 7.4,
+  "label": "Q21（F）講解-對",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:59"
+ },
+ "q21_ng.mp3": {
+  "hash": "69825002",
+  "chars": 54,
+  "sec": 11.9,
+  "label": "Q21（F）講解-錯",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:59"
+ },
+ "q22_ok.mp3": {
+  "hash": "d82c1151",
+  "chars": 47,
+  "sec": 10.0,
+  "label": "Q22（G）講解-對",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:59"
+ },
+ "q22_ng.mp3": {
+  "hash": "3bd8dd35",
+  "chars": 49,
+  "sec": 10.2,
+  "label": "Q22（G）講解-錯",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:59"
+ },
+ "q23_ok.mp3": {
+  "hash": "854ab9fb",
+  "chars": 50,
+  "sec": 11.0,
+  "label": "Q23（G）講解-對",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:59"
+ },
+ "q23_ng.mp3": {
+  "hash": "9b80d1fa",
+  "chars": 55,
+  "sec": 11.7,
+  "label": "Q23（G）講解-錯",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:59"
+ },
+ "q24_ok.mp3": {
+  "hash": "e42b6866",
+  "chars": 28,
+  "sec": 8.2,
+  "label": "Q24（H）講解-對",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:59"
+ },
+ "q24_ng.mp3": {
+  "hash": "af8479bd",
+  "chars": 49,
+  "sec": 10.7,
+  "label": "Q24（H）講解-錯",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:59"
+ },
+ "q25_ok.mp3": {
+  "hash": "57d8244e",
+  "chars": 17,
+  "sec": 5.2,
+  "label": "Q25（H）講解-對",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:59"
+ },
+ "q25_ng.mp3": {
+  "hash": "8fae978e",
+  "chars": 37,
+  "sec": 9.1,
+  "label": "Q25（H）講解-錯",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:59"
+ },
+ "q26_ok.mp3": {
+  "hash": "415ea87b",
+  "chars": 24,
+  "sec": 6.7,
+  "label": "Q26（H）講解-對",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:59"
+ },
+ "q26_ng.mp3": {
+  "hash": "61ca1287",
+  "chars": 27,
+  "sec": 5.9,
+  "label": "Q26（H）講解-錯",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:59"
+ },
+ "q27_ok.mp3": {
+  "hash": "1e8747a8",
+  "chars": 36,
+  "sec": 8.3,
+  "label": "Q27（H）講解-對",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:59"
+ },
+ "q27_ng.mp3": {
+  "hash": "52ba7471",
+  "chars": 48,
+  "sec": 11.1,
+  "label": "Q27（H）講解-錯",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:59"
+ },
+ "intro_home.mp3": {
+  "hash": "528a4c09",
+  "chars": 95,
+  "sec": 21.1,
+  "label": "首頁開場旁白",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:59"
+ },
+ "intro_handson.mp3": {
+  "hash": "233df36a",
+  "chars": 98,
+  "sec": 22.7,
+  "label": "③ 動手互動情境開場旁白",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 04:59"
+ }
+}

@@ -1,0 +1,183 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>化療藥品溢灑速查</title>
+<meta name="description" content="化療藥品溢灑處理速查卡：漂白水泡製、防護裝備穿脫、液體與粉劑、擦拭方向、時間點、暴露處置與通報；每張卡對應院內技術評核表單項次，附 4 題小測驗。">
+<style>
+:root{--bg:#f6f8fb;--card:#fff;--ink:#1c2430;--mut:#5b6675;--line:#e3e8ef;--navy:#123a6b;--red:#c81e3a;--liq:#1f6fd0;--pow:#8a5a12;--ok:#2e8b57;--amber:#d98a00;--teal:#0f7c86;--na:#7d8794}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",system-ui,sans-serif;line-height:1.6}
+header{background:var(--navy);color:#fff;padding:18px 16px 14px}.home{display:inline-block;margin-bottom:8px;padding:5px 14px;border-radius:999px;background:rgba(255,255,255,.18);color:#fff;text-decoration:none;font-size:.9rem;font-weight:700}.home:hover{background:rgba(255,255,255,.3)}header h1{margin:0;font-size:1.35rem}header p{margin:6px 0 0;font-size:.85rem;opacity:.85}
+main{max-width:980px;margin:0 auto;padding:14px 16px 60px}
+.tabs{display:flex;gap:8px;margin:10px 0 14px;flex-wrap:wrap}.tabs button{border:1px solid var(--line);background:#fff;padding:8px 14px;border-radius:999px;font-size:.95rem;cursor:pointer;font-family:inherit}.tabs button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.jump{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 12px}.jump a{border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 10px;font-size:.85rem;text-decoration:none;color:var(--ink)}.jump a:hover{border-color:var(--navy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-top:6px solid var(--c,var(--navy));border-radius:14px;padding:12px 14px;scroll-margin-top:12px;min-width:0}
+.card h2{margin:0 0 2px;font-size:1.08rem;display:flex;gap:6px;align-items:flex-start}.card h2 .ic{flex:none}
+.form{display:inline-block;font-size:.76rem;padding:1px 8px;border-radius:6px;background:#eef2f7;color:var(--navy);font-weight:700;margin:2px 0 6px}
+.card ul,.card ol{margin:4px 0 0 20px;padding:0;font-size:.92rem}.card li{margin:3px 0}
+.card .tip{margin-top:8px;font-size:.84rem;color:var(--mut);background:#f6f8fb;border-radius:8px;padding:6px 10px}
+.card.bleach{--c:var(--teal)}.card.ppe{--c:var(--navy)}.card.off{--c:var(--red)}.card.lp{--c:var(--liq)}.card.dir{--c:var(--ok)}.card.time{--c:var(--amber)}.card.exp{--c:#b3261e}.card.rep{--c:#5b3fb5}.card.box{--c:var(--na)}.card.first{--c:#123a6b}
+.big{font-size:1.5rem;font-weight:800;color:var(--teal);line-height:1.2}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}@media(max-width:420px){.two{grid-template-columns:1fr}}
+.two>div{border-radius:10px;padding:8px 10px;font-size:.88rem;color:#fff}.two .l{background:var(--liq)}.two .p{background:var(--pow)}
+.dirs{display:grid;gap:6px;margin-top:6px}.dirs div{display:flex;gap:10px;align-items:center;background:#f0f8f3;border-radius:10px;padding:6px 10px;font-size:.9rem}.dirs b{flex:none;min-width:4.5em}.dirs .arrow{font-size:1.2rem;flex:none}
+.steps7{counter-reset:s;list-style:none;margin:6px 0 0!important;padding:0!important}
+.steps7 li{counter-increment:s;position:relative;padding:5px 8px 5px 38px!important;margin:4px 0!important;background:#fff4f6;border-radius:10px}
+.steps7 li::before{content:counter(s);position:absolute;left:8px;top:6px;width:22px;height:22px;border-radius:50%;background:var(--red);color:#fff;font-weight:700;font-size:.8rem;display:flex;align-items:center;justify-content:center}
+.steps7 small{color:var(--mut)}
+.ph{border:2px dashed #c5ced9;border-radius:12px;padding:18px 10px;text-align:center;color:var(--mut);font-size:.9rem;background:#fafbfd;margin-top:6px}
+.sec{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:10px 0}.sec h2{margin:0 0 8px;font-size:1.15rem;color:var(--navy)}
+.quiz{border:1px dashed var(--line);border-radius:12px;padding:10px 12px;margin-top:8px}
+.quiz .qno{font-size:.8rem;color:var(--mut)}.quiz .stem{font-weight:700;margin:2px 0 6px}
+.quiz .opts{display:grid;gap:6px}
+.quiz .opts button{text-align:left;padding:8px 12px;border:1px solid var(--line);background:#fff;border-radius:10px;cursor:pointer;font:inherit;font-size:.95rem;color:var(--ink)}
+.quiz .ok{background:#e6f6ec!important;border-color:var(--ok)!important}.quiz .ng{background:#fdecec!important;border-color:var(--red)!important}
+.quiz .why{margin-top:8px;font-size:.92rem}
+.quiz .nx{margin-top:8px;padding:8px 16px;border:0;border-radius:10px;background:var(--navy);color:#fff;font:inherit;font-weight:700;cursor:pointer}
+.src{font-size:.78rem;color:var(--mut);margin-top:16px}
+</style></head><body>
+<header><a class="home" href="../">← 回教材首頁</a><h1>化療藥品溢灑速查</h1><p>資料來源：本院〈化療藥品溢灑處理〉技術評核表單（腫瘤品管，28 項）｜每張卡標註對應的表單項次</p></header>
+<main>
+<div class="tabs"><button class="on" data-t="c">🗂️ 速查卡</button><button data-t="z">✏️ 小測驗（4 題）</button></div>
+
+<section id="tab-c">
+<nav class="jump" aria-label="跳到卡片">
+<a href="#k-first">第一時間</a><a href="#k-bleach">漂白水</a><a href="#k-ppe">防護裝備</a><a href="#k-lp">液體／粉劑</a><a href="#k-dir">擦拭方向</a><a href="#k-time">時間點</a><a href="#k-off">卸除七步</a><a href="#k-exp">暴露處置</a><a href="#k-rep">通報</a><a href="#k-box">處理箱</a>
+</nav>
+<div class="grid">
+
+<article class="card first" id="k-first"><h2><span class="ic">🚨</span>第一時間與警戒區</h2><span class="form">表單第 1–3、6–7 項</span>
+<ol>
+<li>第一到達現場者<b>先尋求協助</b>（第 1 項）</li>
+<li>請同仁拿<b>溢灑處理箱及水桶</b>到現場（第 2 項）</li>
+<li>在現場者<b>指揮</b>，污染區<b>限制人員走動</b>，以免擴大污染區（第 3 項）</li>
+<li>圍起<b>警戒線</b>，標示出警戒區範圍（第 6 項）</li>
+<li>放置<b>警示牌</b>（第 7 項）</li>
+</ol>
+</article>
+
+<article class="card bleach" id="k-bleach"><h2><span class="ic">🪣</span>漂白水泡製</h2><span class="form">表單第 5、9、10 項</span>
+<div class="big">500 mL 水 ＋ 7 顆 2.5 gm 漂白錠 ＝ 2~3%</div>
+<ul>
+<li>取 500 mL 水於<b>另外一個空的水桶</b>泡製（第 5 項）</li>
+<li>抹布分兩桶：一份放入<b>清水</b>水桶（或至鄰近水龍頭準備清水抹布）（第 9 項）；一份放入 <b>2~3% 漂白水</b>水桶（第 10 項）</li>
+</ul>
+<div class="tip">清水桶與漂白水桶分開，不要把漂白錠丟進清水桶。</div>
+</article>
+
+<article class="card ppe" id="k-ppe"><h2><span class="ic">🥽</span>防護裝備清單與穿戴要點</h2><span class="form">表單第 4、8 項</span>
+<ul>
+<li><b>N95 口罩</b>（第 4 項）</li>
+<li>髮帽</li>
+<li>護目鏡或防護面罩</li>
+<li><b>雙層</b>外科乳膠或橡膠手套——<b>手套需套緊袖口</b></li>
+<li><b>防水隔離衣</b>——後開式、長袖、袖口可束緊</li>
+<li>鞋套</li>
+</ul>
+<div class="tip">以上髮帽至鞋套為表單第 8 項。N95 在表單中排在第 4 項，卸除時則是最後才移除（第 21 項）。</div>
+</article>
+
+<article class="card lp" id="k-lp"><h2><span class="ic">💧🧂</span>液體 vs 粉劑</h2><span class="form">表單第 11、12 項</span>
+<div class="two">
+<div class="l"><b>💧 液體（第 11 項）</b><br>用<b>單面吸水襯墊（如看護墊）</b>、或擦手紙、紗布等<b>吸附</b></div>
+<div class="p"><b>🧂 粉劑（第 12 項）</b><br>用<b>濕紗布或濕抹布</b>擦拭處理</div>
+</div>
+<div class="tip">兩者處理後都丟入<b>貼有毒物標籤之雙層塑膠袋</b>。</div>
+</article>
+
+<article class="card dir" id="k-dir"><h2><span class="ic">🧽</span>擦拭方向與順序</h2><span class="form">表單第 13–15 項</span>
+<div class="dirs">
+<div><b>地面</b><span class="arrow">⤵</span><span>由外向內（第 13、14 項）</span></div>
+<div><b>點滴架</b><span class="arrow">⬇</span><span>由上到下（第 15 項）</span></div>
+<div><b>輸液幫浦</b><span class="arrow">⤵</span><span>由外向內（第 15 項）</span></div>
+</div>
+<ul>
+<li><b>先清水、後漂白水</b>（第 13–15 項）</li>
+<li>漂白水抹布完全沾濕後<b>擰到不滴水</b>，擦拭後表面有漂白水覆蓋、保持微濕（第 14 項）</li>
+<li><b>一擦一丟</b>：抹布擦拭 1 次後即丟入貼有毒物標籤之雙層塑膠袋，<b>不可再放入水桶</b>（第 13、14 項）</li>
+</ul>
+</article>
+
+<article class="card time" id="k-time"><h2><span class="ic">⏱️</span>時間點</h2><span class="form">表單第 14、23、24 項</span>
+<ol>
+<li>漂白水擦拭區域<b>靜置 10 分鐘以上或待乾燥</b>（第 14 項）</li>
+<li>漂白水擦拭 <b>10 分鐘後</b>，再用<b>清水抹布</b>擦拭點滴架或點滴幫浦，避免漂白水腐蝕儀器表面或點滴架（第 23 項）</li>
+<li>靜置 10 分鐘以上或待乾燥<b>之後</b>，才撤除警示牌及警戒線，並聯絡清潔人員將溢灑區域再做一次一般清潔（第 24 項）</li>
+</ol>
+</article>
+
+<article class="card off" id="k-off"><h2><span class="ic">🧤</span>卸除防護裝備七步</h2><span class="form">表單第 16–22 項</span>
+<ol class="steps7">
+<li>脫下<b>外層手套</b>，丟入貼有毒物標籤之雙層塑膠袋 <small>（16）</small></li>
+<li>以<b>內層手套</b>移除護目鏡、髮帽、防水隔離衣，脫除鞋套 <small>（17）</small></li>
+<li>所有防護裝備丟入雙層塑膠袋，將<b>內層</b>毒性廢棄物垃圾袋<b>束口</b> <small>（18）</small></li>
+<li>脫除<b>內層手套</b>，丟入毒性廢棄物垃圾袋 <small>（19）</small></li>
+<li>穿戴<b>一副新的乳膠手套</b>，將<b>外層</b>塑膠袋束緊，垃圾袋及手套丟入<b>化療廢棄物收集桶</b> <small>（20）</small></li>
+<li>移除 <b>N95 口罩</b> <small>（21）</small></li>
+<li>進行<b>手部衛生</b> <small>（22）</small></li>
+</ol>
+</article>
+
+<article class="card exp" id="k-exp"><h2><span class="ic">🚿</span>暴露處置</h2><span class="form">表單第 28 項</span>
+<ul>
+<li>觸及<b>皮膚</b>：以<b>肥皂、冷水立即清洗</b></li>
+<li>觸及<b>眼睛</b>：立即沖洗眼睛<b>至少 15 分鐘</b></li>
+</ul>
+<div class="tip">人員受傷另需完成職業災害通報（第 27 項，見「通報」卡）。</div>
+</article>
+
+<article class="card rep" id="k-rep"><h2><span class="ic">📝</span>通報與後續</h2><span class="form">表單第 25–27 項</span>
+<ul>
+<li>與<b>主治醫師</b>討論是否<b>追加藥品劑量</b>（第 25 項）</li>
+<li>完成<b>異常事件通報</b>（第 26 項）</li>
+<li>護理人員或工作人員如有受傷，完成<b>職業災害通報</b>（第 27 項）</li>
+</ul>
+</article>
+
+<article class="card box" id="k-box"><h2><span class="ic">🧰</span>溢灑處理箱內容物</h2><span class="form">表單第 2 項（表單未列內容物清單）</span>
+<div class="ph">📷 待院內實照<br><small>表單只寫「溢灑處理箱」，未列出箱內物品；待補院內處理箱照片或清單後再更新本卡。</small></div>
+</article>
+
+</div>
+</section>
+
+<section id="tab-z" hidden>
+<div class="sec"><h2>✏️ 小測驗</h2><p>看完速查卡後試試看，共 4 題（選自前後測題庫），每題答完會看到解說。</p><div class="quiz" id="quiz">題目載入中…</div></div>
+</section>
+
+<p class="src">本頁為教學用途，內容依本院〈化療藥品溢灑處理〉技術評核表單整理；臨床處置依院內現行文件。</p>
+</main>
+<script>
+const $=s=>document.querySelector(s);
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on",x===b));["c","z"].forEach(t=>$("#tab-"+t).hidden=(b.dataset.t!==t));});
+
+/* 進度：完成小測驗時寫入 localStorage「spill_xrprog」物件的 lookup 欄位（時間戳） */
+const PROG_KEY="spill_xrprog";
+const xrMark=k=>{try{const p=JSON.parse(localStorage.getItem(PROG_KEY)||'{}')||{};if(!p[k]){p[k]=Date.now();localStorage.setItem(PROG_KEY,JSON.stringify(p));}}catch(e){}};
+
+/* 小測驗：從題庫檔（單一來源）取 Q5、Q14、Q17、Q27，選項順序打亂 */
+const PICK=[5,14,17,27];
+let Q=[],qi=0;
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function quiz(){
+ const q=Q[qi];const opts=shuffle(q.options);
+ $("#quiz").innerHTML=`<div class="qno">第 ${qi+1}／${Q.length} 題・題庫 Q${q.id}・表單第 ${q.form_item} 項</div><div class="stem">${q.stem}</div><div class="opts">${opts.map(o=>`<button data-k="${o.key}">${o.text}</button>`).join("")}</div><div class="why"></div>`;
+ $("#quiz").querySelectorAll(".opts button").forEach(b=>b.onclick=()=>{
+  const ok=b.dataset.k===q.answer;
+  $("#quiz").querySelectorAll(".opts button").forEach(x=>{x.disabled=true;if(x.dataset.k===q.answer)x.classList.add("ok");});
+  if(!ok)b.classList.add("ng");
+  const last=qi===Q.length-1;
+  $("#quiz .why").innerHTML=(ok?"✅ "+(q.explain_ok||"答對了。"):"❌ "+(q.explain_ng||"不對。"))+(last?"<div style='margin-top:6px'>🎉 完成 4 題！</div>":`<div><button class="nx" id="nx">下一題 ▶</button></div>`);
+  if(last)xrMark("lookup");
+  const n=$("#nx");if(n)n.onclick=()=>{qi++;quiz();};
+ });
+}
+(async()=>{
+ try{
+  const r=await fetch("../assets/data/questions.json",{cache:"no-store"});
+  if(!r.ok)throw new Error(r.status);
+  const d=await r.json();
+  Q=PICK.map(id=>(d.questions||[]).find(q=>q.id===id)).filter(Boolean);
+  if(!Q.length)throw new Error("empty");
+  quiz();
+ }catch(e){$("#quiz").textContent="題目暫時載入不了，請重新整理頁面再試一次。";}
+})();
+</script></body></html>

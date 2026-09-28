@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>動手：溢灑現場怎麼做</title>
+<meta name="description" content="化療藥品溢灑處理動手互動：你是第一個到達現場的人——求援、圍警戒、清理、卸除防護裝備，做錯會看到後果。">
+<style>
+/* ===== 色票：沿用首頁；動手區主色＝橘 t2 ===== */
+:root{--bg:#f4f7fb;--card:#fff;--ink:#1c2430;--mut:#5b6675;--line:#e3e8ef;--navy:#123a6b;--acc:#e8792b;--ok:#2e8b57;--ng:#c81e3a;--warn:#d98a00;--info:#1f6fd0;--sh:0 2px 10px rgba(0,0,0,.06)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",system-ui,sans-serif;line-height:1.55;font-size:16px}
+body{padding-bottom:env(safe-area-inset-bottom);overflow-x:hidden}
+header{background:var(--navy);color:#fff;padding:12px 16px;position:sticky;top:0;z-index:20;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+header .row{display:flex;align-items:center;justify-content:space-between;gap:10px;max-width:640px;margin:0 auto}
+header h1{margin:0;font-size:1.05rem;font-weight:700}
+header a{color:#fff;text-decoration:none;font-size:.85rem;opacity:.9;white-space:nowrap}
+.prog{max-width:640px;margin:8px auto 0;height:6px;background:rgba(255,255,255,.25);border-radius:3px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--acc);width:0;transition:width .3s}
+.sub{max-width:640px;margin:6px auto 0;font-size:.8rem;opacity:.85;display:flex;justify-content:space-between;gap:8px}
+main{max-width:640px;margin:0 auto;padding:16px 16px 40px}
+.card{background:var(--card);border-radius:16px;padding:18px 16px;box-shadow:var(--sh);margin-bottom:14px}
+.card h2{margin:0 0 8px;font-size:1.15rem;color:var(--navy)}
+.card h3{margin:14px 0 6px;font-size:1rem}
+.stem{font-size:1.08rem;font-weight:700;margin:10px 0 12px}
+.lead{color:var(--mut);font-size:.92rem;margin:0 0 10px}
+.badge{display:inline-block;font-size:.75rem;padding:2px 8px;border-radius:6px;background:#eef2f7;color:var(--mut);margin:0 6px 4px 0}
+.badge.acc{background:#fdebdd;color:#a2501a}
+.badge.ok{background:#e3f3ea;color:#1e6b42}.badge.ng{background:#fbe3e8;color:#8e1530}
+/* ===== 圖卡佔位：先顯示文字卡；若 ../assets/img/gen_xxx.png 存在則自動換圖（不存在→保留文字卡，不破圖） ===== */
+.ph{position:relative;border:2px dashed #b8c2d0;border-radius:12px;background:#f8fafc;min-height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:12px;color:var(--mut);font-size:.9rem;overflow:hidden}
+.ph .id{font-family:ui-monospace,Consolas,monospace;font-size:.72rem;color:#8a95a5;margin-bottom:4px}
+.ph .cap{font-weight:700;color:var(--ink)}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+.ph.has img{display:block}.ph.has .id,.ph.has .cap{display:none}
+.ph.scene{aspect-ratio:16/9;min-height:0}
+/* ===== 按鈕 ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:12px;padding:12px 18px;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit;background:var(--acc);color:#fff;min-height:48px;text-decoration:none;text-align:center}
+.btn.sec{background:#eef2f7;color:var(--navy)}
+.btn.ok{background:var(--ok)}.btn.ng{background:var(--ng)}.btn.navy{background:var(--navy)}
+.btn.wide{width:100%}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.btnrow .btn{flex:1 1 140px}
+/* ===== 選項 ===== */
+.opts{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+.opt{display:flex;gap:10px;align-items:flex-start;text-align:left;width:100%;border:2px solid var(--line);background:#fff;border-radius:12px;padding:12px 14px;font-size:.98rem;cursor:pointer;font-family:inherit;color:var(--ink);line-height:1.45;min-height:52px}
+.opt .k{flex:0 0 28px;height:28px;border-radius:50%;background:#eef2f7;color:var(--navy);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.9rem}
+.opt:active{background:#fff7f0;border-color:var(--acc)}
+.opt.ok{border-color:var(--ok);background:#effaf3}.opt.ok .k{background:var(--ok);color:#fff}
+.opt:disabled{cursor:default}
+/* 分支選擇（液體／粉劑） */
+.fork{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.fork button{border:2px solid var(--line);background:#fff;border-radius:14px;padding:14px 10px;cursor:pointer;font-family:inherit;color:var(--ink);font-size:1rem;font-weight:700;min-height:64px}
+.fork button span{display:block;font-weight:400;font-size:.8rem;color:var(--mut);margin-top:2px}
+.fork button.both{grid-column:1/-1}
+/* ===== 講解面板 ===== */
+.exp{border-radius:12px;padding:12px 14px;margin-top:12px;font-size:.95rem}
+.exp.ok{background:#effaf3;border-left:5px solid var(--ok)}
+.exp.ng{background:#fdf1f3;border-left:5px solid var(--ng)}
+.exp.warn{background:#fff7e6;border-left:5px solid var(--warn)}
+.exp.info{background:#eef4fc;border-left:5px solid var(--info)}
+.exp .t{font-weight:700;margin-bottom:4px}
+.exp audio{width:100%;height:40px;display:block;margin-top:8px}
+.src{font-size:.78rem;color:var(--mut);margin-top:6px}
+.picked{font-size:.9rem;background:#fff;border:1px solid #f3c2cb;border-radius:10px;padding:8px 10px;margin:8px 0}
+/* ===== 卸除 PPE 排序 ===== */
+.seq{display:flex;flex-direction:column;gap:6px;margin:10px 0}
+.seq .slot{display:flex;gap:10px;align-items:center;border:2px dashed #b8c2d0;border-radius:12px;padding:8px 10px;min-height:48px;background:#f8fafc;font-size:.92rem;color:var(--mut)}
+.seq .slot .no{flex:0 0 28px;height:28px;border-radius:50%;background:#dde3ec;color:var(--navy);font-weight:700;display:flex;align-items:center;justify-content:center}
+.seq .slot.done{border-style:solid;border-color:var(--ok);background:#effaf3;color:var(--ink)}
+.seq .slot.done .no{background:var(--ok);color:#fff}
+.seq .slot.next{border-color:var(--acc);background:#fff7f0}
+.pool{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.pool button{display:block;width:100%;text-align:left;border:2px solid var(--line);background:#fff;border-radius:12px;padding:12px 14px;font-size:.95rem;cursor:pointer;font-family:inherit;color:var(--ink);line-height:1.45;min-height:52px}
+.pool button:active{border-color:var(--acc);background:#fff7f0}
+.tries{font-size:.85rem;color:var(--mut)}
+/* ===== 後果頁（全螢幕覆蓋） ===== */
+.ov{position:fixed;inset:0;background:rgba(20,10,12,.92);z-index:40;display:none;overflow:auto;padding:20px 16px}
+.ov.show{display:block}
+.ov .box{max-width:640px;margin:0 auto;background:#fff;border-radius:18px;padding:18px 16px;border-top:8px solid var(--ng)}
+.ov h2{margin:0 0 6px;color:var(--ng);font-size:1.2rem}
+.ov .ph{min-height:140px;margin:10px 0}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1c2430;color:#fff;padding:10px 16px;border-radius:12px;font-size:.92rem;z-index:60;display:none;max-width:90vw;text-align:center}
+.toast.show{display:block}
+/* ===== 總覽 ===== */
+.steps{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px}
+.step{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:8px 10px;background:#fff}
+.step .no{flex:0 0 32px;height:32px;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.8rem}
+.step .tx{flex:1;font-size:.92rem;min-width:0}
+.step .st{font-size:1.2rem}
+.rv{border-top:1px solid var(--line);padding-top:12px;margin-top:12px}
+.rv:first-of-type{border-top:0}
+.chip{display:inline-block;padding:2px 8px;border-radius:6px;font-size:.78rem;background:#eef2f7;color:var(--mut);margin:2px 4px 0 0}
+.err{background:#fdf1f3;border:1px solid #f3c2cb;border-radius:12px;padding:14px;color:#8e1530}
+footer{text-align:center;color:var(--mut);font-size:.78rem;padding:20px 16px}
+</style>
+</head>
+<body>
+<header>
+  <div class="row"><h1>🖐️ 動手：溢灑現場怎麼做</h1><a href="../">← 回首頁</a></div>
+  <div class="prog"><i id="pbar"></i></div>
+  <div class="sub"><span id="ptitle">開始</span><span id="pstep"></span></div>
+</header>
+<main id="app"><div class="card"><p class="lead">載入題庫中…</p></div></main>
+<footer>教學示範情境，無病人資料｜題目與講解文字來源：規格檔 Q1–Q3、Q6–Q7、Q12–Q21（questions.json）</footer>
+<div class="ov" id="ov"></div>
+<div class="toast" id="toast"></div>
+<script id="qdata" type="application/json">{"source":"20260929_溢灑XR_需求規格與題目草稿_v1.md","count":15,"questions":[{"id":1,"block":"A","block_name":"第一時間反應","use":["learn","handson","3d","test"],"stem":"你是第一個到達化療藥品溢灑現場的人，第一個動作是？","note":"","options":[{"key":"A","text":"先尋求協助"},{"key":"B","text":"自己拿抹布先把藥擦掉"},{"key":"C","text":"先離開去拿溢灑處理箱"},{"key":"D","text":"先打電話完成異常事件通報"}],"answer":"A","explain_ok":"對！第一到達現場的人要先尋求協助。你留在現場、不動手，才能管制人員走動、等裝備到位。","explain_ng":"第一步是先尋求協助。沒有防護就擦，受污染的是你自己；離開去拿箱子，現場沒人管，別人踩過就擴大污染；通報是處理完之後的事。","img":"gen_a01（第一到達者站在溢灑旁舉手呼叫同事）","form_item":"1","text_hash":{"ok":"88064525","ng":"8425a4fd","stem":"6acf227a"}},{"id":2,"block":"A","block_name":"第一時間反應","use":["learn","handson","3d","test"],"stem":"請同仁幫忙時，要請他把什麼帶到現場？","note":"","options":[{"key":"A","text":"溢灑處理箱及水桶"},{"key":"B","text":"只要溢灑處理箱"},{"key":"C","text":"拖把和一般清潔劑"},{"key":"D","text":"一包擦手紙"}],"answer":"A","explain_ok":"對！要請同仁拿溢灑處理箱及水桶到現場。水桶之後要用來泡漂白水、放清水抹布。","explain_ng":"要拿的是溢灑處理箱及水桶。只拿箱子會缺水桶；拖把會把藥推散，一般清潔劑不是表單規定的處理方式。","img":"gen_a02（同事提著溢灑處理箱與水桶走來）","form_item":"2","text_hash":{"ok":"f7ade9d3","ng":"dc3c7109","stem":"28310901"}},{"id":3,"block":"A","block_name":"第一時間反應","use":["learn","handson","3d","test"],"stem":"同仁去拿東西時，有家屬正要從溢灑處旁邊走過，你應該？","note":"","options":[{"key":"A","text":"留在現場指揮，請他停下、改走別的路"},{"key":"B","text":"提醒他小心腳下就好"},{"key":"C","text":"先跟著去拿處理箱，回來再處理"},{"key":"D","text":"讓他快速通過"}],"answer":"A","explain_ok":"對！在現場的人要指揮，限制人員在污染區走動，以免擴大污染區。","explain_ng":"要攔下來、請他改道。只提醒或讓人快速通過，鞋底就可能把藥帶到走廊和別的病室，污染範圍會擴大。","img":"gen_a03（護理師伸手攔下走近的家屬，指向另一條路）","form_item":"3","text_hash":{"ok":"d8f73967","ng":"08491aef","stem":"ff19e2cd"}},{"id":6,"block":"C","block_name":"設置警戒區","use":["learn","handson","3d","test"],"stem":"警戒線要怎麼圍？","note":"","options":[{"key":"A","text":"圍起警戒線，範圍涵蓋可能噴濺與被踩到的地方"},{"key":"B","text":"只圍住看得到的那一灘"},{"key":"C","text":"不用圍線，放警示牌就好"},{"key":"D","text":"等清潔人員來再圍"}],"answer":"A","explain_ok":"對！要圍起警戒線、標示出警戒區範圍。範圍要包含細小噴濺和可能被踩到的地方，不只是看得到的那一灘。","explain_ng":"要圍起警戒線、標示警戒區範圍。只圍一灘會漏掉噴濺；只放牌子別人仍會走進來；等清潔人員就太晚了。","img":"gen_c01（俯視圖：溢灑處外圍一圈警戒線，涵蓋噴濺點）","form_item":"6","text_hash":{"ok":"ccff1515","ng":"ba7b8373","stem":"3b539a89"}},{"id":7,"block":"C","block_name":"設置警戒區","use":["learn","handson","3d","test"],"stem":"警示牌放在哪裡最有用？","note":"","options":[{"key":"A","text":"來人第一眼會看到的動線上"},{"key":"B","text":"溢灑那一灘的正中間"},{"key":"C","text":"護理站的桌上"},{"key":"D","text":"處理完再放"}],"answer":"A","explain_ok":"對！要放置警示牌，而且放在別人走過來會先看到的地方，才擋得住人。","explain_ng":"警示牌要放在來人會先看到的動線上。放在一灘中間你得踩進去；放護理站或處理完才放，都擋不到路過的人。","img":"gen_c02（走道入口處的警示牌，後方是警戒線）","form_item":"7","text_hash":{"ok":"8d7278fc","ng":"cd09e7c8","stem":"e4d63e31"}},{"id":12,"block":"E","block_name":"環境清理","use":["handson","3d","test"],"stem":"液體化療藥品灑在地上，要先怎麼處理？","note":"","options":[{"key":"A","text":"用單面吸水襯墊（如看護墊）、擦手紙或紗布吸附，再丟進貼毒物標籤的雙層塑膠袋"},{"key":"B","text":"用濕抹布來回擦"},{"key":"C","text":"用拖把拖乾"},{"key":"D","text":"先把漂白水倒在藥上"}],"answer":"A","explain_ok":"對！液體溢灑要用單面吸水襯墊（如看護墊）、擦手紙或紗布吸附，再丟入貼有毒物標籤的雙層塑膠袋。","explain_ng":"液體要先吸附，不是擦或拖。來回擦和拖把會把藥推散；表單沒有直接倒漂白水這一步。","img":"gen_e01（看護墊蓋在地上的液體上吸附）","form_item":"11","text_hash":{"ok":"cf561ea5","ng":"783164a8","stem":"70c74a73"}},{"id":13,"block":"E","block_name":"環境清理","use":["handson","3d","test"],"stem":"如果灑出來的是粉劑呢？","note":"","options":[{"key":"A","text":"用濕紗布或濕抹布擦拭，再丟進貼毒物標籤的雙層塑膠袋"},{"key":"B","text":"用乾紗布把粉掃起來"},{"key":"C","text":"用吸塵器吸乾淨"},{"key":"D","text":"用看護墊吸附"}],"answer":"A","explain_ok":"對！粉劑溢灑要用濕紗布或濕抹布擦拭，再丟入貼有毒物標籤的雙層塑膠袋。","explain_ng":"粉劑要用濕的紗布或抹布擦。乾擦或吸塵器會讓粉末飛起來被吸進去；看護墊是吸液體用的。","img":"gen_e02（濕紗布輕壓地上的白色粉末）","form_item":"12","text_hash":{"ok":"240ad81c","ng":"4d03b00a","stem":"cc2db542"}},{"id":14,"block":"E","block_name":"環境清理","use":["handson","3d","test"],"stem":"用清水抹布擦地，怎麼擦才對？","note":"","options":[{"key":"A","text":"由外向內擦，擦 1 次就丟進毒物標籤雙層塑膠袋"},{"key":"B","text":"由內向外擦，擦完放回水桶洗一洗"},{"key":"C","text":"由外向內擦，擦完放回水桶再用"},{"key":"D","text":"來回擦到乾淨為止"}],"answer":"A","explain_ok":"對！由外向內擦拭，擦 1 次後就丟入貼有毒物標籤的雙層塑膠袋，不可以再放回水桶。","explain_ng":"要由外向內擦、擦 1 次就丟。由內向外會把藥推到外圍；抹布放回水桶，整桶水都被污染了。","img":"gen_e03（俯視圖：箭頭由外圈向中心，旁邊是毒物標籤雙層袋）","form_item":"13","text_hash":{"ok":"489a3580","ng":"2da047b2","stem":"99a247fa"}},{"id":15,"block":"E","block_name":"環境清理","use":["handson","3d","test"],"stem":"漂白水抹布要多濕？擦完要等多久？","note":"","options":[{"key":"A","text":"擰到不滴水、保持微濕；擦過的地方靜置 10 分鐘以上或待乾燥"},{"key":"B","text":"濕到會滴水最好；靜置 3 分鐘"},{"key":"C","text":"擰到全乾；不用靜置"},{"key":"D","text":"擰到不滴水；擦完馬上用清水擦掉"}],"answer":"A","explain_ok":"對！漂白水抹布完全沾濕後擰到不滴水，由外向內擦，讓表面保持微濕；擦過的地方靜置 10 分鐘以上或待乾燥，抹布一樣擦 1 次就丟。","explain_ng":"要擰到不滴水、保持微濕，擦過要靜置 10 分鐘以上或待乾燥。太濕會流開，全乾蓋不住表面，時間不夠或馬上擦掉，漂白水就還沒發揮作用。","img":"gen_e04（擰乾的抹布＋計時器顯示 10 分鐘）","form_item":"14","text_hash":{"ok":"98e3f9e4","ng":"0dc1b0cf","stem":"3fd18a19"}},{"id":16,"block":"E","block_name":"環境清理","use":["handson","3d","test"],"stem":"溢灑波及點滴架和輸液幫浦，要怎麼擦？","note":"","options":[{"key":"A","text":"先清水、後漂白水；點滴架由上到下，輸液幫浦由外向內"},{"key":"B","text":"先漂白水、後清水；點滴架由下到上"},{"key":"C","text":"先清水、後漂白水；點滴架由外向內，輸液幫浦由上到下"},{"key":"D","text":"只用漂白水擦一次就好"}],"answer":"A","explain_ok":"對！先用清水抹布、再用漂白水抹布；點滴架由上到下擦，輸液幫浦由外向內擦。","explain_ng":"順序是先清水、後漂白水；方向是點滴架由上到下、輸液幫浦由外向內，兩個不能對調。","img":"gen_e05（點滴架旁向下箭頭、幫浦上由外向內箭頭）","form_item":"15","text_hash":{"ok":"db8a1c7c","ng":"ee6b66db","stem":"a7210e14"}},{"id":17,"block":"F","block_name":"卸除防護裝備","use":["handson","3d","test"],"stem":"處理完要卸除防護裝備，第一件先脫什麼？","note":"","options":[{"key":"A","text":"外層手套"},{"key":"B","text":"N95 口罩"},{"key":"C","text":"防水隔離衣"},{"key":"D","text":"內層手套"}],"answer":"A","explain_ok":"對！先脫下外層手套，丟進貼有毒物標籤的雙層塑膠袋。它碰過最多藥，最先脫。","explain_ng":"第一件是外層手套。先脫口罩或隔離衣，等於用最髒的手套碰臉和身體；內層手套要留到後面。","img":"gen_f01（脫下外層手套丟進毒物標籤袋）","form_item":"16","text_hash":{"ok":"5e2ad795","ng":"b90a2daa","stem":"cac037a3"}},{"id":18,"block":"F","block_name":"卸除防護裝備","use":["handson","3d","test"],"stem":"脫完外層手套後，用什麼移除護目鏡、髮帽、隔離衣和鞋套？","note":"","options":[{"key":"A","text":"用內層手套"},{"key":"B","text":"先洗手，再用空手脫"},{"key":"C","text":"先換一副新手套再脫"},{"key":"D","text":"請同事幫忙脫"}],"answer":"A","explain_ok":"對！用內層手套移除護目鏡、髮帽、防水隔離衣，再脫除鞋套。","explain_ng":"要用內層手套來脫。空手會直接碰到污染的裝備；新手套是後面綁垃圾袋時才戴。","img":"gen_f02（戴著內層手套取下護目鏡）","form_item":"17","text_hash":{"ok":"7fe3ca13","ng":"460c6db3","stem":"f7b33513"}},{"id":19,"block":"F","block_name":"卸除防護裝備","use":["handson","3d","test"],"stem":"防護裝備都丟進袋子之後，下一步是？","note":"","options":[{"key":"A","text":"把內層垃圾袋束口，再脫內層手套丟進毒性廢棄物袋"},{"key":"B","text":"先脫內層手套，再空手把袋子綁起來"},{"key":"C","text":"袋子不用綁，直接丟"},{"key":"D","text":"先脫 N95 口罩"}],"answer":"A","explain_ok":"對！所有防護裝備丟進毒物標籤雙層塑膠袋後，先把內層垃圾袋束口，再脫內層手套丟入毒性廢棄物袋。","explain_ng":"要先把內層垃圾袋束口，再脫內層手套。先脫手套就得空手碰袋口；袋子不綁，藥會跑出來。","img":"gen_f03（戴手套將內層垃圾袋束口）","form_item":"18、19","text_hash":{"ok":"4b203830","ng":"0a1bac13","stem":"339a7079"}},{"id":20,"block":"F","block_name":"卸除防護裝備","use":["handson","3d","test"],"stem":"內層手套脫掉之後，還要做什麼？","note":"","options":[{"key":"A","text":"戴一副新的乳膠手套，把外層塑膠袋束緊，丟進化療廢棄物收集桶"},{"key":"B","text":"空手把外層塑膠袋綁起來丟掉"},{"key":"C","text":"請清潔人員來收"},{"key":"D","text":"直接洗手就結束"}],"answer":"A","explain_ok":"對！要戴一副新的乳膠手套，把外層塑膠袋束緊，垃圾袋和這副手套一起丟進化療廢棄物收集桶。很多人漏掉「再戴新手套」這一步。","explain_ng":"要先戴一副新的乳膠手套，再把外層塑膠袋束緊，丟進化療廢棄物收集桶。空手碰袋子會再次暴露。","img":"gen_f04（戴新手套綁緊外層袋，旁邊是化療廢棄物收集桶）","form_item":"20","text_hash":{"ok":"0b2b588c","ng":"0e969806","stem":"d05f2afa"}},{"id":21,"block":"F","block_name":"卸除防護裝備","use":["handson","3d","test"],"stem":"N95 口罩什麼時候脫？","note":"","options":[{"key":"A","text":"垃圾袋丟進收集桶之後、手部衛生之前"},{"key":"B","text":"一開始先脫，比較好呼吸"},{"key":"C","text":"脫完外層手套就脫"},{"key":"D","text":"洗完手再脫"}],"answer":"A","explain_ok":"對！N95 口罩是最後才移除的防護裝備，脫完再進行手部衛生。","explain_ng":"N95 要留到最後：垃圾袋處理完才脫，脫完再做手部衛生。太早脫會吸入現場的藥；洗完手再脫，手又被口罩弄髒了。","img":"gen_f05（取下 N95 後走向洗手台）","form_item":"21、22","text_hash":{"ok":"e3de64de","ng":"69825002","stem":"6ab5c1dd"}}]}</script>
+
+<script>
+/* ===================================================================
+   資料來源規則：題幹／選項／講解一律讀 ../assets/data/questions.json，
+   本檔不手抄題目文字（supplement 欄不顯示）。
+   本檔只寫互動骨架：流程、後果卡標題（取自各題「講解-錯」的字句）、卸除 PPE 七步卡（表單 16–22）。
+   =================================================================== */
+const DATA_URL = '../assets/data/questions.json';
+const IMG_BASE = '../assets/img/';          // 生圖：gen_xxx.png（代號取自各題 img 欄）
+const AUD_BASE = '../assets/audio/';        // 音檔：q01_ok.mp3／q01_ng.mp3（沿用範本命名）
+const PROG_KEY = 'spill_xrprog';              // 首頁進度（本站專用 spill_ 前綴，避免與其他教材站撞 key）
+const IDS = [1,2,3,6,7,12,13,14,15,16,17,18,19,20,21];
+let Q = {};                                  // id → 題目物件
+const IMG_MISS = new Set();                  // 已確認不存在的生圖代號
+let AUDIO_OK = {};                           // 檔名 → true（manifest 有、且 hash 與目前講解文字一致）
+
+/* ---------- 後果卡標題：key＝題號＋錯誤選項；內文一律用該題 explain_ng ---------- */
+const CQT = {
+  '1B':'沒有防護就擦——受污染的是你自己',
+  '1C':'你離開了——現場沒人管，別人踩過就擴大污染',
+  '1D':'通報是處理完之後的事',
+  '2B':'只拿箱子——少了水桶',
+  '2C':'拖把會把藥推散',
+  '3B':'只提醒一聲——鞋底把藥帶到走廊和別的病室',
+  '3C':'你跟著走了——現場沒人指揮',
+  '3D':'讓他快速通過——污染範圍擴大',
+  '6B':'只圍一灘——漏掉噴濺',
+  '6C':'只放牌子——別人仍會走進來',
+  '6D':'等清潔人員——太晚了',
+  '7B':'放在一灘中間——你得踩進去',
+  '7C':'放在護理站——擋不到路過的人',
+  '7D':'處理完才放——擋不到路過的人',
+  '12B':'來回擦——把藥推散',
+  '12C':'拖把——把藥推散',
+  '12D':'表單沒有直接倒漂白水這一步',
+  '13B':'乾擦——粉末飛起來被吸進去',
+  '13C':'吸塵器——粉末飛起來被吸進去',
+  '13D':'看護墊是吸液體用的',
+  '14B':'由內向外——把藥推到外圍',
+  '14C':'抹布放回水桶——整桶水都被污染了',
+  '15B':'太濕會流開',
+  '15C':'全乾蓋不住表面',
+  '15D':'馬上擦掉——漂白水還沒發揮作用',
+  '16B':'順序與方向都反了',
+  '16C':'方向對調了'
+};
+
+/* ---------- 卸除 PPE 七步（表單 16–22）；q＝對應講解題號 ---------- */
+const DOFF = [
+  {t:'脫外層手套', form:'16', q:17},
+  {t:'以內層手套移除護目鏡、髮帽、防水隔離衣、鞋套', form:'17', q:18},
+  {t:'防護裝備丟毒物袋，並將內層垃圾袋束口', form:'18', q:19},
+  {t:'脫內層手套', form:'19', q:19},
+  {t:'戴新乳膠手套，外層袋束緊，丟化療廢棄物收集桶', form:'20', q:20},
+  {t:'移除 N95 口罩', form:'21', q:21},
+  {t:'手部衛生', form:'22', q:21}
+];
+
+/* ---------- 區塊與流程 ---------- */
+const SEC = {A:'區塊 A｜第一時間反應', C:'區塊 C｜設置警戒區', E:'區塊 E｜環境清理', F:'區塊 F｜卸除防護裝備'};
+let flow = [], pos = 0, branch = 'both';
+function buildFlow(){
+  const e = branch === 'liquid' ? ['q12'] : branch === 'powder' ? ['q13'] : ['q12','q13'];
+  flow = ['scene','q1','q2','q3','q6','q7','fork', ...e, 'q14','q15','q16','doff','review','sum'];
+}
+const result = {};   // key → {tries, first}
+function mark(key, ok){ const r = result[key] || (result[key] = {tries:0, first:null}); r.tries++; if (r.first === null) r.first = ok; }
+
+/* ---------- 小工具 ---------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function imgOf(q){
+  // img 欄格式：「gen_a01（描述）」→ 代號＋描述
+  const m = String(q.img||'').match(/^(gen_[a-z0-9]+)\s*[（(](.*)[）)]\s*$/i);
+  return m ? {code:m[1], desc:m[2]} : {code:'', desc:q.img||''};
+}
+function ph(q, cls){
+  const {code, desc} = imgOf(q);
+  // 同一張缺圖每次載入頁面只試抓一次（IMG_MISS 記住），減少 404 雜訊
+  const img = code && !IMG_MISS.has(code) ? `<img src="${IMG_BASE}${code}.png" alt="${esc(desc)}" onload="this.parentNode.classList.add('has')" onerror="IMG_MISS.add('${code}');this.remove()">` : '';
+  return `<div class="ph scene ${cls||''}">${img}<div class="id">圖卡 ${esc(code)}（待生圖）</div><div class="cap">${esc(desc)}</div></div>`;
+}
+function audio(q, kind){
+  const f = `q${String(q.id).padStart(2,'0')}_${kind}.mp3`;
+  return AUDIO_OK[f] ? `<audio controls preload="none" src="${AUD_BASE}${f}" aria-label="Q${q.id} 講解音檔"></audio>` : '';
+}
+function toast(msg, ms){
+  const t = $('#toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(t._h); t._h = setTimeout(()=>t.classList.remove('show'), ms||2000);
+}
+function shuffle(a){ a = a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function expBox(cls, title, text, extra){
+  return `<div class="exp ${cls}"><div class="t">${esc(title)}</div><div>${esc(text)}</div>${extra||''}</div>`;
+}
+function srcQ(q){ return `<div class="src">文字來源：規格檔 Q${q.id}（表單 ${esc(q.form_item)}）</div>`; }
+function nextBtn(label){ return `<div class="btnrow"><button class="btn wide" id="next">${label||'下一步 →'}</button></div>`; }
+function bindNext(){ const b = $('#next'); if (b) b.onclick = () => go(pos+1); }
+
+/* ---------- 後果頁 ---------- */
+function showCQ(o){
+  // o: {title, picked, text, q, extra, retryLabel, onRetry}
+  const ov = $('#ov');
+  ov.innerHTML = `<div class="box" role="dialog" aria-modal="true">
+    <span class="badge ng">後果卡</span>
+    <h2>${esc(o.title)}</h2>
+    ${o.picked ? `<div class="picked">你選的是：${esc(o.picked)}</div>` : ''}
+    ${o.extra || ''}
+    ${o.q ? ph(o.q) : ''}
+    <div class="exp ng"><div class="t">為什麼不行</div><div>${esc(o.text)}</div>${o.q ? audio(o.q,'ng') + srcQ(o.q) : ''}</div>
+    <div class="btnrow"><button class="btn ng wide" id="cqRetry">${esc(o.retryLabel||'回去重選')}</button></div></div>`;
+  ov.classList.add('show'); ov.scrollTop = 0;
+  $('#cqRetry').onclick = () => { ov.querySelectorAll('audio').forEach(a => a.pause()); ov.classList.remove('show'); o.onRetry && o.onRetry(); };
+}
+
+/* ---------- 導覽 ---------- */
+function go(i){
+  pos = i; const key = flow[pos];
+  const total = flow.length - 1;
+  $('#pbar').style.width = Math.round(Math.min(pos,total)/total*100)+'%';
+  $('#pstep').textContent = key === 'sum' ? '完成' : `${pos+1} / ${total}`;
+  document.querySelectorAll('audio').forEach(a => a.pause());
+  window.scrollTo({top:0});
+  (RENDER[key] || qStep(+key.slice(1)))();
+}
+function home(){
+  flow = []; pos = 0;
+  $('#pbar').style.width = '0%'; $('#ptitle').textContent = '開始'; $('#pstep').textContent = '';
+  for (const k in result) delete result[k];
+  $('#app').innerHTML = `
+  <div class="card"><span class="badge acc">情境</span><h2>你是第一個到達化療藥品溢灑現場的人</h2>
+    <p class="lead">從第一個動作開始，一步一步做決定：求援、管制走動、圍警戒、清理地面與儀器，最後卸除防護裝備。<b>選錯會跳出後果卡</b>，看完再回來重選。</p>
+    <div><span class="chip">A 第一時間反應 ×3</span><span class="chip">C 設置警戒區 ×2</span><span class="chip">E 環境清理 ×4–5</span><span class="chip">F 卸除 PPE 排序 ×7 步</span></div>
+    <p class="lead" style="margin-top:10px">N95、泡製漂白水、穿戴防護裝備與準備抹布（區塊 B、D）在 ①② 自學站。</p>
+    <div class="btnrow"><button class="btn wide" id="start">開始 →</button></div></div>
+  <div class="card"><h2>想直接練卸除 PPE？</h2><p class="lead">七個步驟打亂，依序點選；錯一步就看後果並從頭。</p>
+    <div class="btnrow"><button class="btn sec wide" id="jump">直接跳到卸除 PPE 排序</button></div></div>`;
+  $('#start').onclick = () => { branch = 'both'; buildFlow(); go(0); };
+  $('#jump').onclick = () => { branch = 'both'; buildFlow(); go(flow.indexOf('doff')); };
+}
+
+/* ================= 各步驟畫面 ================= */
+const RENDER = {};
+
+RENDER.scene = () => {
+  $('#ptitle').textContent = SEC.A;
+  $('#app').innerHTML = `<div class="card"><span class="badge acc">情境</span><h2>化療藥品灑出來了</h2>
+    <p>你是<b>第一個到達現場的人</b>，身上沒有任何防護。接下來每一步都由你決定。</p>
+    <p class="lead">選錯會看到後果卡，看完回來重選；每一題選對後會出現講解（有音檔時可播放）。</p>
+    ${nextBtn('開始處理 →')}</div>`;
+  bindNext();
+};
+
+/* 通用單選題：選項打亂顯示；錯→後果卡→重選；對→explain_ok */
+function qStep(id){
+  return function render(){
+    const q = Q[id];
+    $('#ptitle').textContent = SEC[q.block] || q.block_name;
+    const opts = shuffle(q.options);
+    $('#app').innerHTML = `<div class="card"><span class="badge acc">${esc(q.block)}｜${esc(q.block_name)}</span><span class="badge">表單 ${esc(q.form_item)}</span>
+      ${ph(q)}
+      <div class="stem">${esc(q.stem)}</div>
+      <div class="opts">${opts.map((o,i)=>`<button class="opt" data-k="${esc(o.key)}"><span class="k">${'ABCDEF'[i]}</span><span>${esc(o.text)}</span></button>`).join('')}</div>
+      <div id="fb"></div></div>`;
+    document.querySelectorAll('.opt').forEach(b => b.onclick = () => {
+      const k = b.dataset.k, ok = k === q.answer;
+      mark('q'+id, ok);
+      if (ok) {
+        document.querySelectorAll('.opt').forEach(x => { x.disabled = true; });
+        b.classList.add('ok');
+        const last = flow[pos+1] === 'doff' ? '進入卸除防護裝備 →' : '下一步 →';
+        $('#fb').innerHTML = expBox('ok', '答對了', q.explain_ok, audio(q,'ok') + srcQ(q)) + nextBtn(last);
+        bindNext();
+        $('#fb').scrollIntoView({behavior:'smooth', block:'nearest'});
+      } else {
+        const picked = q.options.find(o=>o.key===k).text;
+        showCQ({title: CQT[id+k] || '這樣做會出問題', picked, text: q.explain_ng, q, onRetry: render});
+      }
+    });
+  };
+}
+
+/* 區塊 E 開頭：這次灑的是液體還是粉劑 */
+RENDER.fork = () => {
+  $('#ptitle').textContent = SEC.E;
+  $('#app').innerHTML = `<div class="card"><span class="badge acc">E｜環境清理</span>
+    <h2>防護裝備穿好、兩桶抹布也準備好了</h2>
+    <div class="stem">這次灑出來的是什麼？</div>
+    <p class="lead">液體和粉劑的第一步處理不同，可以只練一種，或兩種都走。</p>
+    <div class="fork"><button data-b="liquid">液體<span>練 Q12</span></button><button data-b="powder">粉劑<span>練 Q13</span></button>
+      <button class="both" data-b="both">兩種都練<span>先液體、再粉劑</span></button></div></div>`;
+  document.querySelectorAll('.fork button').forEach(b => b.onclick = () => {
+    branch = b.dataset.b; const here = pos; buildFlow(); go(here + 1);
+  });
+};
+
+/* 區塊 F：卸除 PPE 嚴格排序——錯一步顯示後果並從頭 */
+let doffTries = 0;
+RENDER.doff = () => {
+  $('#ptitle').textContent = SEC.F;
+  let n = 0;                                  // 已正確放入幾步
+  const pool = shuffle(DOFF.map((d,i)=>({...d, i})));
+  $('#app').innerHTML = `<div class="card"><span class="badge acc">F｜卸除防護裝備</span><span class="badge">表單 16–22</span>
+    <h2>清理完成，開始卸除防護裝備</h2>
+    <p class="lead">下面七張步驟卡已打亂。<b>依正確順序一張一張點</b>；錯一步就等於污染自己——會看到後果，並<b>從頭</b>再來。</p>
+    <div class="tries" id="tries">${doffTries ? `已重來 ${doffTries} 次` : ''}</div>
+    <div class="seq" id="seq">${DOFF.map((d,i)=>`<div class="slot${i===0?' next':''}" data-s="${i}"><span class="no">${i+1}</span><span class="tx">${i===0?'← 第 1 步是？':''}</span></div>`).join('')}</div>
+    <div class="pool" id="pool">${pool.map(d=>`<button data-i="${d.i}">${esc(d.t)}</button>`).join('')}</div>
+    <div id="fb"></div></div>`;
+  document.querySelectorAll('#pool button').forEach(b => b.onclick = () => {
+    const i = +b.dataset.i;
+    if (i === n) {
+      const s = $(`.slot[data-s="${n}"]`); s.classList.remove('next'); s.classList.add('done');
+      s.querySelector('.tx').textContent = DOFF[i].t; b.remove(); n++;
+      if (n < DOFF.length) { const nx = $(`.slot[data-s="${n}"]`); nx.classList.add('next'); nx.querySelector('.tx').textContent = `← 第 ${n+1} 步是？`; toast(`✓ 第 ${n} 步`, 900); }
+      else finish();
+    } else {
+      mark('doff', false); doffTries++;
+      const exp = DOFF[n], q = Q[exp.q];
+      showCQ({
+        title: `第 ${n+1} 步做錯了——等於污染自己`,
+        picked: DOFF[i].t,
+        extra: `<div class="exp warn"><div class="t">這一步應該是</div><div>第 ${n+1} 步（表單 ${exp.form}）：${esc(exp.t)}</div></div>`,
+        text: q.explain_ng, q, retryLabel: '從頭再來', onRetry: RENDER.doff
+      });
+    }
+  });
+  function finish(){
+    if (!result.doff) mark('doff', true); else result.doff.tries++;
+    $('#pool').remove();
+    $('#fb').innerHTML = expBox('ok', doffTries ? `七步全對（重來過 ${doffTries} 次）` : '一次就全對！', '外層手套最先脫、N95 最後脫、脫完做手部衛生；中間「再戴一副新的乳膠手套」最常被漏掉。下一頁是每一步的講解回顧。') + nextBtn('看步驟回顧 →');
+    bindNext();
+  }
+};
+
+/* 卸除 PPE 回顧：Q17–Q21 題幹＋正解＋講解-對 */
+RENDER.review = () => {
+  $('#ptitle').textContent = SEC.F;
+  const items = [17,18,19,20,21].map(id => {
+    const q = Q[id], ans = q.options.find(o=>o.key===q.answer);
+    return `<div class="rv"><span class="badge">表單 ${esc(q.form_item)}</span>
+      <div class="stem" style="margin-top:4px">${esc(q.stem)}</div>
+      ${expBox('ok', '正解：' + ans.text, q.explain_ok, audio(q,'ok') + srcQ(q))}</div>`;
+  }).join('');
+  $('#app').innerHTML = `<div class="card"><span class="badge ok">回顧</span><h2>卸除防護裝備：每一步為什麼這樣做</h2>${items}${nextBtn('看總覽 →')}</div>`;
+  bindNext();
+};
+
+/* 總覽＋完成標記 */
+function progMark(k){ try { const p = JSON.parse(localStorage.getItem(PROG_KEY) || '{}') || {}; if (!p[k]) { p[k] = Date.now(); localStorage.setItem(PROG_KEY, JSON.stringify(p)); } } catch (e) {} }
+RENDER.sum = () => {
+  // 首頁進度：③ 動手 2D 整條情境走完才標記（只跳練卸除 PPE 不算）
+  const need = flow.filter(k => /^q\d+$/.test(k) || k === 'doff');
+  if (need.every(k => result[k])) progMark('handson');
+  const rows = flow.filter(k => /^q\d+$/.test(k) || k === 'doff').map(k => {
+    const r = result[k];
+    const label = k === 'doff' ? '卸除防護裝備七步排序（表單 16–22）' : `Q${Q[+k.slice(1)].id}｜${Q[+k.slice(1)].stem}`;
+    const blk = k === 'doff' ? 'F' : Q[+k.slice(1)].block;
+    const st = !r ? '—' : r.first ? '✅' : '🔁';
+    return `<div class="step"><div class="no">${blk}</div><div class="tx">${esc(label)}</div><div class="st" title="第一次就對／重選過">${st}</div></div>`;
+  }).join('');
+  const firstOk = Object.values(result).filter(r => r.first).length, all = Object.keys(result).length;
+  $('#app').innerHTML = `<div class="card"><span class="badge ok">完成 ③ 動手</span><h2>第一次就對 ${firstOk}／${all}</h2>
+    <p class="lead">✅＝第一次就對　🔁＝看過後果卡後重選。</p><div class="steps">${rows}</div>
+    <p class="lead" style="margin-top:12px">撤除警戒、再清潔、通報與暴露處置（區塊 G、H）在 ①② 自學站的圖卡與自我檢核。</p>
+    <div class="btnrow"><button class="btn" id="again">再走一次</button><a class="btn navy" href="../lookup/">溢灑速查</a><a class="btn sec" href="../">回首頁</a></div></div>`;
+  $('#again').onclick = () => { for (const k in result) delete result[k]; doffTries = 0; branch = 'both'; buildFlow(); go(0); };
+};
+
+/* ---------- 啟動：讀題庫（fetch 失敗→內嵌題庫）＋音檔清單 ---------- */
+function loadEmbedded(){
+  const t = document.getElementById('qdata').textContent.trim(); if (!t) throw new Error('Failed to fetch');
+  return JSON.parse(t);
+}
+function loadAudioManifest(){
+  // manifest 有該檔、且 hash 與目前講解文字的 text_hash 相同，才顯示播放器；否則略過（不去抓不存在的 mp3）
+  return fetch(AUD_BASE + '_manifest.json', {cache:'no-cache'}).then(r => r.ok ? r.json() : {}).catch(() => ({})).then(m => {
+    IDS.forEach(id => { const q = Q[id]; ['ok','ng'].forEach(kind => {
+      const f = `q${String(id).padStart(2,'0')}_${kind}.mp3`, th = (q.text_hash||{})[kind];
+      if (m[f] && th && m[f].hash === th) AUDIO_OK[f] = true;
+    }); });
+  });
+}
+fetch(DATA_URL, {cache:'no-cache'}).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).catch(loadEmbedded).then(d => {
+  d.questions.forEach(q => { Q[q.id] = q; });
+  const missing = IDS.filter(id => !Q[id]);
+  if (missing.length) throw new Error('題庫缺 Q' + missing.join('、Q'));
+  return loadAudioManifest();
+}).then(home).catch(err => {
+  $('#app').innerHTML = `<div class="err"><b>題庫載入失敗</b>（${esc(err.message)}）。<br>本頁的題目文字來自 <code>assets/data/questions.json</code>，直接雙擊 HTML 用 <code>file://</code> 開會被瀏覽器擋住。<br><b>本機預覽</b>：雙擊同資料夾的 <code>_preview.bat</code>（會啟動本機伺服器並自動開頁）。</div>`;
+});
+</script>
+</body>
+</html>

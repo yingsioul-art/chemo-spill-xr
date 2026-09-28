@@ -1,0 +1,451 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>練習：指揮 AI 學妹處理溢灑</title>
+<meta name="description" content="化療藥品溢灑處理（表單 1–28）：把提示詞貼給生成式 AI（Copilot、ChatGPT、Gemini 等），AI 扮演第一次遇到溢灑的學妹，你當現場指揮一步步交代，AI 最後依表單逐項回饋。">
+<style>
+:root{--bg:#f4f7fb;--card:#fff;--ink:#1c2430;--mut:#5b6675;--line:#e3e8ef;--navy:#123a6b;--red:#c81e3a;--liq:#1f6fd0;--pow:#8a5a12;--ok:#2e8b57;--soft:#fff4f6;--gold:#b7791f}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",system-ui,sans-serif;line-height:1.6;padding-bottom:84px}
+header{background:var(--navy);color:#fff;padding:16px 16px 14px}
+header .wrap{max-width:860px;margin:0 auto}
+header a{color:#fff;opacity:.8;font-size:.85rem;text-decoration:none}
+header h1{margin:4px 0 0;font-size:1.35rem}
+.flow{display:flex;align-items:center;gap:4px;margin-top:10px;overflow-x:auto;scrollbar-width:none}.flow::-webkit-scrollbar{display:none}
+.flow div{flex:none;background:rgba(255,255,255,.12);border-radius:12px;padding:6px 10px;font-size:.78rem;text-align:center;line-height:1.2;min-width:64px}.flow div span{display:block;font-size:1.3rem;margin-bottom:2px}.flow i{color:rgba(255,255,255,.5);font-style:normal;flex:none}
+/* 步驟列（黏在上方） */
+.stepbar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.stepbar .wrap{max-width:860px;margin:0 auto;display:flex}
+.stepbar a{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 4px;text-decoration:none;color:var(--mut);font-size:.85rem;border-bottom:3px solid transparent;white-space:nowrap}
+.stepbar a .n{width:22px;height:22px;border-radius:50%;background:#dfe5ee;color:#fff;font-weight:700;font-size:.8rem;display:inline-flex;align-items:center;justify-content:center}
+.stepbar a.on{color:var(--red);border-bottom-color:var(--red);font-weight:700}.stepbar a.on .n{background:var(--red)}
+.stepbar a.done .n{background:var(--ok)}
+main{max-width:860px;margin:0 auto;padding:14px 16px}
+.sec{background:var(--card);border-radius:16px;padding:16px;margin-bottom:16px;box-shadow:0 2px 10px rgba(0,0,0,.05);scroll-margin-top:56px}
+.sec .step{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.sec .step .n{width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.sec h2{margin:0;font-size:1.15rem}
+.sec .sub{margin:0 0 10px 40px;color:var(--mut);font-size:.88rem}
+.note{font-size:.86rem;color:var(--mut)}
+/* 提示框 */
+.hint{display:flex;gap:8px;align-items:flex-start;background:#fff8e6;border:1px solid #f3dfa6;border-radius:12px;padding:10px 12px;font-size:.9rem;margin-top:10px}
+.hint.ok{background:#eef8f1;border-color:#bfe3cb}
+.hint b{color:var(--gold)}.hint.ok b{color:var(--ok)}
+/* 情境卡 */
+.cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:8px}
+.casecard{border:2px solid var(--line);border-radius:14px;background:#fff;padding:12px 14px;cursor:pointer;text-align:left;font:inherit;color:var(--ink);position:relative;border-top-width:6px}
+.casecard.c1{border-top-color:var(--liq)}.casecard.c2{border-top-color:var(--pow)}
+.casecard.on{border-color:var(--red);background:var(--soft)}
+.casecard.on::after{content:"✓ 已選";position:absolute;top:10px;right:12px;background:var(--red);color:#fff;font-size:.75rem;padding:2px 8px;border-radius:999px}
+.casecard .ic{font-size:1.5rem}.casecard h3{margin:2px 0;font-size:1.02rem}.casecard p{margin:0;font-size:.85rem;color:var(--mut)}
+.tags{margin-top:6px}.tag{display:inline-block;font-size:.75rem;padding:2px 8px;border-radius:6px;color:#fff;margin-right:4px}
+.tL{background:var(--liq)}.tP{background:var(--pow)}.tG{background:#5b6675}
+.casebox{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-top:10px;background:#fafbfd;font-size:.9rem}
+/* 按鈕 */
+.btnrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+.btn{border:0;border-radius:12px;padding:12px 18px;font:inherit;font-size:1rem;font-weight:700;cursor:pointer;color:#fff;background:var(--red);display:inline-flex;align-items:center;gap:6px;justify-content:center}
+.btn.big{width:100%;padding:15px 18px;font-size:1.08rem}
+.btn.line{background:#fff;color:var(--navy);border:2px solid var(--navy);font-weight:600}
+.btn.ghost{background:transparent;color:var(--navy);border:0;font-weight:600;padding:8px 10px}
+.btn:active{transform:translateY(1px)}
+#copied{font-weight:700;font-size:.9rem;color:var(--ok)}
+/* 接著怎麼做 */
+.next3{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin-top:12px}
+.next3 div{background:#f6f8fb;border-radius:12px;padding:10px 12px;font-size:.88rem;text-align:center;line-height:1.45}
+.next3 div b{display:block;font-size:1.6rem;margin-bottom:4px}
+/* 提示詞預覽 */
+.prewrap{position:relative;margin-top:10px}
+pre{white-space:pre-wrap;word-break:break-word;background:#1c2430;color:#e9eef5;border-radius:12px;padding:14px;font-size:.84rem;line-height:1.55;margin:0;max-height:170px;overflow:hidden;transition:max-height .2s}
+.prewrap.open pre{max-height:none}
+.prewrap .fade{position:absolute;left:0;right:0;bottom:0;height:70px;background:linear-gradient(transparent,#1c2430);border-radius:0 0 12px 12px;pointer-events:none}
+.prewrap.open .fade{display:none}
+/* 自評卡 */
+.chkcard{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-top:8px;display:grid;grid-template-columns:30px 1fr;gap:8px}
+.chkcard .no{width:26px;height:26px;border-radius:50%;background:#eef2f7;color:var(--red);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.85rem}
+.chkcard .t{font-weight:700}.chkcard .d{font-size:.84rem;color:var(--mut);margin:2px 0 8px}
+.segc{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.segc label{border:1.5px solid var(--line);border-radius:8px;padding:6px 4px;font-size:.84rem;text-align:center;cursor:pointer;color:var(--mut);user-select:none}
+.segc input{position:absolute;opacity:0;width:0;height:0}
+.segc input:checked+span{font-weight:700}
+.segc label.y:has(input:checked){background:#e7f5ec;border-color:var(--ok);color:var(--ok)}
+.segc label.n:has(input:checked){background:#f0f2f5;border-color:#7d8794;color:#333}
+.segc label.x:has(input:checked){background:#fdebee;border-color:var(--red);color:var(--red)}
+.sumrow{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.chip{font-size:.82rem;padding:3px 10px;border-radius:999px;background:#eef2f7;color:var(--mut)}
+.chip.y{background:#e7f5ec;color:var(--ok)}.chip.x{background:#fdebee;color:var(--red)}
+/* 參考資料 */
+.ref{border-top:6px solid var(--navy)}
+details{border:1px solid var(--line);border-radius:12px;padding:8px 12px;margin-top:8px;background:#fff}
+summary{cursor:pointer;font-weight:700;color:var(--navy);list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::after{content:"＋";color:var(--mut)}details[open] summary::after{content:"－"}
+.formlist{font-size:.9rem;padding-left:24px;margin:8px 0}
+.formlist li{margin:3px 0}
+.formlist .grp{list-style:none;margin:10px 0 2px -24px;font-weight:700;color:var(--navy)}
+/* 底部固定鈕 */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(255,255,255,.96);border-top:1px solid var(--line);padding:8px 16px;box-shadow:0 -4px 14px rgba(0,0,0,.06)}
+.dock .wrap{max-width:860px;margin:0 auto;display:flex;gap:10px;align-items:center}
+.dock .lab{flex:1;font-size:.82rem;color:var(--mut);line-height:1.3;min-width:0}
+.dock .lab b{display:block;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dock .btn{flex:none}
+footer{text-align:center;color:var(--mut);font-size:.8rem;padding:16px}
+.hide{display:none!important}
+.guide{border:2px dashed #bcd0ea;border-radius:14px;padding:12px 14px;margin:12px 0;background:#f7faff}
+.guide>summary{cursor:pointer;font-weight:700;color:var(--navy);font-size:1rem;list-style:none}
+.guide>summary::before{content:"▶ ";font-size:.8rem}.guide[open]>summary::before{content:"▼ "}
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:10px 0}
+.tools a{display:block;border:1px solid var(--line);border-radius:12px;background:#fff;padding:10px;text-decoration:none;color:var(--ink);text-align:center;font-size:.9rem}
+.tools a b{display:block;font-size:1rem;color:var(--navy)}.tools a small{color:var(--mut)}
+.howto{counter-reset:h;list-style:none;padding:0;margin:8px 0}
+.howto li{counter-increment:h;position:relative;padding:8px 10px 8px 44px;margin:6px 0;background:#fff;border:1px solid var(--line);border-radius:12px;font-size:.92rem}
+.howto li::before{content:counter(h);position:absolute;left:10px;top:8px;width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.85rem}
+.mock{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px;margin:8px 0}
+.mock .row{display:flex;margin:6px 0}.mock .row.me{justify-content:flex-end}
+.mock .bub{max-width:82%;padding:8px 12px;border-radius:14px;font-size:.9rem;line-height:1.5}
+.mock .ai .bub{background:#eef2f7;border-top-left-radius:4px}.mock .me .bub{background:#1f6fd0;color:#fff;border-top-right-radius:4px}
+.mock .who{font-size:.72rem;color:var(--mut);margin:0 6px}
+.mock .tip{font-size:.8rem;color:var(--gold);margin:2px 0 8px;text-align:center}
+.faq dt{font-weight:700;margin-top:8px;font-size:.92rem}.faq dd{margin:2px 0 0 0;font-size:.9rem;color:var(--ink)}
+
+.stepbar a.lock{opacity:.45;cursor:default}
+.sec.wiz{animation:fadein .25s ease}@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (max-width:480px){.sec{padding:14px}.stepbar a{font-size:.8rem}.stepbar a .txt{display:none}.stepbar a.on .txt{display:inline}}
+</style></head>
+<body>
+<header><div class="wrap"><a href="../">← 回首頁</a><h1>🗣️ 練習：指揮 AI 學妹處理溢灑</h1><div class="flow"><div><span>💧🧂</span>選情境</div><i>›</i><div><span>📋</span>複製提示詞</div><i>›</i><div><span>🤖</span>貼給 AI</div><i>›</i><div><span>📣</span>一步步指揮</div><i>›</i><div><span>✅</span>看回饋</div></div></div></header>
+
+<nav class="stepbar"><div class="wrap">
+<a href="#" id="nav1" data-step="1" class="on"><span class="n">1</span><span class="txt">選情境</span></a>
+<a href="#" id="nav2" data-step="2" class="lock"><span class="n">2</span><span class="txt">複製提示詞</span></a>
+<a href="#" id="nav3" data-step="3" class="lock"><span class="n">3</span><span class="txt">練完自評</span></a>
+</div></nav>
+
+<main>
+
+<!-- STEP 1 -->
+<section class="sec wiz" id="s1">
+<div class="step"><span class="n">1</span><h2>選一個溢灑情境</h2></div>
+<p class="sub">一個是液體、一個是粉劑，處理方式不同，建議都練。</p>
+<details class="guide" open><summary>第一次用 AI 練習？先看這裡（1 分鐘）</summary>
+<p style="margin:8px 0 4px"><b>這個練習在做什麼：</b>我們準備好一段「提示詞」（給 AI 的說明書）。你把它貼給 AI，AI 就會<b>變成一位第一次遇到化療藥品溢灑的學妹</b>。你是學姊，<b>只負責指揮、不動手</b>，用說的一步一步交代她做。</p>
+<p style="margin:4px 0"><b>要注意：</b>學妹只會照你講的字面去做，<b>不會自己補步驟</b>。你沒交代的，她會照新手直覺做（常常是錯的），然後告訴你她剛剛做了什麼——你要聽出哪裡不對，馬上更正。全部指揮完，AI 會依院內〈化療藥品溢灑處理〉表單逐項告訴你哪些有交代、哪些漏了。</p>
+<p style="margin:4px 0"><b>你不需要會寫提示詞</b>，也不用改任何字，只要「複製 → 貼上 → 開始聊天」。</p>
+<p style="margin:4px 0" class="note">🔒 情境全部是虛擬示範。請不要在對話中輸入任何真實病人或同仁的姓名、病歷號等資料。</p>
+</details>
+<div class="cases" id="caseSeg">
+<button class="casecard c1 on" data-case="1"><div class="ic">💧</div><h3>情境一｜液體溢灑在病室地面</h3><p>波及點滴架與輸液幫浦・家屬在旁</p><div class="tags"><span class="tag tL">液體</span><span class="tag tG">點滴架／幫浦</span></div></button>
+<button class="casecard c2" data-case="2"><div class="ic">🧂</div><h3>情境二｜粉劑灑在治療室檯面</h3><p>治療室門開著・同事隨時會進來</p><div class="tags"><span class="tag tP">粉劑</span></div></button>
+</div>
+<div class="casebox" id="caseBox"></div>
+<div class="hint ok" id="hint1">✅ <div><b>已選好。</b>下一步：把提示詞複製、貼給你慣用的 AI。</div></div>
+<div class="btnrow"><button class="btn big" id="go2">下一步：複製提示詞 ▶</button></div>
+</section>
+
+<!-- STEP 2 -->
+<section class="sec wiz hide" id="s2">
+<div class="step"><span class="n">2</span><h2>複製提示詞，貼給生成式 AI</h2></div>
+<p class="sub">提示詞已依你選的情境組好，不用改任何字。</p>
+<button class="btn big" id="copyBtn">📋 複製提示詞</button>
+<div class="btnrow"><button class="btn line" id="dlBtn">⬇ 下載 .txt</button><button class="btn ghost" id="toggleBtn">看提示詞全文 ▾</button><span id="copied"></span></div>
+<div class="prewrap" id="prewrap"><pre id="promptBox"></pre><div class="fade"></div></div>
+<details class="guide" open><summary>要貼到哪裡？任何一個生成式 AI 都可以</summary>
+<div class="tools">
+<a href="https://copilot.microsoft.com/" target="_blank" rel="noopener"><b>Microsoft Copilot</b><small>院內帳號可登入</small></a>
+<a href="https://chatgpt.com/" target="_blank" rel="noopener"><b>ChatGPT</b><small>免費版即可</small></a>
+<a href="https://gemini.google.com/" target="_blank" rel="noopener"><b>Google Gemini</b><small>用 Google 帳號</small></a>
+<a href="https://claude.ai/" target="_blank" rel="noopener"><b>Claude</b><small>免費版即可</small></a>
+</div>
+<p class="note" style="margin:0">手機上也可以用這些 AI 的 App。挑一個你打得開的就好，效果差不多。</p>
+<ol class="howto">
+<li>按上面的 <b>📋 複製提示詞</b>（看到「✅ 已複製」就成功了）。</li>
+<li>點一個 AI 的連結打開，找到最下面的<b>輸入框</b>（通常寫著「詢問任何問題」「傳送訊息」）。</li>
+<li>在輸入框<b>長按（手機）或按右鍵（電腦）→ 貼上</b>，再按<b>送出</b>（紙飛機或 ↑ 按鈕）。</li>
+<li>AI 會先用學妹的口氣說她看到什麼。接著<b>把它當成真的學妹</b>，一句一句交代她做事；可以打字，也可以按麥克風用說的。</li>
+<li>每次學妹回報「我剛剛做了……」，<b>仔細聽有沒有做錯</b>，錯了就馬上請她更正。</li>
+<li>全部處理完，輸入 <b>「我說完了」</b>，AI 就會停止扮演，依表單逐項給你回饋。</li>
+</ol>
+</details>
+
+<details class="guide"><summary>看範例：對話大概長這樣</summary>
+<div class="mock">
+<div class="tip">① 貼上提示詞送出後，AI 會開始扮演學妹</div>
+<div class="row ai"><span class="who">AI</span><div class="bub">學姊！地上有一灘化療的藥，旁邊點滴架也有沾到……我要怎麼辦？</div></div>
+<div class="tip">② 你像在現場那樣交代（一次交代一兩件事就好）</div>
+<div class="row me"><div class="bub">妳先不要碰，按叫人鈴請同事把溢灑處理箱和水桶拿過來。</div><span class="who">你</span></div>
+<div class="row ai"><span class="who">AI</span><div class="bub">好，我按鈴了，阿玲說她去拿處理箱和水桶。啊……家屬剛剛起身，從那灘旁邊走過去了。</div></div>
+<div class="tip">③ 發現學妹漏了什麼？馬上更正</div>
+<div class="row me"><div class="bub">請家屬先停在原地、不要再走動，改從床的另一邊繞。之後妳留在這裡，不要讓任何人走過來。</div><span class="who">你</span></div>
+<div class="tip">④ 繼續指揮……全部處理完後輸入「我說完了」</div>
+<div class="row me"><div class="bub">我說完了</div><span class="who">你</span></div>
+<div class="row ai"><span class="who">AI</span><div class="bub">── 練習結束，以下是回饋 ──<br>1｜先尋求協助｜✅有交代｜……<br>3｜限制人員走動｜❌交代錯（太晚）｜家屬已經走過污染區才攔……</div></div>
+</div>
+<p class="note">範例只示範流程，實際對話內容會依你講的而不同。</p>
+</details>
+
+<details class="guide"><summary>卡住了怎麼辦？</summary>
+<dl class="faq">
+<dt>😵 AI 開始講課、提醒你步驟，沒有當學妹</dt><dd>直接輸入「<b>回到角色</b>」，它就會接著用學妹口氣講。還是不行的話，開「新對話」重新貼一次提示詞。</dd>
+<dt>🤷 學妹一直做錯</dt><dd>這是故意的：她只照字面做。請把話講完整，例如不要只說「戴口罩」，要說「戴 N95 口罩」。</dd>
+<dt>📋 按了複製，貼上沒東西</dt><dd>按「看提示詞全文」，用手指長按文字 → 全選 → 複製；或按「⬇ 下載 .txt」再打開複製。</dd>
+<dt>🔑 AI 網站要我登入</dt><dd>換另一個 AI 試試（ChatGPT、Gemini、Claude 用一般帳號即可），或用院內帳號登入 Copilot。</dd>
+<dt>🤔 不知道要交代什麼</dt><dd>先到 <a href="../lookup/">溢灑速查站</a> 看一遍，或往下看「參考資料」的表單 28 項，照順序交代就好。</dd>
+<dt>🔁 想重來</dt><dd>在 AI 網站開「新對話」，再貼一次提示詞。</dd>
+</dl>
+</details>
+
+<div class="next3">
+<div><b>🤖</b>打開 AI<br>貼上、送出</div>
+<div><b>📣</b>像在現場那樣指揮<br>打字或口說都可以</div>
+<div><b>🏁</b>講完打「我說完了」<br>AI 逐項回饋</div>
+</div>
+<div class="hint">💡 <div><b>小提醒：</b>最多 20 輪（你講一次、AI 回一次算一輪）。中途 AI 開始提醒你或教你，就輸入「回到角色」。練完回到這一頁，按下面的按鈕做自評。</div></div>
+<div class="btnrow"><button class="btn ghost" id="back1">◀ 上一步</button><button class="btn big" id="go3" style="flex:1">練完了 → 下一步：自評 ▶</button></div>
+</section>
+
+<!-- STEP 3 -->
+<section class="sec wiz hide" id="s3">
+<div class="step"><span class="n">3</span><h2>練完了？自己勾一次，再對 AI 的回饋</h2></div>
+<p class="sub">八個區塊對應表單 28 項。先憑印象勾，再看 AI 怎麼說。</p>
+<div id="chkList"></div>
+<div class="sumrow" id="chkSum"></div>
+<div class="btnrow"><button class="btn ghost" id="back2">◀ 上一步</button><button class="btn line" id="clearChk">清除勾選</button><button class="btn" id="swapBtn">換另一個情境再練 🔁</button></div>
+<div class="hint" id="hint3">📌 <div><b>對照方法：</b>你勾「有交代」但 AI 說「交代錯」→ 通常是講得不完整（例如說了「戴口罩」沒說 N95、說了「擦乾淨」沒說由外向內）。</div></div>
+</section>
+
+<!-- 參考資料 -->
+<section class="sec ref">
+<div class="step"><span class="n" style="background:var(--navy)">📚</span><h2>參考資料</h2></div>
+<details open><summary>技術評核表單「化療藥品溢灑處理」28 項</summary>
+<ol class="formlist" id="formList"></ol>
+<p class="note">重點整理成卡片版：<a href="../lookup/">溢灑速查站</a>。</p>
+</details>
+</section>
+
+</main>
+<footer>化療藥品溢灑處理 XR 教材｜④ AI 指揮練習｜版本 2026-09-29</footer>
+
+<div class="dock hide" id="dock"><div class="wrap"><div class="lab">目前：<b id="dockLab"></b></div><button class="btn" id="dockCopy">📋 複製提示詞</button></div></div>
+
+<script>
+/* ---------- 表單 28 項（來源：院內〈化療藥品溢灑處理〉技術評核表單，腫瘤品管） ---------- */
+const GROUPS=[
+ {t:"取得設備",from:1,to:5},{t:"設置警戒區",from:6,to:7},{t:"穿著防護裝備",from:8,to:8},{t:"準備清潔抹布",from:9,to:10},
+ {t:"環境清理",from:11,to:15},{t:"卸除防護裝備",from:16,to:22},{t:"再清潔",from:23,to:24},{t:"紀錄與檢討",from:25,to:28}
+];
+const FORM=[
+ "第一到達現場者應先尋求協助。",
+ "請同仁拿溢灑處理箱及水桶，到溢灑現場。",
+ "在現場者指揮，污染區限制人員走動，以免擴大污染區。",
+ "戴上 N95 口罩。",
+ "取 500 mL 於另外一個空的水桶，泡製 2~3% 漂白水（7 顆 2.5 gm 漂白錠泡 500 mL）。",
+ "圍起警戒線，標示出警戒區範圍。",
+ "放置警示牌。",
+ "穿戴髮帽、護目鏡或防護面罩、雙層外科乳膠或橡膠手套（手套需套緊袖口）、防水隔離衣（後開式、長袖、袖口可束緊）及鞋套等。",
+ "將抹布放入裝有清水的水桶（或至鄰近水龍頭準備清水抹布）。",
+ "將抹布放入裝有 2~3% 漂白水的水桶內。",
+ "液體性化療藥品溢灑時，使用單面吸水襯墊（如看護墊）、或擦手紙、紗布等吸附溢灑化療藥品，再丟入貼有毒物標籤之雙層塑膠袋。",
+ "粉劑化療藥品溢灑時，需採用濕紗布或濕抹布擦拭處理，再丟入貼有毒物標籤之雙層塑膠袋。",
+ "取沾清水的抹布由外向內擦拭後，擦拭 1 次後即丟入貼有毒物標籤之雙層塑膠袋，不可再放入水桶內。",
+ "取沾 2~3% 漂白水抹布，完全沾濕後，擰乾抹布至不滴水為原則。由外向內擦拭，確保化療藥品溢灑表面有漂白水覆蓋，保持微濕感【漂白水擦拭區域需靜置 10 分鐘以上或待乾燥】，擦拭 1 次後的抹布丟入貼有毒物標籤之雙層塑膠袋，不可再放入水桶內。",
+ "若化療藥品溢灑範圍包含點滴架或輸液幫浦，先取用清水抹布擦拭後，再取用沾有 2~3% 漂白水抹布擦拭，擦拭點滴架表面方式為由上到下，擦拭輸液幫浦方式為由外向內。",
+ "脫下外層手套，丟棄於貼有毒物標籤之雙層塑膠袋。",
+ "以內層手套移除護目鏡、髮帽、防水隔離衣、脫除鞋套。",
+ "將所有防護裝備丟棄於貼有毒物標籤之雙層塑膠袋，將內層毒性廢棄物垃圾袋束口。",
+ "脫除內層手套丟入毒性廢棄物垃圾袋。",
+ "穿戴一副新的乳膠手套，將外層塑膠袋束緊，將垃圾袋及手套丟棄於化療廢棄物收集桶。",
+ "移除 N95 口罩。",
+ "進行手部衛生。",
+ "漂白水擦拭後需於 10 分鐘後再用清水抹布擦拭點滴架或點滴幫浦，以避免漂白水造成儀器表面或點滴架腐蝕。",
+ "漂白水擦拭區域靜置 10 分鐘以上或待乾燥後，再撤除警示牌及警戒線，並聯絡清潔人員再一次將化療藥品溢灑區域進行一般清潔。",
+ "與主治醫師討論是否追加藥品劑量。",
+ "完成異常事件通報。",
+ "護理人員或工作人員如有受傷應完成職業災害通報。",
+ "藥品觸及皮膚，應以肥皂、冷水立即清洗。觸及眼睛，應立即沖眼睛至少 15 分鐘。"
+];
+
+/* ---------- 自評八區塊（對應表單 28 項） ---------- */
+const CHECK=[
+ {t:"第一時間：求援、拿箱與水桶、管制走動（表單 1–3）",d:"叫學妹先別動手、先找人；請同仁拿溢灑處理箱「及水桶」；有人留在現場指揮，不讓人走過污染區。"},
+ {t:"N95 與泡漂白水（表單 4–5）",d:"說出「N95」；另一個空水桶、500 mL 水、7 顆 2.5 gm 漂白錠＝2~3%。"},
+ {t:"警戒區（表單 6–7）",d:"圍起警戒線、標示警戒區範圍；放置警示牌。"},
+ {t:"防護裝備與兩桶抹布（表單 8–10）",d:"髮帽、護目鏡或防護面罩、雙層手套套緊袖口、防水隔離衣（後開式長袖束袖口）、鞋套；清水抹布、漂白水抹布分兩桶。"},
+ {t:"環境清理（表單 11–15）",d:"液體先吸附／粉劑用濕紗布或濕抹布；先清水後漂白水、由外向內、擦 1 次就丟；漂白水擰到不滴水、靜置 10 分鐘以上；點滴架由上到下、幫浦由外向內。"},
+ {t:"卸除防護裝備七步（表單 16–22）",d:"外層手套 → 內層手套移除護目鏡、髮帽、隔離衣、鞋套 → 內袋束口 → 脫內層手套 → 戴新乳膠手套束外袋丟收集桶 → N95 → 手部衛生。"},
+ {t:"再清潔與撤警戒（表單 23–24）",d:"10 分鐘後清水擦點滴架／幫浦；靜置 10 分鐘以上或待乾燥才撤警示牌與警戒線，聯絡清潔人員一般清潔。"},
+ {t:"通報與暴露處置（表單 25–28）",d:"與主治醫師討論是否追加劑量；異常事件通報；有人受傷做職業災害通報；皮膚肥皂冷水、眼睛沖至少 15 分鐘。"}
+];
+
+/* ---------- 兩情境 ---------- */
+const CASES={
+ 1:{short:"情境一 液體・病室",name:"情境一｜液體化療藥品溢灑在病室地面",type:"液體",
+    scene:"病室內，一袋化療藥品輸液（液體）漏出來，在病床旁的地面形成一灘約手掌大小的藥液，旁邊的點滴架和輸液幫浦表面也沾到了藥液。輸液已經停止、管路已經處理好，病人躺在床上沒有被沾到。病人的家屬坐在床邊，隨時可能起身走動。",
+    who:"家屬",
+    na:"第 12 項（粉劑）本情境不適用，標「➖不適用」。第 11、15、23 項適用。",
+    extra:"- 家屬是一般民眾，會起身、走動、想幫忙；沒人攔就會從那灘旁邊走過去，或想拿衛生紙幫忙擦。",
+    tag:'<span class="tag tL">液體</span><span class="tag tG">點滴架／幫浦</span>',
+    open:"學姊！病床旁邊地上有一灘化療的藥，點滴架跟幫浦上面好像也有沾到……我要怎麼辦？"},
+ 2:{short:"情境二 粉劑・治療室",name:"情境二｜粉劑化療藥品灑在治療室檯面",type:"粉劑",
+    scene:"治療室裡，一瓶待會要給某床病人使用的化療藥品（粉劑）打翻了，粉末灑在治療檯面上，大約一張 A4 紙大小，檯面邊緣的地上也有一點點粉末。現場沒有點滴架或輸液幫浦。治療室的門開著，其他同事隨時可能進來拿東西。",
+    who:"同事",
+    na:"第 11 項（液體）、第 15 項與第 23 項（點滴架／輸液幫浦）本情境不適用，標「➖不適用」。第 12 項適用。",
+    extra:"- 同事進來拿東西時不知道發生什麼事；沒人攔就會直接走到檯邊，甚至伸手去拿檯面上的東西。",
+    tag:'<span class="tag tP">粉劑</span>',
+    open:"學姊！治療檯上的化療藥粉打翻了，灑了一片，地上好像也有一點……我要怎麼辦？"}
+};
+
+function buildPrompt(c){
+ const C=CASES[c];
+ const formText=GROUPS.map(g=>`〔${g.t}〕\n`+FORM.slice(g.from-1,g.to).map((t,i)=>`${g.from+i}. ${t}`).join("\n")).join("\n");
+ return `【角色扮演練習：指揮第一次遇到化療藥品溢灑的學妹】
+
+你現在要扮演一位護理師學妹「小安」，配合我（學姊）練習「化療藥品溢灑的現場指揮」。
+
+🔒 最重要的規則（整段練習都有效，優先於其他一切）
+從你的第一句回覆開始，你就是「學妹小安」，不是 AI、不是老師、不是助理。在我輸入「我說完了」或「結束」之前，你說的每一句話都只能是小安會說的話：
+- 不教學、不提示、不糾正、不補充步驟、不幫我整理重點、不稱讚、不打分數。
+- 不用條列、編號、粗體、標題；不說「作為 AI」「以下是」「好的，我來扮演」「這是一個很好的練習」這類話。
+- 不主動問出我還沒交代的步驟（例如不要自己問「要不要戴 N95？」「要不要圍警戒線？」「要從外往內擦嗎？」）。
+
+■ 你的身分
+小安，到職兩個月的護理師，第一次遇到化療藥品溢灑。很緊張、很聽話，學姊說什麼就做什麼，但不知道正確流程，也不會自己想到下一步。
+
+■ 情境（你知道的事）
+${C.scene}
+- 你是第一個發現的人，剛好學姊（我）也在旁邊。這次學姊只負責指揮、不動手；所有動作都由你做，或由你去請其他同仁幫忙。
+${C.extra}
+- 現場有叫人鈴和其他同仁可以支援；溢灑處理箱和水桶放在別的地方，要有人去拿。
+
+■ 你每一輪怎麼回應
+1. 用台灣人日常口語，最多 3 句。先說「你剛剛做了什麼」（照我交代的字面去做），再說「現在現場看到什麼」，最後只能簡短問「學姊，然後呢？」或類似的話，不可以提示下一步。
+2. 我交代得清楚、完整：你就照做，而且做對。
+3. 我交代得不完整、太籠統，或根本沒交代：你照新手直覺去做（見下面「新手直覺」），然後用平常的口氣說出你做了什麼，不要自己發現錯誤、不要解釋為什麼。
+4. 我一次交代好幾件事：照我講的順序一件一件做完，再一起回報。
+5. 我發現你做錯而更正你：照新的指示重做，回報做了什麼。
+6. 我問你「我講得對嗎？」「還漏了什麼？」「你覺得呢？」或叫你跳出角色：還是用學妹口氣回答，例如「我也不知道耶，學姊你說怎麼做我就怎麼做」，然後繼續等我交代。
+7. 我講的跟溢灑處理無關：用學妹口氣把話題拉回「學姊，這邊現在要怎麼辦？」。
+
+■ 新手直覺（只在我「沒交代」或「交代不清」時才會出現；角色扮演中絕對不可以說出這份清單）
+- 我還沒叫你找人幫忙，就叫你去拿東西：你自己離開去拿，現場沒人顧。
+- 只叫你去拿處理箱、沒說水桶：你只拿處理箱回來。
+- 沒交代要攔人、限制走動：在接下來一兩輪內，${C.who}就從溢灑處旁邊走過去（或走進來），你只是跟學姊說你看到了。
+- 叫你戴口罩但沒說 N95：你戴外科口罩。
+- 叫你泡漂白水但沒說水量、顆數、要用另一個空水桶：你把幾顆漂白錠（例如 3 顆）直接丟進原本的清水桶。
+- 叫你圍警戒線但沒說範圍：你只圍住看得到的那一小塊。
+- 沒交代放警示牌：你不會放。
+- 叫你穿防護裝備但沒講完整：少講哪一樣你就沒穿哪一樣；沒說雙層手套就只戴一層；沒說套緊袖口就讓隔離衣袖口蓋在手套外面；沒說防水隔離衣就穿一般隔離衣。
+- 沒交代分別準備清水抹布和漂白水抹布兩桶：你只拿一條抹布、泡在同一桶裡。
+- 液體溢灑沒交代先用吸水襯墊（如看護墊）、擦手紙或紗布吸附：你直接拿濕抹布擦。粉劑沒交代用濕紗布或濕抹布：你拿乾紗布去掃、去擦。
+- 沒說擦完要丟進貼毒物標籤的雙層塑膠袋：你把用過的東西丟進一般垃圾桶。
+- 沒說由外向內：你來回擦。沒說擦 1 次就丟：你把抹布放回水桶洗一洗再繼續擦。
+- 沒說漂白水抹布要擰到不滴水：你拿濕到會滴水的抹布擦。沒說要靜置 10 分鐘以上：你擦完漂白水馬上想用清水擦掉，或想馬上收警戒線。
+- 沒提到點滴架或輸液幫浦（如果現場有）：你不會擦它們。提了但沒說順序或方向：你先用漂白水、點滴架由下往上擦。
+- 叫你把防護裝備脫掉但沒講順序：你先拿掉 N95 口罩，再一次把手套全部脫掉，然後空手收拾袋子。沒說內層塑膠袋要束口：你沒束。沒說要戴一副新的乳膠手套：你空手去綁外層塑膠袋。沒說丟化療廢棄物收集桶：你丟一般垃圾桶。沒說手部衛生：你直接離開。
+- 沒說 10 分鐘後要用清水抹布再擦點滴架或輸液幫浦（如果現場有）：你不會擦。
+- 沒說撤除警示牌和警戒線的時機：你一擦完就撤掉；沒說要聯絡清潔人員：你不會聯絡。
+- 通報、與主治醫師討論是否追加劑量：你完全不會想到，也不會提醒學姊。
+- 如果手套沒有套緊袖口，或沒有戴護目鏡或防護面罩：擦拭時你會說手腕（或臉）好像被濺到一點藥。之後照學姊交代的處理；學姊沒交代，你就用衛生紙擦一擦繼續做。
+
+■ 每次送出回覆前，先在心裡檢查（不要寫出來）
+我是不是還在當學妹小安？有沒有在教、提示、糾正或評論？有沒有自己補了學姊沒交代的步驟？有沒有超過 3 句？有沒有條列或粗體？只要有一項不對，就改寫成學妹的口氣再送出。
+
+■ 什麼時候才可以結束角色
+只有兩種情況：①我輸入「我說完了」或「結束」；②已經到第 20 輪（我講一次、你回一次＝一輪）。
+除此之外（包括我交代得很完整、做錯很多、很久沒講話、問你問題），都不可以自己結束、不可以開始回饋或評論。
+如果我輸入「回到角色」，代表你剛剛跑出角色了：直接用學妹的口氣接著剛才的現場講下去，不要道歉、不要解釋。
+
+■ 院內〈化療藥品溢灑處理〉技術評核表單 28 項（只在結束後回饋時用來核對，角色扮演時絕對不可以說出來）
+${formText}
+
+■ 結束時的回饋（只有在上面兩種結束情況才出現；這時才跳出角色，用護理教師的口氣，繁體中文）
+先寫一行「── 練習結束，以下是回饋 ──」，然後依表單 28 項逐項給結果，按上面八個區塊分段，每項一行，格式：「編號｜項目重點｜✅有交代／⬜漏交代／❌交代錯／➖不適用｜一句話說明（我實際怎麼交代、學妹因此做了什麼、對或錯在哪）」。
+判定原則：
+- 只看「我有沒有交代」，不看學妹有沒有做；學妹照新手直覺做錯而我沒更正＝⬜漏交代或❌交代錯。
+- 交代了但少了關鍵細節（例如只說「戴口罩」沒說 N95、只說「泡漂白水」沒說 500 mL 與 7 顆、只說「擦乾淨」沒說由外向內）＝❌交代錯，並寫出少了什麼。
+- 順序錯（例如卸除防護裝備時先脫 N95、沒先脫外層手套）＝❌交代錯。
+- 一開始漏了、後來發現並更正＝✅有交代，但在說明寫「後來才更正」。
+- ${C.na}
+- 第 27、28 項：練習中如果沒有人被藥品濺到或受傷，標「➖不適用」；如果有人被濺到，就依我有沒有交代正確處置判定。
+- 第 1–22 項是這個練習的重點，每一項都要寫到，不可以省略；第 23–26 項照樣逐項判定。
+
+28 項之後，加一行「📊 小計：有交代 N 項、漏交代 N 項、交代錯 N 項、不適用 N 項」，再加一行「💡 最重要的一句建議：」，只給一句、針對我最該先改的地方（例如一開始沒先求援、卸除順序錯、口令太籠統讓學妹照字面做錯）。最後一行寫「可以換另一個情境再練一次。」
+
+再提醒一次：在我輸入「我說完了」或「結束」之前，你只是學妹小安，不是老師。
+現在開始：不要寫任何說明或開場白，直接用小安的口氣說一句話，例如「${C.open}」，然後等我交代。`;
+}
+
+/* ---------- 畫面 ---------- */
+let curCase=1;
+const $=s=>document.querySelector(s);
+function renderCase(){
+ const C=CASES[curCase];
+ $("#caseBox").innerHTML=`<div>${C.tag}<b>${C.name}</b>・AI 扮學妹小安</div>
+ <div style="margin-top:4px">${C.scene}</div>
+ <div class="note" style="margin-top:4px">你是學姊，只指揮、不動手；小安只照字面做。</div>`;
+ $("#promptBox").textContent=buildPrompt(curCase);
+ $("#hint1").innerHTML=`✅ <div><b>已選好：${C.short}。</b>下一步：把提示詞複製、貼給你慣用的 AI。</div>`;
+ $("#dockLab").textContent=C.short;
+ $("#copied").textContent="";
+}
+document.querySelectorAll("#caseSeg button").forEach(b=>b.onclick=()=>{curCase=+b.dataset.case;document.querySelectorAll("#caseSeg button").forEach(x=>x.classList.toggle("on",x===b));renderCase();});
+$("#swapBtn").onclick=()=>{const b=document.querySelector(`#caseSeg button[data-case="${curCase===1?2:1}"]`);b.click();show(1);};
+
+async function copyText(t){
+ try{await navigator.clipboard.writeText(t);return true;}catch(e){}
+ try{const ta=document.createElement("textarea");ta.value=t;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.focus();ta.select();const ok=document.execCommand("copy");document.body.removeChild(ta);return ok;}catch(e){return false;}
+}
+async function doCopy(){
+ const ok=await copyText($("#promptBox").textContent);
+ $("#copied").textContent=ok?"✅ 已複製，打開 AI 貼上":"⚠️ 無法自動複製，請展開全文長按複製";
+ [$("#copyBtn"),$("#dockCopy")].forEach(b=>{b.textContent=ok?"✅ 已複製":"📋 複製提示詞";});
+ setTimeout(()=>{[$("#copyBtn"),$("#dockCopy")].forEach(b=>b.textContent="📋 複製提示詞");},2500);
+}
+$("#copyBtn").onclick=doCopy;$("#dockCopy").onclick=doCopy;
+$("#dlBtn").onclick=()=>{const t=$("#promptBox").textContent;const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([t],{type:"text/plain;charset=utf-8"}));a.download=`溢灑指揮練習_${CASES[curCase].short}.txt`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);};
+$("#toggleBtn").onclick=()=>{const w=$("#prewrap");w.classList.toggle("open");$("#toggleBtn").textContent=w.classList.contains("open")?"收合提示詞 ▴":"看提示詞全文 ▾";};
+
+/* 精靈式：一次只顯示一個步驟，按「下一步」才解鎖下一步 */
+let unlocked=1;
+function show(n){
+ if(n>unlocked)unlocked=n;
+ [1,2,3].forEach(i=>{
+  document.getElementById("s"+i).classList.toggle("hide",i!==n);
+  const a=document.getElementById("nav"+i);
+  a.classList.toggle("on",i===n);a.classList.toggle("done",i<n);a.classList.toggle("lock",i>unlocked);
+ });
+ $("#dock").classList.toggle("hide",n<2);
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+document.querySelectorAll(".stepbar a").forEach(a=>a.onclick=e=>{e.preventDefault();const n=+a.dataset.step;if(n<=unlocked)show(n);});
+$("#go2").onclick=()=>show(2);
+$("#go3").onclick=()=>show(3);
+$("#back1").onclick=()=>show(1);
+$("#back2").onclick=()=>show(2);
+
+/* 自評（勾選只存本機瀏覽器，失敗也不影響使用）
+   進度 key：spill_xrprog（物件，本頁完成時寫入 coach 欄位＝時間戳）
+   勾選 key：spill_coach_chk_v1 */
+const PROG_KEY="spill_xrprog";
+const xrMark=k=>{try{const p=JSON.parse(localStorage.getItem(PROG_KEY)||'{}')||{};if(!p[k]){p[k]=Date.now();localStorage.setItem(PROG_KEY,JSON.stringify(p));}}catch(e){}};
+const KEY="spill_coach_chk_v1";
+const N=CHECK.length;
+let saved={};try{saved=JSON.parse(localStorage.getItem(KEY)||"{}")||{};}catch(e){saved={};}
+if(Object.keys(saved).length>=N)xrMark("coach");   // 之前已勾完者，開頁即補記完成
+function renderChk(){
+ $("#chkList").innerHTML=CHECK.map((c,i)=>`<div class="chkcard"><div class="no">${i+1}</div><div><div class="t">${c.t}</div><div class="d">${c.d}</div>
+ <div class="segc">
+ <label class="y"><input type="radio" name="c${i}" value="y" ${saved["c"+i]==="y"?"checked":""}><span>✅ 有交代</span></label>
+ <label class="n"><input type="radio" name="c${i}" value="n" ${saved["c"+i]==="n"?"checked":""}><span>⬜ 漏交代</span></label>
+ <label class="x"><input type="radio" name="c${i}" value="x" ${saved["c"+i]==="x"?"checked":""}><span>❌ 交代錯</span></label></div></div></div>`).join("");
+ sumChk();
+}
+function sumChk(){
+ const v=Object.values(saved);const y=v.filter(x=>x==="y").length,n=v.filter(x=>x==="n").length,x=v.filter(x=>x==="x").length;
+ $("#chkSum").innerHTML=v.length?`<span class="chip y">有交代 ${y}</span><span class="chip">漏交代 ${n}</span><span class="chip x">交代錯 ${x}</span><span class="note">／共 ${N} 區塊${v.length<N?`，還有 ${N-v.length} 區塊沒勾`:""}</span>`:`<span class="note">還沒勾選。練完後每個區塊選一個。</span>`;
+}
+$("#chkList").addEventListener("change",e=>{if(e.target.name){saved[e.target.name]=e.target.value;try{localStorage.setItem(KEY,JSON.stringify(saved));}catch(err){}sumChk();if(Object.keys(saved).length>=N)xrMark("coach");}});
+$("#clearChk").onclick=()=>{saved={};try{localStorage.removeItem(KEY);}catch(e){}renderChk();};
+
+/* 參考資料：表單 28 項 */
+$("#formList").innerHTML=GROUPS.map(g=>`<li class="grp">${g.t}（第 ${g.from}${g.to>g.from?"–"+g.to:""} 項）</li>`+FORM.slice(g.from-1,g.to).map((t,i)=>`<li value="${g.from+i}">${t}</li>`).join("")).join("");
+
+renderCase();renderChk();
+</script>
+</body></html>

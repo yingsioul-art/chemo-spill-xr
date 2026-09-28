@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>自學：第一時間與防護準備｜化療藥品溢灑</title>
+<meta name="description" content="化療藥品溢灑處理 2D 自學站：區塊 A–D 11 題先選再講解（文字＋語音＋圖），⑤ 再清潔與紀錄通報 6 張圖卡與自我檢核。">
+<style>
+/* ── 主題色與基礎（沿用首頁 docs/index.html 的色票） ── */
+:root{
+  --bg:#f4f7fb;--card:#ffffff;--ink:#1c2430;--mut:#5b6675;--navy:#123a6b;--line:#dfe5ee;
+  --ok:#1f8a4c;--okbg:#e8f6ee;--ng:#c81e3a;--ngbg:#fdecef;--acc:#2b7de9;
+  --cA:#2b7de9;--cB:#e8792b;--cC:#7a3fb5;--cD:#c81e3a;--cG:#2e8b57;--cH:#2e8b57;
+  --r:16px;--sh:0 2px 10px rgba(0,0,0,.05);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",system-ui,sans-serif;line-height:1.6;font-size:16px}
+button{font:inherit;color:inherit}
+a{color:var(--navy)}
+
+/* ── 頁首 ── */
+header{background:var(--navy);color:#fff;padding:10px 16px 12px;position:sticky;top:0;z-index:10;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.hrow{display:flex;align-items:center;gap:10px;max-width:760px;margin:0 auto}
+.hrow h1{margin:0;font-size:1.05rem;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hbtn{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:999px;padding:5px 11px;font-size:.82rem;cursor:pointer;white-space:nowrap;min-height:32px}
+.hbtn:active{background:rgba(255,255,255,.28)}
+.hbtn.off{opacity:.65}
+/* 進度條 */
+.prog{max-width:760px;margin:8px auto 0;display:none}
+.prog.show{display:block}
+.prog .lbl{display:flex;justify-content:space-between;font-size:.78rem;opacity:.9;margin-bottom:4px}
+.prog .bar{height:8px;background:rgba(255,255,255,.22);border-radius:999px;overflow:hidden}
+.prog .bar i{display:block;height:100%;width:0;background:#ffd166;border-radius:999px;transition:width .35s}
+
+/* ── 主內容 ── */
+main{max-width:760px;margin:0 auto;padding:16px 16px 48px}
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);padding:16px;margin-bottom:14px}
+.mut{color:var(--mut);font-size:.9rem}
+.hint{background:#eef2f7;border-radius:12px;padding:10px 12px;font-size:.88rem;color:var(--mut);margin-bottom:14px}
+
+/* 首頁方塊 */
+.grid{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:560px){.grid{grid-template-columns:1fr 1fr}}
+.tile{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:var(--r);padding:14px 14px 14px 16px;border-left:7px solid var(--c);box-shadow:var(--sh);width:100%;border-top:0;border-right:0;border-bottom:0;text-align:left;cursor:pointer;transition:.15s}
+.tile:active{transform:scale(.99)}
+.tile .bl{font-size:1.45rem;font-weight:700;color:var(--c);width:34px;text-align:center;flex:none}
+.tile .tx{flex:1;min-width:0}
+.tile h2{margin:0;font-size:1.05rem}
+.tile .sub{font-size:.82rem;color:var(--mut);margin-top:2px}
+.tile .st{flex:none;font-size:.8rem;padding:3px 9px;border-radius:999px;background:#eef2f7;color:var(--mut)}
+.tile .st.done{background:var(--okbg);color:var(--ok)}
+.tile .st.part{background:#fff4e0;color:#b25e00}
+.tA{--c:var(--cA)}.tB{--c:var(--cB)}.tC{--c:var(--cC)}.tD{--c:var(--cD)}.tG{--c:var(--cG)}
+.rev{margin-top:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.rev .num{font-size:1.4rem;font-weight:700;color:var(--navy)}
+
+/* 題目 */
+.qno{display:inline-block;font-size:.78rem;font-weight:700;color:#fff;background:var(--c,var(--navy));padding:2px 10px;border-radius:999px;margin-bottom:8px}
+.stem{margin:0 0 12px;font-size:1.1rem;font-weight:700;line-height:1.55}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px 12px;min-height:48px;cursor:pointer;transition:.15s;line-height:1.5}
+.opt .k{flex:none;width:28px;height:28px;border-radius:50%;background:#eef2f7;color:var(--mut);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem}
+.opt:not(:disabled):hover{border-color:var(--acc)}
+.opt:disabled{cursor:default;opacity:.92}
+.opt.ok{border-color:var(--ok);background:var(--okbg)}
+.opt.ok .k{background:var(--ok);color:#fff}
+.opt.ng{border-color:var(--ng);background:var(--ngbg)}
+.opt.ng .k{background:var(--ng);color:#fff}
+.opt .t{flex:1}
+
+/* 圖片與佔位 */
+.fig{margin:0 0 12px;border-radius:12px;overflow:hidden;background:#e9edf3}
+.fig{position:relative;cursor:zoom-in}
+.fig img{display:block;width:100%;height:auto;max-height:38vh;max-height:38dvh;object-fit:contain;margin:0 auto}
+.fig .zoom{position:absolute;right:8px;bottom:8px;background:rgba(18,58,107,.85);color:#fff;font-size:.78rem;padding:3px 9px;border-radius:999px;pointer-events:none}
+.lb{position:fixed;inset:0;background:rgba(10,20,35,.92);z-index:999;display:flex;align-items:center;justify-content:center;padding:12px;cursor:zoom-out}
+.lb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px;background:#fff}
+.lb .x{position:absolute;top:10px;right:14px;color:#fff;font-size:1rem;background:rgba(255,255,255,.18);padding:6px 14px;border-radius:999px}
+.fig.ph{aspect-ratio:16/9;max-height:30vh;max-height:30dvh;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:12px 16px;text-align:center;color:var(--mut);font-size:.9rem;cursor:default;background:repeating-linear-gradient(45deg,#e6eaf0 0 12px,#eef1f6 12px 24px)}
+.fig.ph b{font-size:.82rem;color:#7a8594;font-weight:700}
+.fig.ph span{line-height:1.45}
+
+/* 講解卡 */
+.exp{margin-top:14px;border-radius:14px;padding:14px;border:1px solid var(--line);animation:fadeUp .4s ease both}
+.exp.ok{background:var(--okbg);border-color:#bfe3cc}
+.exp.ng{background:var(--ngbg);border-color:#f3c3cc}
+.exp .ttl{font-weight:700;font-size:1.02rem;margin-bottom:6px}
+.exp.ok .ttl{color:var(--ok)}
+.exp.ng .ttl{color:var(--ng)}
+.exp p{margin:0 0 10px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.exp{animation:none}}
+.aud{margin-top:6px}
+.aud audio{width:100%;height:40px;display:block}
+.audnote{font-size:.78rem;color:var(--mut);margin-top:4px}
+
+/* 按鈕 */
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.btn{flex:1;min-width:120px;min-height:46px;border:0;border-radius:12px;padding:10px 14px;font-weight:700;cursor:pointer;background:var(--navy);color:#fff}
+.btn.sec{background:#fff;color:var(--navy);border:2px solid var(--navy)}
+.btn.lite{background:#eef2f7;color:var(--ink)}
+.btn:disabled{opacity:.45;cursor:default}
+.btn:active{transform:scale(.98)}
+
+/* 總複習 */
+.wrong{display:flex;gap:10px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px}
+.wrong .q{flex:1;min-width:0;font-size:.92rem}
+.wrong .q b{color:var(--ng)}
+.wrong .q span{display:block;color:var(--mut);font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wrong button{flex:none;min-height:38px;padding:6px 12px;border-radius:10px;border:0;background:var(--navy);color:#fff;font-weight:700;cursor:pointer}
+
+/* ⑤ 圖卡 */
+.gcard .num{display:inline-block;font-size:.78rem;font-weight:700;color:#fff;background:var(--cG);padding:2px 10px;border-radius:999px;margin-bottom:8px}
+.gcard h2{margin:0 0 4px;font-size:1.15rem}
+.gcard .sub{color:var(--mut);font-size:.9rem;margin-bottom:12px}
+.check{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px}
+.check .tag{font-size:.8rem;color:var(--cG);font-weight:700;margin-bottom:6px}
+
+.err{background:var(--ngbg);border:1px solid #f3c3cc;border-radius:12px;padding:14px;color:var(--ng)}
+footer{text-align:center;color:var(--mut);font-size:.78rem;padding:0 16px 28px}
+.sr{position:absolute;left:-9999px}
+</style>
+</head>
+<body>
+<header>
+  <div class="hrow">
+    <button class="hbtn" id="back" type="button">← 回首頁</button>
+    <h1 id="ttl">自學：第一時間與防護準備</h1>
+    <button class="hbtn" id="auto" type="button" aria-pressed="true">🔊 自動播放 開</button>
+  </div>
+  <div class="prog" id="prog"><div class="lbl"><span id="plbl"></span><span id="pnum"></span></div><div class="bar"><i id="pbar"></i></div></div>
+</header>
+<main id="app" aria-live="polite"></main>
+<footer>內容以院內〈化療藥品溢灑處理〉技術評核表單（15700-4-041229）為準；無病人資料。</footer>
+
+<!-- 題目資料：正式版由頁面 fetch ../assets/data/questions.json；
+     本機用 file:// 開啟時 fetch 會失敗，build 腳本可把 questions.json 全文注入下方標籤作為 fallback（不手抄題目）。 -->
+<script id="qdata" type="application/json">{"source":"20260929_溢灑XR_需求規格與題目草稿_v1.md","count":27,"questions":[{"id":1,"block":"A","block_name":"第一時間反應","use":["learn","handson","3d","test"],"stem":"你是第一個到達化療藥品溢灑現場的人，第一個動作是？","note":"","options":[{"key":"A","text":"先尋求協助"},{"key":"B","text":"自己拿抹布先把藥擦掉"},{"key":"C","text":"先離開去拿溢灑處理箱"},{"key":"D","text":"先打電話完成異常事件通報"}],"answer":"A","explain_ok":"對！第一到達現場的人要先尋求協助。你留在現場、不動手，才能管制人員走動、等裝備到位。","explain_ng":"第一步是先尋求協助。沒有防護就擦，受污染的是你自己；離開去拿箱子，現場沒人管，別人踩過就擴大污染；通報是處理完之後的事。","img":"gen_a01（第一到達者站在溢灑旁舉手呼叫同事）","form_item":"1","supplement":"","text_hash":{"ok":"88064525","ng":"8425a4fd","stem":"6acf227a"}},{"id":2,"block":"A","block_name":"第一時間反應","use":["learn","handson","3d","test"],"stem":"請同仁幫忙時，要請他把什麼帶到現場？","note":"","options":[{"key":"A","text":"溢灑處理箱及水桶"},{"key":"B","text":"只要溢灑處理箱"},{"key":"C","text":"拖把和一般清潔劑"},{"key":"D","text":"一包擦手紙"}],"answer":"A","explain_ok":"對！要請同仁拿溢灑處理箱及水桶到現場。水桶之後要用來泡漂白水、放清水抹布。","explain_ng":"要拿的是溢灑處理箱及水桶。只拿箱子會缺水桶；拖把會把藥推散，一般清潔劑不是表單規定的處理方式。","img":"gen_a02（同事提著溢灑處理箱與水桶走來）","form_item":"2","supplement":"","text_hash":{"ok":"f7ade9d3","ng":"dc3c7109","stem":"28310901"}},{"id":3,"block":"A","block_name":"第一時間反應","use":["learn","handson","3d","test"],"stem":"同仁去拿東西時，有家屬正要從溢灑處旁邊走過，你應該？","note":"","options":[{"key":"A","text":"留在現場指揮，請他停下、改走別的路"},{"key":"B","text":"提醒他小心腳下就好"},{"key":"C","text":"先跟著去拿處理箱，回來再處理"},{"key":"D","text":"讓他快速通過"}],"answer":"A","explain_ok":"對！在現場的人要指揮，限制人員在污染區走動，以免擴大污染區。","explain_ng":"要攔下來、請他改道。只提醒或讓人快速通過，鞋底就可能把藥帶到走廊和別的病室，污染範圍會擴大。","img":"gen_a03（護理師伸手攔下走近的家屬，指向另一條路）","form_item":"3","supplement":"","text_hash":{"ok":"d8f73967","ng":"08491aef","stem":"ff19e2cd"}},{"id":4,"block":"B","block_name":"N95 與泡製漂白水","use":["learn","test"],"stem":"處理溢灑前，要戴哪一種口罩？","note":"","options":[{"key":"A","text":"N95 口罩"},{"key":"B","text":"外科口罩"},{"key":"C","text":"布口罩"},{"key":"D","text":"不用戴口罩，戴防護面罩就好"}],"answer":"A","explain_ok":"對！要戴 N95 口罩。它是最先戴、也是最後才脫的一件。","explain_ng":"表單規定的是 N95 口罩，外科口罩或布口罩都不是。防護面罩擋的是噴濺，不能取代 N95。","img":"gen_b01（N95 口罩與外科口罩並排，N95 打勾）","form_item":"4","supplement":"","text_hash":{"ok":"b4ec5b31","ng":"1430bd60","stem":"8ada9a15"}},{"id":5,"block":"B","block_name":"N95 與泡製漂白水","use":["learn","test"],"stem":"漂白水要怎麼泡？","note":"","options":[{"key":"A","text":"取 500 mL 水到另一個空水桶，放 7 顆 2.5 gm 漂白錠"},{"key":"B","text":"取 500 mL 水，放 3 顆 2.5 gm 漂白錠"},{"key":"C","text":"取 1000 mL 水，放 7 顆 2.5 gm 漂白錠"},{"key":"D","text":"直接把漂白錠丟進清水桶"}],"answer":"A","explain_ok":"對！取 500 mL 水到另外一個空的水桶，放 7 顆 2.5 gm 漂白錠，泡成 2~3% 漂白水。","explain_ng":"正確是 500 mL 水、7 顆 2.5 gm 漂白錠、另一個空水桶。顆數或水量不對，濃度就不是 2~3%；丟進清水桶，你就沒有清水可用了。","img":"gen_b02（量杯 500 mL、7 顆漂白錠、空水桶）","form_item":"5","supplement":"","text_hash":{"ok":"bf5cc209","ng":"04a23abc","stem":"7fb946cf"}},{"id":6,"block":"C","block_name":"設置警戒區","use":["learn","handson","3d","test"],"stem":"警戒線要怎麼圍？","note":"","options":[{"key":"A","text":"圍起警戒線，範圍涵蓋可能噴濺與被踩到的地方"},{"key":"B","text":"只圍住看得到的那一灘"},{"key":"C","text":"不用圍線，放警示牌就好"},{"key":"D","text":"等清潔人員來再圍"}],"answer":"A","explain_ok":"對！要圍起警戒線、標示出警戒區範圍。範圍要包含細小噴濺和可能被踩到的地方，不只是看得到的那一灘。","explain_ng":"要圍起警戒線、標示警戒區範圍。只圍一灘會漏掉噴濺；只放牌子別人仍會走進來；等清潔人員就太晚了。","img":"gen_c01（俯視圖：溢灑處外圍一圈警戒線，涵蓋噴濺點）","form_item":"6","supplement":"範圍判斷","text_hash":{"ok":"ccff1515","ng":"ba7b8373","stem":"3b539a89"}},{"id":7,"block":"C","block_name":"設置警戒區","use":["learn","handson","3d","test"],"stem":"警示牌放在哪裡最有用？","note":"","options":[{"key":"A","text":"來人第一眼會看到的動線上"},{"key":"B","text":"溢灑那一灘的正中間"},{"key":"C","text":"護理站的桌上"},{"key":"D","text":"處理完再放"}],"answer":"A","explain_ok":"對！要放置警示牌，而且放在別人走過來會先看到的地方，才擋得住人。","explain_ng":"警示牌要放在來人會先看到的動線上。放在一灘中間你得踩進去；放護理站或處理完才放，都擋不到路過的人。","img":"gen_c02（走道入口處的警示牌，後方是警戒線）","form_item":"7","supplement":"擺放位置","text_hash":{"ok":"8d7278fc","ng":"cd09e7c8","stem":"e4d63e31"}},{"id":8,"block":"D","block_name":"防護裝備與抹布","use":["learn","test"],"stem":"除了 N95 口罩，還要穿戴哪一組防護裝備？","note":"","options":[{"key":"A","text":"髮帽、護目鏡或防護面罩、雙層手套、防水隔離衣、鞋套"},{"key":"B","text":"髮帽、單層手套、一般隔離衣、鞋套"},{"key":"C","text":"護目鏡、雙層手套、一般隔離衣"},{"key":"D","text":"只要戴雙層手套"}],"answer":"A","explain_ok":"對！要穿戴髮帽、護目鏡或防護面罩、雙層外科乳膠或橡膠手套、防水隔離衣和鞋套。","explain_ng":"完整的一組是髮帽、護目鏡或防護面罩、雙層外科乳膠或橡膠手套、防水隔離衣、鞋套。單層手套、一般隔離衣都不夠，少了鞋套會把藥踩出去。","img":"gen_d01（全套防護裝備攤開：髮帽、護目鏡、面罩、雙層手套、防水隔離衣、鞋套）","form_item":"8","supplement":"","text_hash":{"ok":"b20085f4","ng":"887f8034","stem":"7a508c9f"}},{"id":9,"block":"D","block_name":"防護裝備與抹布","use":["learn","test"],"stem":"手套和隔離衣的袖口，要怎麼搭？","note":"","options":[{"key":"A","text":"手套要套緊袖口"},{"key":"B","text":"袖口蓋在手套外面"},{"key":"C","text":"手套和袖口之間留一點空隙比較好活動"}],"answer":"A","explain_ok":"對！手套需套緊袖口，手腕才不會露出來。","explain_ng":"表單規定手套需套緊袖口。留空隙或手套沒套住袖口，手腕就是藥品碰到皮膚的缺口。","img":"gen_d02（左右對照：手套套緊袖口打勾、手腕外露打叉）","form_item":"8","supplement":"","text_hash":{"ok":"3a4167cf","ng":"afb6f60f","stem":"1a6b1453"}},{"id":10,"block":"D","block_name":"防護裝備與抹布","use":["learn","test"],"stem":"防水隔離衣要選哪一種？","note":"","options":[{"key":"A","text":"後開式、長袖、袖口可束緊"},{"key":"B","text":"前開式、長袖"},{"key":"C","text":"後開式、短袖"},{"key":"D","text":"一般布隔離衣"}],"answer":"A","explain_ok":"對！防水隔離衣要後開式、長袖、袖口可束緊。","explain_ng":"要選後開式、長袖、袖口可束緊的防水隔離衣。前開式正面有開口，短袖露手臂，布隔離衣不防水。","img":"gen_d03（後開式長袖防水隔離衣，袖口束緊處標示）","form_item":"8","supplement":"各誤選的理由","text_hash":{"ok":"494f11b3","ng":"338329da","stem":"0fe6494d"}},{"id":11,"block":"D","block_name":"防護裝備與抹布","use":["learn","test"],"stem":"兩個水桶的抹布要怎麼準備？","note":"","options":[{"key":"A","text":"一桶放清水抹布、一桶放 2~3% 漂白水抹布，兩桶分開"},{"key":"B","text":"抹布全部放進漂白水桶"},{"key":"C","text":"抹布全部放進清水桶，要用時再倒漂白水"},{"key":"D","text":"同一條抹布先沾清水、再沾漂白水"}],"answer":"A","explain_ok":"對！抹布一份放入清水水桶、一份放入 2~3% 漂白水水桶，兩桶分開不混用。","explain_ng":"要準備兩桶：清水抹布一桶、2~3% 漂白水抹布一桶。後面要先用清水擦、再用漂白水擦，混在一起就分不出來了。","img":"gen_d04（兩個水桶並排，分別標示「清水」與「漂白水」）","form_item":"9、10","supplement":"","text_hash":{"ok":"35757076","ng":"cb05bb59","stem":"536c994e"}},{"id":12,"block":"E","block_name":"環境清理","use":["handson","3d","test"],"stem":"液體化療藥品灑在地上，要先怎麼處理？","note":"","options":[{"key":"A","text":"用單面吸水襯墊（如看護墊）、擦手紙或紗布吸附，再丟進貼毒物標籤的雙層塑膠袋"},{"key":"B","text":"用濕抹布來回擦"},{"key":"C","text":"用拖把拖乾"},{"key":"D","text":"先把漂白水倒在藥上"}],"answer":"A","explain_ok":"對！液體溢灑要用單面吸水襯墊（如看護墊）、擦手紙或紗布吸附，再丟入貼有毒物標籤的雙層塑膠袋。","explain_ng":"液體要先吸附，不是擦或拖。來回擦和拖把會把藥推散；表單沒有直接倒漂白水這一步。","img":"gen_e01（看護墊蓋在地上的液體上吸附）","form_item":"11","supplement":"","text_hash":{"ok":"cf561ea5","ng":"783164a8","stem":"70c74a73"}},{"id":13,"block":"E","block_name":"環境清理","use":["handson","3d","test"],"stem":"如果灑出來的是粉劑呢？","note":"","options":[{"key":"A","text":"用濕紗布或濕抹布擦拭，再丟進貼毒物標籤的雙層塑膠袋"},{"key":"B","text":"用乾紗布把粉掃起來"},{"key":"C","text":"用吸塵器吸乾淨"},{"key":"D","text":"用看護墊吸附"}],"answer":"A","explain_ok":"對！粉劑溢灑要用濕紗布或濕抹布擦拭，再丟入貼有毒物標籤的雙層塑膠袋。","explain_ng":"粉劑要用濕的紗布或抹布擦。乾擦或吸塵器會讓粉末飛起來被吸進去；看護墊是吸液體用的。","img":"gen_e02（濕紗布輕壓地上的白色粉末）","form_item":"12","supplement":"揚塵理由","text_hash":{"ok":"240ad81c","ng":"4d03b00a","stem":"cc2db542"}},{"id":14,"block":"E","block_name":"環境清理","use":["handson","3d","test"],"stem":"用清水抹布擦地，怎麼擦才對？","note":"","options":[{"key":"A","text":"由外向內擦，擦 1 次就丟進毒物標籤雙層塑膠袋"},{"key":"B","text":"由內向外擦，擦完放回水桶洗一洗"},{"key":"C","text":"由外向內擦，擦完放回水桶再用"},{"key":"D","text":"來回擦到乾淨為止"}],"answer":"A","explain_ok":"對！由外向內擦拭，擦 1 次後就丟入貼有毒物標籤的雙層塑膠袋，不可以再放回水桶。","explain_ng":"要由外向內擦、擦 1 次就丟。由內向外會把藥推到外圍；抹布放回水桶，整桶水都被污染了。","img":"gen_e03（俯視圖：箭頭由外圈向中心，旁邊是毒物標籤雙層袋）","form_item":"13","supplement":"","text_hash":{"ok":"489a3580","ng":"2da047b2","stem":"99a247fa"}},{"id":15,"block":"E","block_name":"環境清理","use":["handson","3d","test"],"stem":"漂白水抹布要多濕？擦完要等多久？","note":"","options":[{"key":"A","text":"擰到不滴水、保持微濕；擦過的地方靜置 10 分鐘以上或待乾燥"},{"key":"B","text":"濕到會滴水最好；靜置 3 分鐘"},{"key":"C","text":"擰到全乾；不用靜置"},{"key":"D","text":"擰到不滴水；擦完馬上用清水擦掉"}],"answer":"A","explain_ok":"對！漂白水抹布完全沾濕後擰到不滴水，由外向內擦，讓表面保持微濕；擦過的地方靜置 10 分鐘以上或待乾燥，抹布一樣擦 1 次就丟。","explain_ng":"要擰到不滴水、保持微濕，擦過要靜置 10 分鐘以上或待乾燥。太濕會流開，全乾蓋不住表面，時間不夠或馬上擦掉，漂白水就還沒發揮作用。","img":"gen_e04（擰乾的抹布＋計時器顯示 10 分鐘）","form_item":"14","supplement":"各誤選的理由","text_hash":{"ok":"98e3f9e4","ng":"0dc1b0cf","stem":"3fd18a19"}},{"id":16,"block":"E","block_name":"環境清理","use":["handson","3d","test"],"stem":"溢灑波及點滴架和輸液幫浦，要怎麼擦？","note":"","options":[{"key":"A","text":"先清水、後漂白水；點滴架由上到下，輸液幫浦由外向內"},{"key":"B","text":"先漂白水、後清水；點滴架由下到上"},{"key":"C","text":"先清水、後漂白水；點滴架由外向內，輸液幫浦由上到下"},{"key":"D","text":"只用漂白水擦一次就好"}],"answer":"A","explain_ok":"對！先用清水抹布、再用漂白水抹布；點滴架由上到下擦，輸液幫浦由外向內擦。","explain_ng":"順序是先清水、後漂白水；方向是點滴架由上到下、輸液幫浦由外向內，兩個不能對調。","img":"gen_e05（點滴架旁向下箭頭、幫浦上由外向內箭頭）","form_item":"15","supplement":"","text_hash":{"ok":"db8a1c7c","ng":"ee6b66db","stem":"a7210e14"}},{"id":17,"block":"F","block_name":"卸除防護裝備","use":["handson","3d","test"],"stem":"處理完要卸除防護裝備，第一件先脫什麼？","note":"","options":[{"key":"A","text":"外層手套"},{"key":"B","text":"N95 口罩"},{"key":"C","text":"防水隔離衣"},{"key":"D","text":"內層手套"}],"answer":"A","explain_ok":"對！先脫下外層手套，丟進貼有毒物標籤的雙層塑膠袋。它碰過最多藥，最先脫。","explain_ng":"第一件是外層手套。先脫口罩或隔離衣，等於用最髒的手套碰臉和身體；內層手套要留到後面。","img":"gen_f01（脫下外層手套丟進毒物標籤袋）","form_item":"16","supplement":"","text_hash":{"ok":"5e2ad795","ng":"b90a2daa","stem":"cac037a3"}},{"id":18,"block":"F","block_name":"卸除防護裝備","use":["handson","3d","test"],"stem":"脫完外層手套後，用什麼移除護目鏡、髮帽、隔離衣和鞋套？","note":"","options":[{"key":"A","text":"用內層手套"},{"key":"B","text":"先洗手，再用空手脫"},{"key":"C","text":"先換一副新手套再脫"},{"key":"D","text":"請同事幫忙脫"}],"answer":"A","explain_ok":"對！用內層手套移除護目鏡、髮帽、防水隔離衣，再脫除鞋套。","explain_ng":"要用內層手套來脫。空手會直接碰到污染的裝備；新手套是後面綁垃圾袋時才戴。","img":"gen_f02（戴著內層手套取下護目鏡）","form_item":"17","supplement":"","text_hash":{"ok":"7fe3ca13","ng":"460c6db3","stem":"f7b33513"}},{"id":19,"block":"F","block_name":"卸除防護裝備","use":["handson","3d","test"],"stem":"防護裝備都丟進袋子之後，下一步是？","note":"","options":[{"key":"A","text":"把內層垃圾袋束口，再脫內層手套丟進毒性廢棄物袋"},{"key":"B","text":"先脫內層手套，再空手把袋子綁起來"},{"key":"C","text":"袋子不用綁，直接丟"},{"key":"D","text":"先脫 N95 口罩"}],"answer":"A","explain_ok":"對！所有防護裝備丟進毒物標籤雙層塑膠袋後，先把內層垃圾袋束口，再脫內層手套丟入毒性廢棄物袋。","explain_ng":"要先把內層垃圾袋束口，再脫內層手套。先脫手套就得空手碰袋口；袋子不綁，藥會跑出來。","img":"gen_f03（戴手套將內層垃圾袋束口）","form_item":"18、19","supplement":"","text_hash":{"ok":"4b203830","ng":"0a1bac13","stem":"339a7079"}},{"id":20,"block":"F","block_name":"卸除防護裝備","use":["handson","3d","test"],"stem":"內層手套脫掉之後，還要做什麼？","note":"","options":[{"key":"A","text":"戴一副新的乳膠手套，把外層塑膠袋束緊，丟進化療廢棄物收集桶"},{"key":"B","text":"空手把外層塑膠袋綁起來丟掉"},{"key":"C","text":"請清潔人員來收"},{"key":"D","text":"直接洗手就結束"}],"answer":"A","explain_ok":"對！要戴一副新的乳膠手套，把外層塑膠袋束緊，垃圾袋和這副手套一起丟進化療廢棄物收集桶。很多人漏掉「再戴新手套」這一步。","explain_ng":"要先戴一副新的乳膠手套，再把外層塑膠袋束緊，丟進化療廢棄物收集桶。空手碰袋子會再次暴露。","img":"gen_f04（戴新手套綁緊外層袋，旁邊是化療廢棄物收集桶）","form_item":"20","supplement":"","text_hash":{"ok":"0b2b588c","ng":"0e969806","stem":"d05f2afa"}},{"id":21,"block":"F","block_name":"卸除防護裝備","use":["handson","3d","test"],"stem":"N95 口罩什麼時候脫？","note":"","options":[{"key":"A","text":"垃圾袋丟進收集桶之後、手部衛生之前"},{"key":"B","text":"一開始先脫，比較好呼吸"},{"key":"C","text":"脫完外層手套就脫"},{"key":"D","text":"洗完手再脫"}],"answer":"A","explain_ok":"對！N95 口罩是最後才移除的防護裝備，脫完再進行手部衛生。","explain_ng":"N95 要留到最後：垃圾袋處理完才脫，脫完再做手部衛生。太早脫會吸入現場的藥；洗完手再脫，手又被口罩弄髒了。","img":"gen_f05（取下 N95 後走向洗手台）","form_item":"21、22","supplement":"各誤選的理由","text_hash":{"ok":"e3de64de","ng":"69825002","stem":"6ab5c1dd"}},{"id":22,"block":"G","block_name":"再清潔","use":["learn_g","test"],"stem":"用漂白水擦過的點滴架或輸液幫浦，之後還要？","note":"","options":[{"key":"A","text":"10 分鐘後再用清水抹布擦一次，避免漂白水腐蝕表面"},{"key":"B","text":"不用再擦，漂白水會自己揮發"},{"key":"C","text":"馬上用清水擦掉"},{"key":"D","text":"改用酒精再擦一次"}],"answer":"A","explain_ok":"對！漂白水擦拭 10 分鐘後，再用清水抹布擦點滴架或點滴幫浦，避免漂白水腐蝕儀器表面或點滴架。","explain_ng":"要等 10 分鐘後再用清水抹布擦一次。不擦會腐蝕儀器表面；馬上擦掉漂白水就沒作用；表單沒有用酒精。","img":"gen_g01（計時器 10 分鐘，清水抹布擦點滴幫浦）","form_item":"23","supplement":"","text_hash":{"ok":"d82c1151","ng":"3bd8dd35","stem":"4a70fa15"}},{"id":23,"block":"G","block_name":"再清潔","use":["learn_g","test"],"stem":"什麼時候可以撤除警示牌和警戒線？","note":"","options":[{"key":"A","text":"漂白水擦拭區靜置 10 分鐘以上或乾了之後；撤除後聯絡清潔人員再做一般清潔"},{"key":"B","text":"擦完地就馬上撤"},{"key":"C","text":"等清潔人員來，由他們擦漂白水"},{"key":"D","text":"等下一班再撤"}],"answer":"A","explain_ok":"對！漂白水擦拭區域靜置 10 分鐘以上或待乾燥，才撤除警示牌和警戒線，再聯絡清潔人員做一次一般清潔。","explain_ng":"要等漂白水擦拭區靜置 10 分鐘以上或乾了才撤，撤完再請清潔人員做一般清潔。漂白水擦拭是我們做，不是清潔人員。","img":"gen_g02（收起警戒線與警示牌，清潔人員推車走來）","form_item":"24","supplement":"","text_hash":{"ok":"854ab9fb","ng":"9b80d1fa","stem":"91af40d5"}},{"id":24,"block":"H","block_name":"紀錄檢討與暴露處置","use":["learn_g","test"],"stem":"藥灑掉了，病人的那份藥怎麼辦？","note":"","options":[{"key":"A","text":"與主治醫師討論是否追加藥品劑量"},{"key":"B","text":"不用處理，已經打進去的就算了"},{"key":"C","text":"自己去藥局再領一份補打"},{"key":"D","text":"等下一次療程再補"}],"answer":"A","explain_ok":"對！要與主治醫師討論是否追加藥品劑量。這一步很常被忘記。","explain_ng":"要與主治醫師討論是否追加劑量。病人可能沒拿到足夠的藥；補不補、補多少是醫師決定，不能自己領藥補打。","img":"gen_h01（護理師與醫師討論，手上拿著藥品標籤）","form_item":"25","supplement":"","text_hash":{"ok":"e42b6866","ng":"af8479bd","stem":"49e8cf61"}},{"id":25,"block":"H","block_name":"紀錄檢討與暴露處置","use":["learn_g","test"],"stem":"處理完之後，一定要完成哪一個通報？","note":"","options":[{"key":"A","text":"異常事件通報"},{"key":"B","text":"不用通報，沒有人受傷"},{"key":"C","text":"口頭告訴護理長就好"},{"key":"D","text":"寫在交班本上就好"}],"answer":"A","explain_ok":"對！溢灑處理完要完成異常事件通報。","explain_ng":"要完成異常事件通報。沒人受傷也要通報；口頭報告或寫交班本，都不能取代通報。","img":"gen_h02（電腦畫面上的通報表單示意，無個資）","form_item":"26","supplement":"","text_hash":{"ok":"57d8244e","ng":"8fae978e","stem":"de21b42b"}},{"id":26,"block":"H","block_name":"紀錄檢討與暴露處置","use":["learn_g","test"],"stem":"處理時同仁被藥品噴到受傷了，除了異常事件通報，還要？","note":"","options":[{"key":"A","text":"完成職業災害通報"},{"key":"B","text":"只要異常事件通報就夠了"},{"key":"C","text":"自己擦乾淨就好"},{"key":"D","text":"下班再說"}],"answer":"A","explain_ok":"對！護理人員或工作人員受傷，要完成職業災害通報。","explain_ng":"人員受傷要另外完成職業災害通報，異常事件通報不能取代。","img":"gen_h03（職災通報表單示意）","form_item":"27","supplement":"","text_hash":{"ok":"415ea87b","ng":"61ca1287","stem":"bf0b2793"}},{"id":27,"block":"H","block_name":"紀錄檢討與暴露處置","use":["learn_g","test"],"stem":"藥品碰到皮膚或眼睛，要怎麼處理？","note":"","options":[{"key":"A","text":"皮膚用肥皂、冷水立即清洗；眼睛立即沖洗至少 15 分鐘"},{"key":"B","text":"皮膚用熱水清洗；眼睛沖洗 5 分鐘"},{"key":"C","text":"皮膚用酒精擦；眼睛點眼藥水"},{"key":"D","text":"先把溢灑處理完再清洗"}],"answer":"A","explain_ok":"對！碰到皮膚要用肥皂、冷水立即清洗；碰到眼睛要立即沖洗至少 15 分鐘。","explain_ng":"皮膚是肥皂加冷水、立即洗；眼睛是立即沖、至少 15 分鐘。用熱水、沖太短或拖到處理完才洗都不對。","img":"gen_h04（左：肥皂冷水洗手；右：洗眼設備沖眼）","form_item":"28","supplement":"","text_hash":{"ok":"1e8747a8","ng":"52ba7471","stem":"bbea3182"}}]}</script>
+
+<script>
+(function(){
+'use strict';
+const IMG='../assets/img/', AUD='../assets/audio/', DATA='../assets/data/questions.json';
+// localStorage：本站一律 spill_ 前綴（與同網域 yingsioul-art.github.io 的其他教材站不可共用 key）
+const KEY='spill_learn_v1', PROG='spill_xrprog';
+// 首頁五個方塊（UI 標籤；題目文字一律來自 JSON）
+const TILES=[
+  {b:'A',name:'第一時間反應',ic:'🚨'},
+  {b:'B',name:'N95 與泡製漂白水',ic:'😷'},
+  {b:'C',name:'設置警戒區',ic:'🚧'},
+  {b:'D',name:'防護裝備與抹布',ic:'🧤'},
+  {b:'G',name:'再清潔與紀錄通報',ic:'📋'}
+];
+// ⑤ 六張圖卡（區塊 G、H；依序對應 use 含 learn_g 的 Q22–Q27）：標題／副標取自規格檔各題講解，不另加事實；
+// 圖檔＝該題 img 欄的 gen_xxx 代號；卡片旁白音檔＝g01.mp3–g06.mp3（未供應時暫播該題講解-對音檔）
+const CARDS=[
+  {id:'g01',title:'儀器：10 分鐘後再用清水擦一次',sub:'漂白水擦過的點滴架、輸液幫浦，10 分鐘後用清水抹布再擦，避免漂白水腐蝕表面'},
+  {id:'g02',title:'撤除警戒區的時機',sub:'漂白水擦拭區靜置 10 分鐘以上或待乾燥，才撤警示牌與警戒線；撤除後聯絡清潔人員做一般清潔'},
+  {id:'g03',title:'與主治醫師討論是否追加劑量',sub:'病人可能沒拿到足夠的藥；補不補、補多少由醫師決定'},
+  {id:'g04',title:'完成異常事件通報',sub:'沒人受傷也要通報；口頭報告或寫交班本都不能取代'},
+  {id:'g05',title:'人員受傷：職業災害通報',sub:'護理人員或工作人員受傷，另外完成職業災害通報'},
+  {id:'g06',title:'碰到皮膚、眼睛怎麼處理',sub:'皮膚：肥皂、冷水立即清洗；眼睛：立即沖洗至少 15 分鐘'}
+];
+
+let Q=[], byId={}, learnQ=[], gQ=[], blocks={};
+let st=load();
+let curAudio=null;
+const $=id=>document.getElementById(id);
+const app=$('app');
+
+function load(){ try{ const s=JSON.parse(localStorage.getItem(KEY)||'null'); if(s&&s.ans) return Object.assign({auto:true,gans:{}},s);}catch(e){} return {ans:{},gans:{},auto:true}; }
+const xrMark=k=>{try{const p=JSON.parse(localStorage.getItem(PROG)||'{}');if(!p[k]){p[k]=Date.now();localStorage.setItem(PROG,JSON.stringify(p));}}catch(e){}};
+/* 首頁進度：區塊 A–D 題目全部作答過＝完成 */
+function markLearn(){ if(learnQ.length&&learnQ.every(q=>st.ans[q.id])) xrMark('learn'); }
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify(st)); }catch(e){} markLearn(); }
+function el(tag,cls,html){ const e=document.createElement(tag); if(cls) e.className=cls; if(html!=null) e.innerHTML=html; return e; }
+function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function stopAudio(){ if(curAudio){ try{curAudio.pause();}catch(e){} curAudio=null; } }
+function go(h){ location.hash=h; }
+function qid(q){ return 'q'+String(q.id).padStart(2,'0'); }
+
+/* ── 資料載入：先 fetch，失敗再讀內嵌 #qdata ── */
+async function loadData(){
+  try{
+    const r=await fetch(DATA,{cache:'no-store'});
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    return await r.json();
+  }catch(e){
+    const t=($('qdata').textContent||'').trim();
+    if(t) return JSON.parse(t);
+    throw e;
+  }
+}
+
+/* ── 圖片：由題目 img 欄取 gen_xxx 代號與括號內圖說 ── */
+function imgInfo(q){
+  const s=String(q&&q.img||''); const m=s.match(/gen_[a-z]\d+/i);
+  const c=s.match(/（([^）]*)）/);
+  return {code:m?m[0]:'', cap:c?c[1]:''};
+}
+/* ── 圖片：gen_xxx.png → 灰底佔位卡＋圖說（檔案不存在時不破圖、不報錯） ── */
+function imgEl(base,alt,cap){
+  const box=el('div','fig'); const im=new Image(); im.alt=cap||alt||'';
+  const ph=()=>{ box.innerHTML=''; box.classList.add('ph'); box.appendChild(el('b',null,'🖼 圖片準備中')); if(cap) box.appendChild(el('span',null,esc(cap))); };
+  if(!base){ ph(); return box; }
+  im.onerror=ph;
+  im.src=IMG+base+'.png'; box.appendChild(im);
+  const z=el('span','zoom','🔍 點圖放大'); box.appendChild(z);
+  box.addEventListener('click',()=>{ if(box.classList.contains('ph')||!im.complete||!im.naturalWidth) return; const lb=el('div','lb'); const big=new Image(); big.src=im.src; big.alt=im.alt; lb.appendChild(big); lb.appendChild(el('span','x','✕ 關閉')); lb.addEventListener('click',()=>lb.remove()); document.body.appendChild(lb); });
+  return box;
+}
+
+/* ── 音檔：候選清單依序嘗試；全部失敗顯示提示；autoplay 可關 ── */
+function audioEl(cands,autoplay,label){
+  const wrap=el('div','aud'); const a=document.createElement('audio'); a.controls=true; a.preload='auto'; a.setAttribute('aria-label',label||'講解音檔');
+  const note=el('div','audnote',''); let i=0;
+  a.addEventListener('error',()=>{
+    i++;
+    if(i<cands.length){ if(cands[i].fallbackNote) note.textContent=cands[i].fallbackNote; a.src=cands[i].src; if(autoplay&&st.auto) a.play().catch(()=>{}); }
+    else { a.remove(); note.textContent='🔇 音檔尚未提供（素材到位後自動出現）'; }
+  });
+  a.addEventListener('play',()=>{ if(curAudio&&curAudio!==a){ try{curAudio.pause();}catch(e){} } curAudio=a; });
+  a.src=cands[0].src; wrap.appendChild(a); wrap.appendChild(note);
+  if(autoplay&&st.auto){ a.play().catch(()=>{ note.textContent='▶ 點播放鍵聽講解'; }); }
+  return wrap;
+}
+
+/* ── 進度條 ── */
+function setProg(show,lbl,done,total){
+  const p=$('prog'); if(!show){ p.classList.remove('show'); return; }
+  p.classList.add('show'); $('plbl').textContent=lbl; $('pnum').textContent=done+'／'+total;
+  $('pbar').style.width=(total?Math.round(done/total*100):0)+'%';
+}
+function setHead(title,back){ $('ttl').textContent=title; $('back').textContent=back; }
+
+/* ── 題目卡（A–D 計入總複習；G 自我檢核不計） ── */
+function questionCard(q,opts){
+  const counted=opts.counted!==false; const store=counted?st.ans:st.gans;
+  const card=el('section','card'); card.style.setProperty('--c','var(--c'+q.block+')');
+  card.appendChild(el('div','qno','Q'+q.id+'・'+esc(q.block_name||'')));
+  card.appendChild(el('h2','stem',esc(q.stem)));
+  const imgWithStem=!!(q.note&&q.note.trim());       // 規格標「搭配圖片」的題（note 非空），圖隨題幹先出現
+  const ii=imgInfo(q);
+  if(imgWithStem) card.appendChild(imgEl(ii.code,'Q'+q.id+' 圖',ii.cap));
+  const optsBox=el('div','opts'); card.appendChild(optsBox);
+  const btns=[];
+  q.options.forEach(o=>{
+    const b=el('button','opt'); b.type='button'; b.dataset.key=o.key;
+    b.innerHTML='<span class="k">'+esc(o.key)+'</span><span class="t">'+esc(o.text)+'</span>';
+    b.addEventListener('click',()=>answer(o.key,true)); optsBox.appendChild(b); btns.push(b);
+  });
+  let expBox=null;
+  function answer(key,fresh){
+    if(expBox) return;
+    store[q.id]=key; save();
+    const right=key===q.answer;
+    btns.forEach(b=>{ b.disabled=true; if(b.dataset.key===q.answer) b.classList.add('ok'); else if(b.dataset.key===key) b.classList.add('ng'); });
+    expBox=el('div','exp '+(right?'ok':'ng'));
+    expBox.appendChild(el('div','ttl',right?'✅ 答對了':'❌ 答錯了，正解是 '+esc(q.answer)));
+    expBox.appendChild(el('p',null,esc(right?q.explain_ok:q.explain_ng)));
+    if(!imgWithStem&&!opts.noImg) expBox.appendChild(imgEl(ii.code,'Q'+q.id+' 講解圖',ii.cap));
+    expBox.appendChild(audioEl([{src:AUD+qid(q)+(right?'_ok':'_ng')+'.mp3'}],fresh,'Q'+q.id+' 講解音檔'));
+    const row=el('div','row');
+    (opts.actions||[]).forEach(ac=>{ const b=el('button','btn'+(ac.sec?' sec':'')+(ac.lite?' lite':''),ac.label); b.type='button'; b.addEventListener('click',()=>{stopAudio();ac.go();}); row.appendChild(b); });
+    expBox.appendChild(row); card.appendChild(expBox);
+    if(fresh) setTimeout(()=>expBox.scrollIntoView({behavior:'smooth',block:'start'}),60);
+    if(opts.onAnswer) opts.onAnswer(right);
+  }
+  if(store[q.id]&&opts.showPrev!==false) answer(store[q.id],false);   // 回看已答過的題：直接鎖定並顯示講解，不自動播
+  return card;
+}
+
+/* ── 首頁 ── */
+function renderHome(){
+  markLearn();
+  stopAudio(); setHead('自學：第一時間與防護準備','← 回首頁'); setProg(false);
+  app.innerHTML='';
+  app.appendChild(el('div','hint','先選答案再看講解，答對答錯各有一版講解與語音。區塊 A–D 共 '+learnQ.length+' 題，做完出總複習；⑤ 再清潔與紀錄通報是圖卡＋自我檢核，不計分。'));
+  const grid=el('div','grid');
+  TILES.forEach(t=>{
+    const list=t.b==='G'?gQ:(blocks[t.b]||[]); const store=t.b==='G'?st.gans:st.ans;
+    const done=list.filter(q=>store[q.id]).length; const total=list.length;
+    const b=el('button','tile t'+t.b); b.type='button';
+    let stCls='',stTxt=done?done+'／'+total:'開始';
+    if(total&&done===total){ stCls='done'; stTxt='✓ 完成'; } else if(done){ stCls='part'; }
+    const sub=t.b==='G'?(CARDS.length+' 張圖卡・'+total+' 題自我檢核'):(total+' 題');
+    b.innerHTML='<span class="bl">'+t.b+'</span><span class="tx"><h2>'+t.ic+' '+esc(t.name)+'</h2><div class="sub">'+esc(sub)+'</div></span><span class="st '+stCls+'">'+esc(stTxt)+'</span>';
+    b.addEventListener('click',()=>go('#'+t.b)); grid.appendChild(b);
+  });
+  app.appendChild(grid);
+  const doneAll=learnQ.filter(q=>st.ans[q.id]).length;
+  const rv=el('section','card');
+  rv.appendChild(el('div','mut','總複習（區塊 A–D）'));
+  const row=el('div','rev');
+  row.appendChild(el('span','num',doneAll+'／'+learnQ.length+' 題已作答'));
+  const b1=el('button','btn',doneAll===learnQ.length?'看總複習':'全部做完才能看總複習'); b1.type='button'; b1.disabled=doneAll!==learnQ.length; b1.style.flex='1 1 100%'; b1.addEventListener('click',()=>go('#review'));
+  const b2=el('button','btn lite','重新開始'); b2.type='button'; b2.style.flex='1 1 100%'; b2.addEventListener('click',()=>{ if(!doneAll&&!Object.keys(st.gans).length) return; st.ans={}; st.gans={}; save(); renderHome(); });
+  row.appendChild(b1); row.appendChild(b2); rv.appendChild(row); app.appendChild(rv);
+  window.scrollTo(0,0);
+}
+
+/* ── 區塊 A–D 逐題 ── */
+function nextBlockWithGap(after){
+  const order=['A','B','C','D']; const i=order.indexOf(after);
+  for(let k=1;k<=order.length;k++){ const b=order[(i+k)%order.length]; if((blocks[b]||[]).some(q=>!st.ans[q.id])) return b; }
+  return null;
+}
+function renderQuiz(block,idx){
+  stopAudio();
+  const list=blocks[block]||[]; if(!list.length){ go('#home'); return; }
+  if(idx==null){ idx=list.findIndex(q=>!st.ans[q.id]); if(idx<0) idx=0; }
+  idx=Math.max(0,Math.min(idx,list.length-1));
+  const q=list[idx]; const tile=TILES.find(t=>t.b===block);
+  setHead('區塊 '+block+'・'+tile.name,'← 區塊列表');
+  const lbl='區塊 '+block+' 第 '+(idx+1)+'／'+list.length+' 題・A–D 進度';
+  setProg(true,lbl,learnQ.filter(x=>st.ans[x.id]).length,learnQ.length);
+  app.innerHTML='';
+  const last=idx===list.length-1;
+  const allDone=()=>learnQ.every(x=>st.ans[x.id]);
+  const actions=[];
+  if(!last) actions.push({label:'下一題 →',go:()=>go('#'+block+'/'+(idx+2))});
+  else{
+    // 這一區做完：A–D 全答完 → 看總複習；否則帶去下一個還有未答題的區塊
+    actions.push({label:'繼續 →',go:()=>{ const nb=nextBlockWithGap(block); if(allDone()) go('#review'); else if(nb) go('#'+nb); else go('#home'); }});
+    actions.push({label:'回區塊列表',sec:true,go:()=>go('#home')});
+  }
+  const card=questionCard(q,{counted:true,actions,onAnswer:()=>{
+    setProg(true,lbl,learnQ.filter(x=>st.ans[x.id]).length,learnQ.length);
+    if(last){ const b=app.querySelector('.exp .row .btn'); if(b){ const nb=nextBlockWithGap(block); b.textContent=allDone()?'看總複習 →':(nb?'下一區塊 '+nb+' →':'回首頁'); } }
+  }});
+  app.appendChild(card);
+  if(idx>0){ const r=el('div','row'); const b=el('button','btn lite','← 上一題'); b.type='button'; b.addEventListener('click',()=>go('#'+block+'/'+idx)); r.appendChild(b); app.appendChild(r); }
+  window.scrollTo(0,0);
+}
+
+/* ── 總複習 ── */
+function renderReview(){
+  stopAudio(); setHead('總複習','← 回首頁'); setProg(false); app.innerHTML='';
+  const done=learnQ.filter(q=>st.ans[q.id]); const wrong=learnQ.filter(q=>st.ans[q.id]&&st.ans[q.id]!==q.answer);
+  const right=done.length-wrong.length;
+  const s=el('section','card');
+  s.appendChild(el('div','mut','區塊 A–D 作答結果'));
+  s.appendChild(el('div','rev','<span class="num">答對 '+right+'／'+learnQ.length+'</span><span class="mut">已作答 '+done.length+' 題・答錯 '+wrong.length+' 題</span>'));
+  app.appendChild(s);
+  const w=el('section','card');
+  if(!wrong.length){ w.appendChild(el('div',null,done.length===learnQ.length?'🎉 全部答對，沒有需要重做的題目。':'目前沒有答錯的題目，還有 '+(learnQ.length-done.length)+' 題未作答。')); }
+  else{
+    w.appendChild(el('div','mut','答錯的題目（點「重做」再做一次，重做結果會覆蓋原紀錄）'));
+    w.style.paddingBottom='8px';
+    wrong.forEach(q=>{
+      const r=el('div','wrong'); r.appendChild(el('div','q','<b>Q'+q.id+'</b>・區塊 '+q.block+'<span>'+esc(q.stem)+'</span>'));
+      const b=el('button',null,'重做'); b.type='button'; b.addEventListener('click',()=>go('#redo/'+q.id)); r.appendChild(b); w.appendChild(r);
+    });
+  }
+  app.appendChild(w);
+  const row=el('div','row');
+  const b1=el('button','btn sec','回首頁'); b1.type='button'; b1.addEventListener('click',()=>go('#home'));
+  const b2=el('button','btn','前往 ⑤ 再清潔與紀錄通報 →'); b2.type='button'; b2.addEventListener('click',()=>go('#G'));
+  const b3=el('button','btn lite','A–D 全部重做'); b3.type='button'; b3.style.flex='1 1 100%'; b3.addEventListener('click',()=>{ st.ans={}; save(); go('#A'); });
+  row.appendChild(b1); row.appendChild(b2); row.appendChild(b3); app.appendChild(row);
+  window.scrollTo(0,0);
+}
+
+/* ── 重做單題（來自總複習） ── */
+function renderRedo(id){
+  stopAudio(); const q=byId[id]; if(!q){ go('#review'); return; }
+  setHead('重做 Q'+id,'← 總複習'); setProg(false); app.innerHTML='';
+  delete st.ans[id]; save();
+  app.appendChild(questionCard(q,{counted:true,showPrev:false,actions:[{label:'回總複習 →',go:()=>go('#review')}]}));
+  window.scrollTo(0,0);
+}
+
+/* ── ⑤ 區塊 G–H：6 張圖卡＋各 1 題自我檢核（不計分） ── */
+function renderCards(idx){
+  stopAudio();
+  idx=Math.max(0,Math.min(idx||0,CARDS.length-1));
+  const c=CARDS[idx]; const q=gQ[idx];
+  setHead('⑤ 再清潔與紀錄通報','← 區塊列表');
+  const lbl='圖卡 第 '+(idx+1)+'／'+CARDS.length+' 張';
+  setProg(true,lbl,idx,CARDS.length);
+  app.innerHTML='';
+  const card=el('section','card gcard');
+  card.appendChild(el('div','num','圖卡 '+(idx+1)+'／'+CARDS.length));
+  card.appendChild(el('h2',null,esc(c.title)));
+  card.appendChild(el('div','sub',esc(c.sub)));
+  const gi=imgInfo(q); card.appendChild(imgEl(gi.code,c.title,gi.cap));
+  // 卡片旁白 g0N.mp3；尚未供應時暫播同主題自我檢核題的講解-對音檔
+  const cands=[{src:AUD+c.id+'.mp3'}];
+  if(q) cands.push({src:AUD+qid(q)+'_ok.mp3',fallbackNote:'（卡片旁白音檔尚未供應，暫播 Q'+q.id+' 講解音檔）'});
+  card.appendChild(audioEl(cands,false,'圖卡 '+(idx+1)+' 旁白'));
+  app.appendChild(card);
+  if(q){
+    const chk=el('section','card check'); chk.style.borderTop='0';
+    chk.appendChild(el('div','tag','✍️ 自我檢核（不計分）'));
+    const last=idx===CARDS.length-1;
+    const actions=last?[{label:'完成，回區塊列表 →',go:()=>go('#home')}]:[{label:'下一張圖卡 →',go:()=>go('#G/'+(idx+2))}];
+    chk.appendChild(questionCard(q,{counted:false,noImg:true,actions,onAnswer:()=>setProg(true,lbl,idx+1,CARDS.length)}));
+    app.appendChild(chk);
+  }
+  const r=el('div','row');
+  if(idx>0){ const b=el('button','btn lite','← 上一張'); b.type='button'; b.addEventListener('click',()=>go('#G/'+idx)); r.appendChild(b); }
+  if(idx<CARDS.length-1){ const b=el('button','btn lite','跳到下一張 →'); b.type='button'; b.addEventListener('click',()=>go('#G/'+(idx+2))); r.appendChild(b); }
+  if(r.children.length) app.appendChild(r);
+  window.scrollTo(0,0);
+}
+
+/* ── 路由（hash） ── */
+function route(){
+  const h=(location.hash||'#home').slice(1); const [a,b]=h.split('/');
+  if(a==='review') return renderReview();
+  if(a==='redo'&&b) return renderRedo(+b);
+  if(a==='G') return renderCards(b?+b-1:0);
+  if(blocks[a]) return renderQuiz(a,b?+b-1:null);
+  renderHome();
+}
+$('back').addEventListener('click',()=>{ stopAudio(); const h=location.hash||'#home'; if(h==='#home'){ location.href='../'; } else if(h.startsWith('#redo')){ go('#review'); } else go('#home'); });
+function paintAuto(){ const b=$('auto'); b.textContent=st.auto?'🔊 自動播放 開':'🔇 自動播放 關'; b.classList.toggle('off',!st.auto); b.setAttribute('aria-pressed',String(st.auto)); }
+$('auto').addEventListener('click',()=>{ st.auto=!st.auto; save(); paintAuto(); if(!st.auto) stopAudio(); });
+paintAuto();
+
+loadData().then(d=>{
+  Q=(Array.isArray(d)?d:(d.questions||[])).slice().sort((x,y)=>x.id-y.id);
+  Q.forEach(q=>byId[q.id]=q);
+  learnQ=Q.filter(q=>(q.use||[]).includes('learn'));
+  gQ=Q.filter(q=>(q.use||[]).includes('learn_g'));
+  learnQ.forEach(q=>{ (blocks[q.block]=blocks[q.block]||[]).push(q); });
+  window.addEventListener('hashchange',route); route();
+}).catch(e=>{
+  app.innerHTML='<div class="err"><b>題目資料載入失敗。</b><br>請經由網站網址開啟（GitHub Pages 或本機 http 伺服器）；以 file:// 直接開啟時需先由 build 腳本注入題目資料。<br><span class="mut">'+esc(e&&e.message||e)+'</span></div>';
+});
+})();
+</script>
+</body>
+</html>

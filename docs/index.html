@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>化療藥品溢灑處理</title>
+<meta name="description" content="化療藥品溢灑處理數位教材：前測、自學、動手（2D／3D）、AI 練習、速查站、後測。">
+<style>
+:root{--bg:#f4f7fb;--ink:#1c2430;--mut:#5b6675;--navy:#123a6b;--ok:#2e8b57}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",system-ui,sans-serif;line-height:1.5}
+header{background:var(--navy);color:#fff;padding:22px 16px 18px;text-align:center}header h1{margin:0;font-size:1.5rem}header p{margin:6px 0 0;font-size:.9rem;opacity:.85}
+main{max-width:900px;margin:0 auto;padding:16px 16px 32px}
+.guide{background:#fff;border-radius:14px;padding:12px 16px;margin-bottom:14px;box-shadow:0 2px 10px rgba(0,0,0,.05);font-size:.95rem}
+.guide b{color:var(--navy)}
+.steps{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.steps span{font-size:.82rem;padding:3px 10px;border-radius:999px;background:#eef2f7;color:var(--mut)}
+.steps span.done{background:#e4f5ea;color:#1c5c36;font-weight:700}
+.steps span.now{background:#fdebd3;color:#a24f00;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.tile{display:block;background:#fff;border-radius:16px;padding:18px 16px;text-decoration:none;color:var(--ink);border-top:6px solid var(--c);box-shadow:0 2px 10px rgba(0,0,0,.05);transition:.15s;position:relative}
+a.tile:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.1)}
+.tile .ic{font-size:2rem}.tile h2{margin:6px 0 4px;font-size:1.15rem}.tile p{margin:0;color:var(--mut);font-size:.92rem}
+.tile .tag{display:inline-block;margin-top:8px;font-size:.8rem;padding:2px 10px;border-radius:6px;background:#eef2f7;color:var(--mut)}
+.tile .tag.done{background:#e4f5ea;color:#1c5c36;font-weight:700}
+.tile .tag.todo{background:#fdebd3;color:#a24f00;font-weight:700}
+.tile.locked{opacity:.5;filter:grayscale(.6);pointer-events:none}
+.tile.locked .tag{background:#eef2f7;color:var(--mut)}
+.btns{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}.btns a{flex:1;min-width:110px;text-align:center;padding:8px 10px;border-radius:10px;background:var(--c);color:#fff;text-decoration:none;font-weight:700;font-size:.92rem}.btns a+a,.btns .dis{background:#123a6b}
+.btns .dis{flex:1;min-width:110px;text-align:center;padding:8px 10px;border-radius:10px;color:#fff;font-weight:700;font-size:.92rem;opacity:.45;cursor:not-allowed}
+.t1{--c:#2b7de9}.t2{--c:#e8792b}.t3{--c:#7a3fb5}.t4{--c:#2e8b57}.t5{--c:#c81e3a}.t6{--c:#a24f00}
+.hide{display:none!important}
+</style></head><body>
+<header><h1>化療藥品溢灑處理</h1><p>臺大醫院護理部 AI 與 XR 數位教材工作坊｜依院內〈化療藥品溢灑處理〉技術評核表單（15700-4-041229）製作｜無病人資料</p></header>
+<main>
+<div class="guide" id="guide"><div id="guide-txt"></div><div class="steps" id="steps"></div></div>
+<div class="grid">
+<a class="tile t4" id="t-pre" href="test/?phase=pre"><div class="ic">📝</div><h2>前測</h2><p>知識題 27 題＋自我效能。<b>先完成前測</b>，才會開啟下面的學習內容。</p><span class="tag"></span></a>
+<a class="tile t1" id="t-learn" href="learn/"><div class="ic">📘</div><h2>自學：第一時間與防護準備</h2><p>求援、攔人、戴 N95、泡漂白水、圍警戒、穿防護裝備——先作答，答對答錯都有講解與語音；最後看再清潔與通報圖卡。</p><span class="tag"></span></a>
+<div class="tile t2" id="t-handson"><div class="ic">🖐️</div><h2>動手：溢灑現場怎麼做</h2><p>你是第一個到達現場的人：圍警戒、液體或粉劑、擦拭方向、卸除防護裝備的順序——做錯會看到後果。</p><div class="btns"><a href="handson/">2D 動手版</a><span class="dis" id="vr-link" role="link" aria-disabled="true" title="3D VR 建置中">3D VR（建置中）</span></div><span class="tag"></span></div>
+<a class="tile t3" id="t-lookup" href="lookup/"><div class="ic">🔍</div><h2>查詢：溢灑速查卡</h2><p>漂白水泡製、防護裝備穿脫順序、液體與粉劑、擦拭方向與時間點、暴露處置與通報，含小測驗。</p><span class="tag"></span></a>
+<a class="tile t5" id="t-coach" href="coach/"><div class="ic">🗣️</div><h2>練習：指揮 AI 學妹處理溢灑</h2><p>生成式 AI 扮演第一次遇到溢灑的學妹，你當現場指揮一步步交代，說完後看回饋。</p><span class="tag"></span></a>
+<a class="tile t6 hide" id="t-post" href="test/?phase=post"><div class="ic">🏁</div><h2>後測</h2><p>知識題＋自我效能（與前測同一套），最後填課程滿意度。</p><span class="tag"></span></a>
+</div>
+</main>
+<script>
+/* 學習順序：前測 → 四站（自學／動手／查詢／練習）→ 後測。進度存在本機瀏覽器（各站完成時寫入 PROG）。
+   本站 localStorage 一律 spill_ 前綴：與同網域 yingsioul-art.github.io 的其他教材站不可共用 key。 */
+const PROG = "spill_xrprog";
+const P = (() => { try { return JSON.parse(localStorage.getItem(PROG) || "{}") || {}; } catch (e) { return {}; } })();
+const STATIONS = [
+  ["learn", "自學", "作答完 11 題"],
+  ["handson", "動手", "走完 2D 動手版"],
+  ["lookup", "查詢", "做完「小測驗」分頁"],
+  ["coach", "練習", "完成練習與自評"],
+];
+function tag(id, cls, txt) { const t = document.querySelector(`#${id} .tag`); t.className = "tag " + cls; t.textContent = txt; }
+function render() {
+  const pre = !!P.pre, post = !!P.post;
+  tag("t-pre", pre ? "done" : "todo", pre ? "✓ 已完成" : "▶ 請先完成");
+  const left = [];
+  for (const [k, name, how] of STATIONS) {
+    const el = document.getElementById("t-" + k);
+    el.classList.toggle("locked", !pre);
+    if (!pre) tag("t-" + k, "", "🔒 完成前測後開啟");
+    else if (P[k]) tag("t-" + k, "done", "✓ 已完成");
+    else { tag("t-" + k, "todo", "完成條件：" + how); left.push(name); }
+  }
+  const postOpen = pre && left.length === 0;
+  document.getElementById("t-post").classList.toggle("hide", !postOpen);
+  if (postOpen) tag("t-post", post ? "done" : "todo", post ? "✓ 已完成，辛苦了！" : "▶ 最後一步");
+  const g = document.getElementById("guide-txt");
+  if (!pre) g.innerHTML = "<b>第一步：請先完成前測。</b>完成後，自學、動手、查詢、練習四站才會開啟。";
+  else if (!postOpen) g.innerHTML = `<b>前測完成！</b>請完成下面四站，全部完成後會出現後測。還差：${left.join("、")}。`;
+  else if (!post) g.innerHTML = "<b>四站都完成了！</b>最後請做後測，並填寫課程滿意度。";
+  else g.innerHTML = "<b>全部完成，謝謝你！</b>各站仍可隨時回來複習。";
+  const st = [["pre", "前測"], ...STATIONS.map(([k, n]) => [k, n]), ["post", "後測"]];
+  const firstTodo = st.find(([k]) => !P[k]);
+  document.getElementById("steps").innerHTML = st.map(([k, n]) => `<span class="${P[k] ? "done" : (firstTodo && firstTodo[0] === k ? "now" : "")}">${P[k] ? "✓ " : ""}${n}</span>`).join("");
+}
+window.addEventListener("pageshow", () => { try { Object.assign(P, JSON.parse(localStorage.getItem(PROG) || "{}")); } catch (e) {} render(); });
+render();
+</script>
+</body></html>

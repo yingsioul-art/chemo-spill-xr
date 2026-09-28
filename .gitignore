@@ -1,0 +1,7 @@
+_check/
+*.bak
+Thumbs.db
+.DS_Store
+# 9/26 S0：下架圖含院內系統截圖（病歷號頁首），不得進公開 repo
+docs/assets/img/_下架_*/
+.playwright-mcp/
