@@ -44,6 +44,9 @@ def parse(text: str):
     qs = []
     cur = None
     for ln in lines:
+        # 第四節以後（待決定、逆向倒推鏈）不是題庫，停止解析題目
+        if re.match(r"^##\s+[四五六七八九]、", ln):
+            break
         m = re.match(r"^###\s.*?區塊\s([A-H])", ln)
         if m:
             block = m.group(1); continue
@@ -106,8 +109,68 @@ def validate(qs):
                 errs.append(f"Q{q['id']} {k} 含反斜線或控制字元")
     return errs
 
+def parse_reverse(text: str):
+    """解析規格檔第五節「逆向工程倒推鏈」→ reverse.json（終點畫面、R 清理主線、D 卸除線、收尾清單、翻正順序）"""
+    i = text.find("## 五、")
+    if i < 0:
+        return None
+    sec = text[i:]
+    out = {"goal": "", "chains": {"R": [], "D": []}, "checklist": [], "forward": ""}
+    part = None
+    cur = None
+    for ln in sec.splitlines():
+        if ln.startswith("### 終點畫面"): part = "goal"; continue
+        if ln.startswith("### 倒推鏈 R"): part = "R"; continue
+        if ln.startswith("### 倒推鏈 D"): part = "D"; continue
+        if ln.startswith("### 收尾檢查清單"): part = "check"; continue
+        if ln.startswith("### 翻正後的順序"): part = "fwd"; continue
+        if not ln.strip():
+            continue
+        if part == "goal" and not ln.startswith(">"):
+            out["goal"] += ln.strip()
+        elif part in ("R", "D"):
+            m = re.match(r"^\*\*([RD]\d+)\*\*\s*畫面：(.+?)｜問：(.+)$", ln)
+            if m:
+                cur = {"id": m.group(1), "scene": m.group(2).strip(), "ask": m.group(3).strip(),
+                       "options": [], "answer": None, "explain": "", "form_item": ""}
+                out["chains"][part].append(cur); continue
+            m = re.match(r"^-\s+([A-D])\s+(.+?)\s*$", ln)
+            if cur and m and not ln.startswith("- 講解"):
+                t = m.group(2); ok = "✓" in t
+                cur["options"].append({"key": m.group(1), "text": t.replace("✓", "").strip()})
+                if ok: cur["answer"] = m.group(1)
+                continue
+            m = re.match(r"^-\s+講解：(.+?)(?:｜表單\s*(.+))?$", ln)
+            if cur and m:
+                cur["explain"] = m.group(1).strip(); cur["form_item"] = (m.group(2) or "").strip()
+                cur["text_hash"] = h8(cur["explain"])
+        elif part == "check" and ln.startswith("- "):
+            out["checklist"].append(ln[2:].strip())
+        elif part == "fwd":
+            out["forward"] += ln.strip()
+    return out
+
+def validate_reverse(rv):
+    errs = []
+    for k, chain in rv["chains"].items():
+        if not chain: errs.append(f"倒推鏈 {k} 是空的")
+        for n in chain:
+            if not (2 <= len(n["options"]) <= 4): errs.append(f"{n['id']} 選項數 {len(n['options'])}")
+            if n["answer"] is None: errs.append(f"{n['id']} 沒有 ✓ 正解")
+            if not n["explain"]: errs.append(f"{n['id']} 沒有講解")
+    if not rv["goal"]: errs.append("缺終點畫面")
+    return errs
+
 def main():
-    qs = parse(SPEC.read_text(encoding="utf-8"))
+    text = SPEC.read_text(encoding="utf-8")
+    rv = parse_reverse(text)
+    if rv:
+        rerrs = validate_reverse(rv)
+        (OUT.parent / "reverse.json").write_text(json.dumps(rv, ensure_ascii=False, indent=1), encoding="utf-8")
+        print(f"倒推鏈 → reverse.json：R {len(rv['chains']['R'])} 節點、D {len(rv['chains']['D'])} 節點、收尾清單 {len(rv['checklist'])} 條")
+        if rerrs:
+            print("⚠️ 倒推鏈檢查未通過："); [print("   -", e) for e in rerrs]; sys.exit(1)
+    qs = parse(text)
     errs = validate(qs)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     payload = {"source": SPEC.name, "count": len(qs), "questions": qs}

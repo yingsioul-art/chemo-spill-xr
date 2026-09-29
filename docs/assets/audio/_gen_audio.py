@@ -4,6 +4,7 @@
 - 講解音檔命名（與外滲站頁面規則一致）：q01_ok.mp3／q01_ng.mp3 … q27_ok.mp3／q27_ng.mp3
   頁面組路徑：AUD + 'q' + 兩位數題號 + ('_ok'|'_ng') + '.mp3'（learn/index.html qid()）
 - 開場旁白：讀 _開場旁白稿.md → intro_home.mp3（首頁）、intro_handson.mp3（③ 情境開場）
+- 倒推開場（learn 頁）：reverse.json → rev_goal、rev_R01…R12、rev_D01…D06、rev_forward（見 collect_reverse）
 - ⑤ 講解卡：questions.json 若有 "cards": [{"id":"g01","text":...}] 會一併產 g01.mp3…
 - _manifest.json 記每檔 hash（題目用 questions.json 的 text_hash；旁白用文字 sha1 前 8 碼）；
   重跑只重產 hash 變動或檔案不存在的檔（--force 全重產）
@@ -28,6 +29,7 @@ from mutagen.mp3 import MP3
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 QJSON = os.path.normpath(os.path.join(HERE, "..", "data", "questions.json"))
+RJSON = os.path.normpath(os.path.join(HERE, "..", "data", "reverse.json"))  # 倒推鏈（learn 開場）
 MANIFEST = os.path.join(HERE, "_manifest.json")
 DUR_MD = os.path.join(HERE, "_時長表.md")
 INTRO_MD = os.path.join(HERE, "_開場旁白稿.md")
@@ -77,7 +79,34 @@ def collect(data):
     for c in data.get("cards", []):
         items.append((f"{c['id']}.mp3", c["text"], c.get("text_hash") or h8(c["text"]), f"⑤ 講解卡 {c['id']}"))
     items += read_intros()
+    items += collect_reverse()
     return items
+
+
+def collect_reverse():
+    """倒推鏈音檔（learn 頁開場）：讀 reverse.json
+    - rev_R01…rev_R12、rev_D01…rev_D06＝各節點 explain（hash 用 reverse.json 的 text_hash）
+    - rev_goal＝終點畫面 goal＋「我們從這裡往回推。」
+    - rev_forward＝翻正旁白（由 forward 一行組出：去掉表單項次括號、箭頭改逗號）"""
+    if not os.path.exists(RJSON):
+        return []
+    r = json.load(open(RJSON, encoding="utf-8"))
+    out = []
+    goal = (r.get("goal") or "").strip()
+    if goal:
+        t = "終點畫面：" + goal + "我們從這裡往回推。"
+        out.append(("rev_goal.mp3", t, h8(t), "倒推・終點畫面旁白"))
+    for cname in ("R", "D"):
+        for n in r.get("chains", {}).get(cname, []):
+            num = int(re.sub(r"\D", "", n["id"]))
+            t = n["explain"]
+            out.append((f"rev_{cname}{num:02d}.mp3", t, n.get("text_hash") or h8(t), f"倒推 {n['id']} 講解"))
+    fw = (r.get("forward") or "").strip()
+    if fw:
+        steps = [re.sub(r"（[^）]*）", "", s).replace("＋", "和").strip() for s in fw.split("→")]
+        t = "把倒推鏈翻正，就是表單的順序：" + "，".join(s for s in steps if s) + "。"
+        out.append(("rev_forward.mp3", t, h8(t), "倒推・翻正旁白"))
+    return out
 
 
 async def synth(text, path):
@@ -138,7 +167,7 @@ def main():
             rows.append(f"| {fname} | — | {len(text)} | {label}（未產） | {th} |")
     with open(DUR_MD, "w", encoding="utf-8") as f:
         f.write("# 音檔時長表（溢灑站；由 _gen_audio.py 自動重寫）\n\n")
-        f.write(f"- 聲音：{VOICE}，rate {RATE}；文字來源＝`docs/assets/data/questions.json` explain_ok／explain_ng＋`_開場旁白稿.md`\n")
+        f.write(f"- 聲音：{VOICE}，rate {RATE}；文字來源＝`docs/assets/data/questions.json` explain_ok／explain_ng＋`reverse.json`（倒推鏈）＋`_開場旁白稿.md`\n")
         f.write(f"- 已產 {sum(1 for r in rows if '（未產）' not in r)} 檔，合計 {total/60:.1f} 分鐘；更新 {time.strftime('%Y-%m-%d %H:%M')}\n\n")
         f.write("| 檔名 | 秒 | 字數 | 內容 | hash |\n|---|---|---|---|---|\n")
         f.write("\n".join(rows) + "\n")

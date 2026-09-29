@@ -31,7 +31,7 @@ a.tile:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.1)}
 <div class="guide" id="guide"><div id="guide-txt"></div><div class="steps" id="steps"></div></div>
 <div class="grid">
 <a class="tile t4" id="t-pre" href="test/?phase=pre"><div class="ic">📝</div><h2>前測</h2><p>知識題 27 題＋自我效能。<b>先完成前測</b>，才會開啟下面的學習內容。</p><span class="tag"></span></a>
-<a class="tile t1" id="t-learn" href="learn/"><div class="ic">📘</div><h2>自學：第一時間與防護準備</h2><p>求援、攔人、戴 N95、泡漂白水、圍警戒、穿防護裝備——先作答，答對答錯都有講解與語音；最後看再清潔與通報圖卡。</p><span class="tag"></span></a>
+<a class="tile t1" id="t-learn" href="learn/"><div class="ic">📘</div><h2>自學：第一時間與防護準備</h2><p>先從「處理完成」的終點倒推 18 步、一路推回「先求援」，再做 11 題：求援、攔人、戴 N95、泡漂白水、圍警戒、穿防護裝備——答對答錯都有講解與語音；最後看再清潔與通報圖卡。</p><span class="tag"></span></a>
 <div class="tile t2" id="t-handson"><div class="ic">🖐️</div><h2>動手：溢灑現場怎麼做</h2><p>你是第一個到達現場的人：圍警戒、液體或粉劑、擦拭方向、卸除防護裝備的順序——做錯會看到後果。</p><div class="btns"><a href="handson/">2D 動手版</a><span class="dis" id="vr-link" role="link" aria-disabled="true" title="3D VR 建置中">3D VR（建置中）</span></div><span class="tag"></span></div>
 <a class="tile t3" id="t-lookup" href="lookup/"><div class="ic">🔍</div><h2>查詢：溢灑速查卡</h2><p>漂白水泡製、防護裝備穿脫順序、液體與粉劑、擦拭方向與時間點、暴露處置與通報，含小測驗。</p><span class="tag"></span></a>
 <a class="tile t5" id="t-coach" href="coach/"><div class="ic">🗣️</div><h2>練習：指揮 AI 學妹處理溢灑</h2><p>生成式 AI 扮演第一次遇到溢灑的學妹，你當現場指揮一步步交代，說完後看回饋。</p><span class="tag"></span></a>
@@ -44,7 +44,7 @@ a.tile:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.1)}
 const PROG = "spill_xrprog";
 const P = (() => { try { return JSON.parse(localStorage.getItem(PROG) || "{}") || {}; } catch (e) { return {}; } })();
 const STATIONS = [
-  ["learn", "自學", "作答完 11 題"],
+  ["learn", "自學", "倒推 18 步＋作答完 11 題"],
   ["handson", "動手", "走完 2D 動手版"],
   ["lookup", "查詢", "做完「小測驗」分頁"],
   ["coach", "練習", "完成練習與自評"],

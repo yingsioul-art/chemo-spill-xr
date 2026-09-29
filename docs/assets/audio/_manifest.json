@@ -502,5 +502,185 @@
   "voice": "zh-TW-YunJheNeural",
   "rate": "-5%",
   "generated": "2026-09-29 04:59"
+ },
+ "rev_goal.mp3": {
+  "hash": "d877f700",
+  "chars": 71,
+  "sec": 14.7,
+  "label": "倒推・終點畫面旁白",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 08:03"
+ },
+ "rev_R01.mp3": {
+  "hash": "1f2c7c26",
+  "chars": 63,
+  "sec": 13.3,
+  "label": "倒推 R1 講解",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 08:03"
+ },
+ "rev_R02.mp3": {
+  "hash": "56b9fd86",
+  "chars": 54,
+  "sec": 11.4,
+  "label": "倒推 R2 講解",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 08:03"
+ },
+ "rev_R03.mp3": {
+  "hash": "6d5b67ba",
+  "chars": 47,
+  "sec": 8.8,
+  "label": "倒推 R3 講解",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 08:03"
+ },
+ "rev_R04.mp3": {
+  "hash": "04458119",
+  "chars": 55,
+  "sec": 10.2,
+  "label": "倒推 R4 講解",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 08:03"
+ },
+ "rev_R05.mp3": {
+  "hash": "3802822c",
+  "chars": 62,
+  "sec": 12.0,
+  "label": "倒推 R5 講解",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 08:03"
+ },
+ "rev_R06.mp3": {
+  "hash": "cc3a2735",
+  "chars": 59,
+  "sec": 12.9,
+  "label": "倒推 R6 講解",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 08:03"
+ },
+ "rev_R07.mp3": {
+  "hash": "042f63b8",
+  "chars": 48,
+  "sec": 9.6,
+  "label": "倒推 R7 講解",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 08:03"
+ },
+ "rev_R08.mp3": {
+  "hash": "96a556f9",
+  "chars": 56,
+  "sec": 12.1,
+  "label": "倒推 R8 講解",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 08:03"
+ },
+ "rev_R09.mp3": {
+  "hash": "92fd1194",
+  "chars": 63,
+  "sec": 13.2,
+  "label": "倒推 R9 講解",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 08:03"
+ },
+ "rev_R10.mp3": {
+  "hash": "2f15bced",
+  "chars": 42,
+  "sec": 9.4,
+  "label": "倒推 R10 講解",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 08:03"
+ },
+ "rev_R11.mp3": {
+  "hash": "81f178f4",
+  "chars": 40,
+  "sec": 9.5,
+  "label": "倒推 R11 講解",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 08:03"
+ },
+ "rev_R12.mp3": {
+  "hash": "804a317c",
+  "chars": 37,
+  "sec": 9.4,
+  "label": "倒推 R12 講解",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 08:03"
+ },
+ "rev_D01.mp3": {
+  "hash": "0bd838a8",
+  "chars": 26,
+  "sec": 5.6,
+  "label": "倒推 D1 講解",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 08:04"
+ },
+ "rev_D02.mp3": {
+  "hash": "2fb2a666",
+  "chars": 42,
+  "sec": 8.7,
+  "label": "倒推 D2 講解",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 08:04"
+ },
+ "rev_D03.mp3": {
+  "hash": "a2a60b75",
+  "chars": 46,
+  "sec": 9.9,
+  "label": "倒推 D3 講解",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 08:04"
+ },
+ "rev_D04.mp3": {
+  "hash": "6f18d5c6",
+  "chars": 36,
+  "sec": 7.6,
+  "label": "倒推 D4 講解",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 08:04"
+ },
+ "rev_D05.mp3": {
+  "hash": "8563adbb",
+  "chars": 40,
+  "sec": 8.9,
+  "label": "倒推 D5 講解",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 08:04"
+ },
+ "rev_D06.mp3": {
+  "hash": "77d6ff7e",
+  "chars": 41,
+  "sec": 8.3,
+  "label": "倒推 D6 講解",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 08:04"
+ },
+ "rev_forward.mp3": {
+  "hash": "0b614101",
+  "chars": 125,
+  "sec": 26.1,
+  "label": "倒推・翻正旁白",
+  "voice": "zh-TW-YunJheNeural",
+  "rate": "-5%",
+  "generated": "2026-09-29 08:04"
  }
 }

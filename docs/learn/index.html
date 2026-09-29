@@ -117,6 +117,40 @@ main{max-width:760px;margin:0 auto;padding:16px 16px 48px}
 .check{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px}
 .check .tag{font-size:.8rem;color:var(--cG);font-weight:700;margin-bottom:6px}
 
+/* ── 🔁 倒推開場（從終點拆回起點） ── */
+.tR{--c:#0e7c86}
+.tile.big{margin-bottom:12px}
+.tile.big .bl{font-size:1.3rem}
+.scene{background:#eef6f7;border-left:4px solid #0e7c86;border-radius:10px;padding:9px 12px;margin:0 0 10px;font-size:.95rem}
+.scene b{color:#0e7c86}
+.goalbox{background:var(--okbg);border:2px solid #bfe3cc;border-radius:14px;padding:14px;margin:4px 0 12px}
+.goalbox .gt{font-weight:700;color:var(--ok);margin-bottom:4px}
+.formtag{display:inline-block;margin-top:2px;font-size:.8rem;font-weight:700;color:var(--navy);background:#e7eef8;border-radius:999px;padding:2px 10px}
+.tlhead{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.tlhead b{font-size:1rem}
+.tl{list-style:none;margin:0;padding:0 0 0 24px;position:relative}
+.tl::before{content:'';position:absolute;left:9px;top:8px;bottom:8px;width:3px;background:#cfe3e6;border-radius:3px}
+.tl li{position:relative;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 10px;margin-bottom:8px;font-size:.9rem;line-height:1.45;overflow-wrap:anywhere}
+.tl li::before{content:'';position:absolute;left:-20px;top:12px;width:11px;height:11px;border-radius:50%;background:#0e7c86;border:2px solid #fff;box-shadow:0 0 0 2px #0e7c86}
+.tl .tg{display:inline-block;font-size:.72rem;font-weight:700;color:#0e7c86;background:#e3f2f4;border-radius:999px;padding:1px 8px;margin-right:6px}
+.tl li.ask{border-style:dashed;color:var(--mut);background:#fafcfd}
+.tl li.ask::before{background:#fff;box-shadow:0 0 0 2px #9fb3c8}
+.tl li.goal{background:var(--okbg);border-color:#bfe3cc}
+.tl li.goal::before{background:var(--ok);box-shadow:0 0 0 2px var(--ok)}
+.tl li.new{animation:grow .7s ease both}
+@keyframes grow{0%{opacity:0;transform:translateY(16px) scale(.95);background:#fff4c2}60%{opacity:1;background:#fff4c2}100%{transform:none;background:#fff}}
+ol.fw{list-style:none;margin:0;padding:0;counter-reset:n}
+ol.fw li{counter-increment:n;display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 10px;margin-bottom:6px;font-size:.9rem;line-height:1.45;animation:flipIn .5s ease both;animation-delay:var(--d,0s);overflow-wrap:anywhere}
+ol.fw li::before{content:counter(n);flex:none;width:26px;height:26px;border-radius:50%;background:#0e7c86;color:#fff;font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center}
+ol.fw li .tx{flex:1;min-width:0}
+ol.fw li.end{background:var(--okbg);border-color:#bfe3cc}
+ol.fw li.end::before{content:'🏁';background:none}
+@keyframes flipIn{from{opacity:0;transform:perspective(500px) rotateX(-80deg)}to{opacity:1;transform:none}}
+.fwline{background:#f6f8fb;border:1px dashed #c9d3e0;border-radius:12px;padding:10px 12px;font-size:.88rem;line-height:1.7;margin-top:10px;overflow-wrap:anywhere}
+.cklist{margin:6px 0 0;padding-left:1.3em}
+.cklist li{margin-bottom:4px}
+@media(prefers-reduced-motion:reduce){.tl li.new,ol.fw li{animation:none}}
+
 .err{background:var(--ngbg);border:1px solid #f3c3cc;border-radius:12px;padding:14px;color:var(--ng)}
 footer{text-align:center;color:var(--mut);font-size:.78rem;padding:0 16px 28px}
 .sr{position:absolute;left:-9999px}
@@ -137,6 +171,9 @@ footer{text-align:center;color:var(--mut);font-size:.78rem;padding:0 16px 28px}
 <!-- 題目資料：正式版由頁面 fetch ../assets/data/questions.json；
      本機用 file:// 開啟時 fetch 會失敗，build 腳本可把 questions.json 全文注入下方標籤作為 fallback（不手抄題目）。 -->
 <script id="qdata" type="application/json">{"source":"20260929_溢灑XR_需求規格與題目草稿_v1.md","count":27,"questions":[{"id":1,"block":"A","block_name":"第一時間反應","use":["learn","handson","3d","test"],"stem":"你是第一個到達化療藥品溢灑現場的人，第一個動作是？","note":"","options":[{"key":"A","text":"先尋求協助"},{"key":"B","text":"自己拿抹布先把藥擦掉"},{"key":"C","text":"先離開去拿溢灑處理箱"},{"key":"D","text":"先打電話完成異常事件通報"}],"answer":"A","explain_ok":"對！第一到達現場的人要先尋求協助。你留在現場、不動手，才能管制人員走動、等裝備到位。","explain_ng":"第一步是先尋求協助。沒有防護就擦，受污染的是你自己；離開去拿箱子，現場沒人管，別人踩過就擴大污染；通報是處理完之後的事。","img":"gen_a01（第一到達者站在溢灑旁舉手呼叫同事）","form_item":"1","supplement":"","text_hash":{"ok":"88064525","ng":"8425a4fd","stem":"6acf227a"}},{"id":2,"block":"A","block_name":"第一時間反應","use":["learn","handson","3d","test"],"stem":"請同仁幫忙時，要請他把什麼帶到現場？","note":"","options":[{"key":"A","text":"溢灑處理箱及水桶"},{"key":"B","text":"只要溢灑處理箱"},{"key":"C","text":"拖把和一般清潔劑"},{"key":"D","text":"一包擦手紙"}],"answer":"A","explain_ok":"對！要請同仁拿溢灑處理箱及水桶到現場。水桶之後要用來泡漂白水、放清水抹布。","explain_ng":"要拿的是溢灑處理箱及水桶。只拿箱子會缺水桶；拖把會把藥推散，一般清潔劑不是表單規定的處理方式。","img":"gen_a02（同事提著溢灑處理箱與水桶走來）","form_item":"2","supplement":"","text_hash":{"ok":"f7ade9d3","ng":"dc3c7109","stem":"28310901"}},{"id":3,"block":"A","block_name":"第一時間反應","use":["learn","handson","3d","test"],"stem":"同仁去拿東西時，有家屬正要從溢灑處旁邊走過，你應該？","note":"","options":[{"key":"A","text":"留在現場指揮，請他停下、改走別的路"},{"key":"B","text":"提醒他小心腳下就好"},{"key":"C","text":"先跟著去拿處理箱，回來再處理"},{"key":"D","text":"讓他快速通過"}],"answer":"A","explain_ok":"對！在現場的人要指揮，限制人員在污染區走動，以免擴大污染區。","explain_ng":"要攔下來、請他改道。只提醒或讓人快速通過，鞋底就可能把藥帶到走廊和別的病室，污染範圍會擴大。","img":"gen_a03（護理師伸手攔下走近的家屬，指向另一條路）","form_item":"3","supplement":"","text_hash":{"ok":"d8f73967","ng":"08491aef","stem":"ff19e2cd"}},{"id":4,"block":"B","block_name":"N95 與泡製漂白水","use":["learn","test"],"stem":"處理溢灑前，要戴哪一種口罩？","note":"","options":[{"key":"A","text":"N95 口罩"},{"key":"B","text":"外科口罩"},{"key":"C","text":"布口罩"},{"key":"D","text":"不用戴口罩，戴防護面罩就好"}],"answer":"A","explain_ok":"對！要戴 N95 口罩。它是最先戴、也是最後才脫的一件。","explain_ng":"表單規定的是 N95 口罩，外科口罩或布口罩都不是。防護面罩擋的是噴濺，不能取代 N95。","img":"gen_b01（N95 口罩與外科口罩並排，N95 打勾）","form_item":"4","supplement":"","text_hash":{"ok":"b4ec5b31","ng":"1430bd60","stem":"8ada9a15"}},{"id":5,"block":"B","block_name":"N95 與泡製漂白水","use":["learn","test"],"stem":"漂白水要怎麼泡？","note":"","options":[{"key":"A","text":"取 500 mL 水到另一個空水桶，放 7 顆 2.5 gm 漂白錠"},{"key":"B","text":"取 500 mL 水，放 3 顆 2.5 gm 漂白錠"},{"key":"C","text":"取 1000 mL 水，放 7 顆 2.5 gm 漂白錠"},{"key":"D","text":"直接把漂白錠丟進清水桶"}],"answer":"A","explain_ok":"對！取 500 mL 水到另外一個空的水桶，放 7 顆 2.5 gm 漂白錠，泡成 2~3% 漂白水。","explain_ng":"正確是 500 mL 水、7 顆 2.5 gm 漂白錠、另一個空水桶。顆數或水量不對，濃度就不是 2~3%；丟進清水桶，你就沒有清水可用了。","img":"gen_b02（量杯 500 mL、7 顆漂白錠、空水桶）","form_item":"5","supplement":"","text_hash":{"ok":"bf5cc209","ng":"04a23abc","stem":"7fb946cf"}},{"id":6,"block":"C","block_name":"設置警戒區","use":["learn","handson","3d","test"],"stem":"警戒線要怎麼圍？","note":"","options":[{"key":"A","text":"圍起警戒線，範圍涵蓋可能噴濺與被踩到的地方"},{"key":"B","text":"只圍住看得到的那一灘"},{"key":"C","text":"不用圍線，放警示牌就好"},{"key":"D","text":"等清潔人員來再圍"}],"answer":"A","explain_ok":"對！要圍起警戒線、標示出警戒區範圍。範圍要包含細小噴濺和可能被踩到的地方，不只是看得到的那一灘。","explain_ng":"要圍起警戒線、標示警戒區範圍。只圍一灘會漏掉噴濺；只放牌子別人仍會走進來；等清潔人員就太晚了。","img":"gen_c01（俯視圖：溢灑處外圍一圈警戒線，涵蓋噴濺點）","form_item":"6","supplement":"範圍判斷","text_hash":{"ok":"ccff1515","ng":"ba7b8373","stem":"3b539a89"}},{"id":7,"block":"C","block_name":"設置警戒區","use":["learn","handson","3d","test"],"stem":"警示牌放在哪裡最有用？","note":"","options":[{"key":"A","text":"來人第一眼會看到的動線上"},{"key":"B","text":"溢灑那一灘的正中間"},{"key":"C","text":"護理站的桌上"},{"key":"D","text":"處理完再放"}],"answer":"A","explain_ok":"對！要放置警示牌，而且放在別人走過來會先看到的地方，才擋得住人。","explain_ng":"警示牌要放在來人會先看到的動線上。放在一灘中間你得踩進去；放護理站或處理完才放，都擋不到路過的人。","img":"gen_c02（走道入口處的警示牌，後方是警戒線）","form_item":"7","supplement":"擺放位置","text_hash":{"ok":"8d7278fc","ng":"cd09e7c8","stem":"e4d63e31"}},{"id":8,"block":"D","block_name":"防護裝備與抹布","use":["learn","test"],"stem":"除了 N95 口罩，還要穿戴哪一組防護裝備？","note":"","options":[{"key":"A","text":"髮帽、護目鏡或防護面罩、雙層手套、防水隔離衣、鞋套"},{"key":"B","text":"髮帽、單層手套、一般隔離衣、鞋套"},{"key":"C","text":"護目鏡、雙層手套、一般隔離衣"},{"key":"D","text":"只要戴雙層手套"}],"answer":"A","explain_ok":"對！要穿戴髮帽、護目鏡或防護面罩、雙層外科乳膠或橡膠手套、防水隔離衣和鞋套。","explain_ng":"完整的一組是髮帽、護目鏡或防護面罩、雙層外科乳膠或橡膠手套、防水隔離衣、鞋套。單層手套、一般隔離衣都不夠，少了鞋套會把藥踩出去。","img":"gen_d01（全套防護裝備攤開：髮帽、護目鏡、面罩、雙層手套、防水隔離衣、鞋套）","form_item":"8","supplement":"","text_hash":{"ok":"b20085f4","ng":"887f8034","stem":"7a508c9f"}},{"id":9,"block":"D","block_name":"防護裝備與抹布","use":["learn","test"],"stem":"手套和隔離衣的袖口，要怎麼搭？","note":"","options":[{"key":"A","text":"手套要套緊袖口"},{"key":"B","text":"袖口蓋在手套外面"},{"key":"C","text":"手套和袖口之間留一點空隙比較好活動"}],"answer":"A","explain_ok":"對！手套需套緊袖口，手腕才不會露出來。","explain_ng":"表單規定手套需套緊袖口。留空隙或手套沒套住袖口，手腕就是藥品碰到皮膚的缺口。","img":"gen_d02（左右對照：手套套緊袖口打勾、手腕外露打叉）","form_item":"8","supplement":"","text_hash":{"ok":"3a4167cf","ng":"afb6f60f","stem":"1a6b1453"}},{"id":10,"block":"D","block_name":"防護裝備與抹布","use":["learn","test"],"stem":"防水隔離衣要選哪一種？","note":"","options":[{"key":"A","text":"後開式、長袖、袖口可束緊"},{"key":"B","text":"前開式、長袖"},{"key":"C","text":"後開式、短袖"},{"key":"D","text":"一般布隔離衣"}],"answer":"A","explain_ok":"對！防水隔離衣要後開式、長袖、袖口可束緊。","explain_ng":"要選後開式、長袖、袖口可束緊的防水隔離衣。前開式正面有開口，短袖露手臂，布隔離衣不防水。","img":"gen_d03（後開式長袖防水隔離衣，袖口束緊處標示）","form_item":"8","supplement":"各誤選的理由","text_hash":{"ok":"494f11b3","ng":"338329da","stem":"0fe6494d"}},{"id":11,"block":"D","block_name":"防護裝備與抹布","use":["learn","test"],"stem":"兩個水桶的抹布要怎麼準備？","note":"","options":[{"key":"A","text":"一桶放清水抹布、一桶放 2~3% 漂白水抹布，兩桶分開"},{"key":"B","text":"抹布全部放進漂白水桶"},{"key":"C","text":"抹布全部放進清水桶，要用時再倒漂白水"},{"key":"D","text":"同一條抹布先沾清水、再沾漂白水"}],"answer":"A","explain_ok":"對！抹布一份放入清水水桶、一份放入 2~3% 漂白水水桶，兩桶分開不混用。","explain_ng":"要準備兩桶：清水抹布一桶、2~3% 漂白水抹布一桶。後面要先用清水擦、再用漂白水擦，混在一起就分不出來了。","img":"gen_d04（兩個水桶並排，分別標示「清水」與「漂白水」）","form_item":"9、10","supplement":"","text_hash":{"ok":"35757076","ng":"cb05bb59","stem":"536c994e"}},{"id":12,"block":"E","block_name":"環境清理","use":["handson","3d","test"],"stem":"液體化療藥品灑在地上，要先怎麼處理？","note":"","options":[{"key":"A","text":"用單面吸水襯墊（如看護墊）、擦手紙或紗布吸附，再丟進貼毒物標籤的雙層塑膠袋"},{"key":"B","text":"用濕抹布來回擦"},{"key":"C","text":"用拖把拖乾"},{"key":"D","text":"先把漂白水倒在藥上"}],"answer":"A","explain_ok":"對！液體溢灑要用單面吸水襯墊（如看護墊）、擦手紙或紗布吸附，再丟入貼有毒物標籤的雙層塑膠袋。","explain_ng":"液體要先吸附，不是擦或拖。來回擦和拖把會把藥推散；表單沒有直接倒漂白水這一步。","img":"gen_e01（看護墊蓋在地上的液體上吸附）","form_item":"11","supplement":"","text_hash":{"ok":"cf561ea5","ng":"783164a8","stem":"70c74a73"}},{"id":13,"block":"E","block_name":"環境清理","use":["handson","3d","test"],"stem":"如果灑出來的是粉劑呢？","note":"","options":[{"key":"A","text":"用濕紗布或濕抹布擦拭，再丟進貼毒物標籤的雙層塑膠袋"},{"key":"B","text":"用乾紗布把粉掃起來"},{"key":"C","text":"用吸塵器吸乾淨"},{"key":"D","text":"用看護墊吸附"}],"answer":"A","explain_ok":"對！粉劑溢灑要用濕紗布或濕抹布擦拭，再丟入貼有毒物標籤的雙層塑膠袋。","explain_ng":"粉劑要用濕的紗布或抹布擦。乾擦或吸塵器會讓粉末飛起來被吸進去；看護墊是吸液體用的。","img":"gen_e02（濕紗布輕壓地上的白色粉末）","form_item":"12","supplement":"揚塵理由","text_hash":{"ok":"240ad81c","ng":"4d03b00a","stem":"cc2db542"}},{"id":14,"block":"E","block_name":"環境清理","use":["handson","3d","test"],"stem":"用清水抹布擦地，怎麼擦才對？","note":"","options":[{"key":"A","text":"由外向內擦，擦 1 次就丟進毒物標籤雙層塑膠袋"},{"key":"B","text":"由內向外擦，擦完放回水桶洗一洗"},{"key":"C","text":"由外向內擦，擦完放回水桶再用"},{"key":"D","text":"來回擦到乾淨為止"}],"answer":"A","explain_ok":"對！由外向內擦拭，擦 1 次後就丟入貼有毒物標籤的雙層塑膠袋，不可以再放回水桶。","explain_ng":"要由外向內擦、擦 1 次就丟。由內向外會把藥推到外圍；抹布放回水桶，整桶水都被污染了。","img":"gen_e03（俯視圖：箭頭由外圈向中心，旁邊是毒物標籤雙層袋）","form_item":"13","supplement":"","text_hash":{"ok":"489a3580","ng":"2da047b2","stem":"99a247fa"}},{"id":15,"block":"E","block_name":"環境清理","use":["handson","3d","test"],"stem":"漂白水抹布要多濕？擦完要等多久？","note":"","options":[{"key":"A","text":"擰到不滴水、保持微濕；擦過的地方靜置 10 分鐘以上或待乾燥"},{"key":"B","text":"濕到會滴水最好；靜置 3 分鐘"},{"key":"C","text":"擰到全乾；不用靜置"},{"key":"D","text":"擰到不滴水；擦完馬上用清水擦掉"}],"answer":"A","explain_ok":"對！漂白水抹布完全沾濕後擰到不滴水，由外向內擦，讓表面保持微濕；擦過的地方靜置 10 分鐘以上或待乾燥，抹布一樣擦 1 次就丟。","explain_ng":"要擰到不滴水、保持微濕，擦過要靜置 10 分鐘以上或待乾燥。太濕會流開，全乾蓋不住表面，時間不夠或馬上擦掉，漂白水就還沒發揮作用。","img":"gen_e04（擰乾的抹布＋計時器顯示 10 分鐘）","form_item":"14","supplement":"各誤選的理由","text_hash":{"ok":"98e3f9e4","ng":"0dc1b0cf","stem":"3fd18a19"}},{"id":16,"block":"E","block_name":"環境清理","use":["handson","3d","test"],"stem":"溢灑波及點滴架和輸液幫浦，要怎麼擦？","note":"","options":[{"key":"A","text":"先清水、後漂白水；點滴架由上到下，輸液幫浦由外向內"},{"key":"B","text":"先漂白水、後清水；點滴架由下到上"},{"key":"C","text":"先清水、後漂白水；點滴架由外向內，輸液幫浦由上到下"},{"key":"D","text":"只用漂白水擦一次就好"}],"answer":"A","explain_ok":"對！先用清水抹布、再用漂白水抹布；點滴架由上到下擦，輸液幫浦由外向內擦。","explain_ng":"順序是先清水、後漂白水；方向是點滴架由上到下、輸液幫浦由外向內，兩個不能對調。","img":"gen_e05（點滴架旁向下箭頭、幫浦上由外向內箭頭）","form_item":"15","supplement":"","text_hash":{"ok":"db8a1c7c","ng":"ee6b66db","stem":"a7210e14"}},{"id":17,"block":"F","block_name":"卸除防護裝備","use":["handson","3d","test"],"stem":"處理完要卸除防護裝備，第一件先脫什麼？","note":"","options":[{"key":"A","text":"外層手套"},{"key":"B","text":"N95 口罩"},{"key":"C","text":"防水隔離衣"},{"key":"D","text":"內層手套"}],"answer":"A","explain_ok":"對！先脫下外層手套，丟進貼有毒物標籤的雙層塑膠袋。它碰過最多藥，最先脫。","explain_ng":"第一件是外層手套。先脫口罩或隔離衣，等於用最髒的手套碰臉和身體；內層手套要留到後面。","img":"gen_f01（脫下外層手套丟進毒物標籤袋）","form_item":"16","supplement":"","text_hash":{"ok":"5e2ad795","ng":"b90a2daa","stem":"cac037a3"}},{"id":18,"block":"F","block_name":"卸除防護裝備","use":["handson","3d","test"],"stem":"脫完外層手套後，用什麼移除護目鏡、髮帽、隔離衣和鞋套？","note":"","options":[{"key":"A","text":"用內層手套"},{"key":"B","text":"先洗手，再用空手脫"},{"key":"C","text":"先換一副新手套再脫"},{"key":"D","text":"請同事幫忙脫"}],"answer":"A","explain_ok":"對！用內層手套移除護目鏡、髮帽、防水隔離衣，再脫除鞋套。","explain_ng":"要用內層手套來脫。空手會直接碰到污染的裝備；新手套是後面綁垃圾袋時才戴。","img":"gen_f02（戴著內層手套取下護目鏡）","form_item":"17","supplement":"","text_hash":{"ok":"7fe3ca13","ng":"460c6db3","stem":"f7b33513"}},{"id":19,"block":"F","block_name":"卸除防護裝備","use":["handson","3d","test"],"stem":"防護裝備都丟進袋子之後，下一步是？","note":"","options":[{"key":"A","text":"把內層垃圾袋束口，再脫內層手套丟進毒性廢棄物袋"},{"key":"B","text":"先脫內層手套，再空手把袋子綁起來"},{"key":"C","text":"袋子不用綁，直接丟"},{"key":"D","text":"先脫 N95 口罩"}],"answer":"A","explain_ok":"對！所有防護裝備丟進毒物標籤雙層塑膠袋後，先把內層垃圾袋束口，再脫內層手套丟入毒性廢棄物袋。","explain_ng":"要先把內層垃圾袋束口，再脫內層手套。先脫手套就得空手碰袋口；袋子不綁，藥會跑出來。","img":"gen_f03（戴手套將內層垃圾袋束口）","form_item":"18、19","supplement":"","text_hash":{"ok":"4b203830","ng":"0a1bac13","stem":"339a7079"}},{"id":20,"block":"F","block_name":"卸除防護裝備","use":["handson","3d","test"],"stem":"內層手套脫掉之後，還要做什麼？","note":"","options":[{"key":"A","text":"戴一副新的乳膠手套，把外層塑膠袋束緊，丟進化療廢棄物收集桶"},{"key":"B","text":"空手把外層塑膠袋綁起來丟掉"},{"key":"C","text":"請清潔人員來收"},{"key":"D","text":"直接洗手就結束"}],"answer":"A","explain_ok":"對！要戴一副新的乳膠手套，把外層塑膠袋束緊，垃圾袋和這副手套一起丟進化療廢棄物收集桶。很多人漏掉「再戴新手套」這一步。","explain_ng":"要先戴一副新的乳膠手套，再把外層塑膠袋束緊，丟進化療廢棄物收集桶。空手碰袋子會再次暴露。","img":"gen_f04（戴新手套綁緊外層袋，旁邊是化療廢棄物收集桶）","form_item":"20","supplement":"","text_hash":{"ok":"0b2b588c","ng":"0e969806","stem":"d05f2afa"}},{"id":21,"block":"F","block_name":"卸除防護裝備","use":["handson","3d","test"],"stem":"N95 口罩什麼時候脫？","note":"","options":[{"key":"A","text":"垃圾袋丟進收集桶之後、手部衛生之前"},{"key":"B","text":"一開始先脫，比較好呼吸"},{"key":"C","text":"脫完外層手套就脫"},{"key":"D","text":"洗完手再脫"}],"answer":"A","explain_ok":"對！N95 口罩是最後才移除的防護裝備，脫完再進行手部衛生。","explain_ng":"N95 要留到最後：垃圾袋處理完才脫，脫完再做手部衛生。太早脫會吸入現場的藥；洗完手再脫，手又被口罩弄髒了。","img":"gen_f05（取下 N95 後走向洗手台）","form_item":"21、22","supplement":"各誤選的理由","text_hash":{"ok":"e3de64de","ng":"69825002","stem":"6ab5c1dd"}},{"id":22,"block":"G","block_name":"再清潔","use":["learn_g","test"],"stem":"用漂白水擦過的點滴架或輸液幫浦，之後還要？","note":"","options":[{"key":"A","text":"10 分鐘後再用清水抹布擦一次，避免漂白水腐蝕表面"},{"key":"B","text":"不用再擦，漂白水會自己揮發"},{"key":"C","text":"馬上用清水擦掉"},{"key":"D","text":"改用酒精再擦一次"}],"answer":"A","explain_ok":"對！漂白水擦拭 10 分鐘後，再用清水抹布擦點滴架或點滴幫浦，避免漂白水腐蝕儀器表面或點滴架。","explain_ng":"要等 10 分鐘後再用清水抹布擦一次。不擦會腐蝕儀器表面；馬上擦掉漂白水就沒作用；表單沒有用酒精。","img":"gen_g01（計時器 10 分鐘，清水抹布擦點滴幫浦）","form_item":"23","supplement":"","text_hash":{"ok":"d82c1151","ng":"3bd8dd35","stem":"4a70fa15"}},{"id":23,"block":"G","block_name":"再清潔","use":["learn_g","test"],"stem":"什麼時候可以撤除警示牌和警戒線？","note":"","options":[{"key":"A","text":"漂白水擦拭區靜置 10 分鐘以上或乾了之後；撤除後聯絡清潔人員再做一般清潔"},{"key":"B","text":"擦完地就馬上撤"},{"key":"C","text":"等清潔人員來，由他們擦漂白水"},{"key":"D","text":"等下一班再撤"}],"answer":"A","explain_ok":"對！漂白水擦拭區域靜置 10 分鐘以上或待乾燥，才撤除警示牌和警戒線，再聯絡清潔人員做一次一般清潔。","explain_ng":"要等漂白水擦拭區靜置 10 分鐘以上或乾了才撤，撤完再請清潔人員做一般清潔。漂白水擦拭是我們做，不是清潔人員。","img":"gen_g02（收起警戒線與警示牌，清潔人員推車走來）","form_item":"24","supplement":"","text_hash":{"ok":"854ab9fb","ng":"9b80d1fa","stem":"91af40d5"}},{"id":24,"block":"H","block_name":"紀錄檢討與暴露處置","use":["learn_g","test"],"stem":"藥灑掉了，病人的那份藥怎麼辦？","note":"","options":[{"key":"A","text":"與主治醫師討論是否追加藥品劑量"},{"key":"B","text":"不用處理，已經打進去的就算了"},{"key":"C","text":"自己去藥局再領一份補打"},{"key":"D","text":"等下一次療程再補"}],"answer":"A","explain_ok":"對！要與主治醫師討論是否追加藥品劑量。這一步很常被忘記。","explain_ng":"要與主治醫師討論是否追加劑量。病人可能沒拿到足夠的藥；補不補、補多少是醫師決定，不能自己領藥補打。","img":"gen_h01（護理師與醫師討論，手上拿著藥品標籤）","form_item":"25","supplement":"","text_hash":{"ok":"e42b6866","ng":"af8479bd","stem":"49e8cf61"}},{"id":25,"block":"H","block_name":"紀錄檢討與暴露處置","use":["learn_g","test"],"stem":"處理完之後，一定要完成哪一個通報？","note":"","options":[{"key":"A","text":"異常事件通報"},{"key":"B","text":"不用通報，沒有人受傷"},{"key":"C","text":"口頭告訴護理長就好"},{"key":"D","text":"寫在交班本上就好"}],"answer":"A","explain_ok":"對！溢灑處理完要完成異常事件通報。","explain_ng":"要完成異常事件通報。沒人受傷也要通報；口頭報告或寫交班本，都不能取代通報。","img":"gen_h02（電腦畫面上的通報表單示意，無個資）","form_item":"26","supplement":"","text_hash":{"ok":"57d8244e","ng":"8fae978e","stem":"de21b42b"}},{"id":26,"block":"H","block_name":"紀錄檢討與暴露處置","use":["learn_g","test"],"stem":"處理時同仁被藥品噴到受傷了，除了異常事件通報，還要？","note":"","options":[{"key":"A","text":"完成職業災害通報"},{"key":"B","text":"只要異常事件通報就夠了"},{"key":"C","text":"自己擦乾淨就好"},{"key":"D","text":"下班再說"}],"answer":"A","explain_ok":"對！護理人員或工作人員受傷，要完成職業災害通報。","explain_ng":"人員受傷要另外完成職業災害通報，異常事件通報不能取代。","img":"gen_h03（職災通報表單示意）","form_item":"27","supplement":"","text_hash":{"ok":"415ea87b","ng":"61ca1287","stem":"bf0b2793"}},{"id":27,"block":"H","block_name":"紀錄檢討與暴露處置","use":["learn_g","test"],"stem":"藥品碰到皮膚或眼睛，要怎麼處理？","note":"","options":[{"key":"A","text":"皮膚用肥皂、冷水立即清洗；眼睛立即沖洗至少 15 分鐘"},{"key":"B","text":"皮膚用熱水清洗；眼睛沖洗 5 分鐘"},{"key":"C","text":"皮膚用酒精擦；眼睛點眼藥水"},{"key":"D","text":"先把溢灑處理完再清洗"}],"answer":"A","explain_ok":"對！碰到皮膚要用肥皂、冷水立即清洗；碰到眼睛要立即沖洗至少 15 分鐘。","explain_ng":"皮膚是肥皂加冷水、立即洗；眼睛是立即沖、至少 15 分鐘。用熱水、沖太短或拖到處理完才洗都不對。","img":"gen_h04（左：肥皂冷水洗手；右：洗眼設備沖眼）","form_item":"28","supplement":"","text_hash":{"ok":"1e8747a8","ng":"52ba7471","stem":"bbea3182"}}]}</script>
+
+<!-- 倒推鏈資料：正式版 fetch ../assets/data/reverse.json；file:// 備援由 _inject_qdata.py 注入 -->
+<script id="rdata" type="application/json">{"goal":"警戒線和警示牌都撤了、地面與點滴架乾淨、所有污染物在化療廢棄物收集桶、處理的人沒有被污染、清潔人員接手做一般清潔。","chains":{"R":[{"id":"R1","scene":"警戒線、警示牌已撤，清潔人員來做一般清潔。","ask":"撤線之前，一定要先完成什麼？","options":[{"key":"A","text":"漂白水擦過的區域已靜置 10 分鐘以上或已經乾燥"},{"key":"B","text":"地面剛用清水抹布擦完"},{"key":"C","text":"異常事件通報已經送出"}],"answer":"A","explain":"漂白水擦拭區域要靜置 10 分鐘以上或待乾燥，才撤除警示牌和警戒線，再聯絡清潔人員做一般清潔。通報是另一件事，不是撤線的條件。","form_item":"24","text_hash":"1f2c7c26"},{"id":"R2","scene":"地面正在靜置計時；溢灑也波及了點滴架和輸液幫浦。","ask":"撤線前，點滴架和幫浦還差哪一步？","options":[{"key":"A","text":"漂白水擦過 10 分鐘後，再用清水抹布擦一次"},{"key":"B","text":"不用再處理，漂白水會自己乾"},{"key":"C","text":"漂白水擦完馬上用清水擦掉"}],"answer":"A","explain":"漂白水擦拭後要等 10 分鐘，再用清水抹布擦點滴架或幫浦，避免漂白水腐蝕儀器表面。太早擦掉，漂白水還沒作用。","form_item":"23","text_hash":"56b9fd86"},{"id":"R3","scene":"擦過漂白水的地面正在靜置計時。","ask":"開始計時之前，剛做完的是哪一步？","options":[{"key":"A","text":"用擰到不滴水的漂白水抹布由外向內擦過，擦一次就丟"},{"key":"B","text":"用清水抹布擦過一遍"},{"key":"C","text":"把漂白水直接倒在地上"}],"answer":"A","explain":"漂白水抹布完全沾濕後擰到不滴水，由外向內擦，讓表面保持微濕；擦過的區域才開始靜置 10 分鐘。","form_item":"14","text_hash":"6d5b67ba"},{"id":"R4","scene":"正在用漂白水抹布擦地。","ask":"在這之前，地面要先用什麼擦過？","options":[{"key":"A","text":"清水抹布由外向內擦，擦一次就丟進毒物標籤雙層袋"},{"key":"B","text":"不用，藥還在地上就直接用漂白水擦"},{"key":"C","text":"先撤掉警戒線，比較好擦"}],"answer":"A","explain":"表單規定的順序是先用清水抹布擦（第 13 項），再用漂白水抹布擦（第 14 項）；抹布擦一次就丟，不放回水桶。","form_item":"13、14","text_hash":"04458119"},{"id":"R5","scene":"正在用清水抹布擦地。","ask":"在這之前，地上的藥要先怎麼處理？","options":[{"key":"A","text":"液體用吸水襯墊吸附、粉劑用濕紗布擦，丟進毒物標籤雙層袋"},{"key":"B","text":"用抹布來回擦，把藥推開"},{"key":"C","text":"先用拖把拖過一遍"}],"answer":"A","explain":"藥要先移走：液體用單面吸水襯墊、擦手紙或紗布吸附，粉劑用濕紗布或濕抹布擦，都丟入貼有毒物標籤的雙層塑膠袋；之後才用抹布擦地。","form_item":"11、12、13","text_hash":"3802822c"},{"id":"R6","scene":"準備開始吸附地上的藥。","ask":"手邊應該已經備好什麼？","options":[{"key":"A","text":"一桶清水抹布、一桶 2~3% 漂白水抹布，兩桶分開"},{"key":"B","text":"一條乾抹布"},{"key":"C","text":"一桶加了漂白水的清水，抹布都泡在一起"}],"answer":"A","explain":"清水抹布和漂白水抹布要先分兩桶準備好，吸附完就接著用。表單把準備抹布（第 9、10 項）排在吸附（第 11 項）之前。","form_item":"9、10","text_hash":"cc3a2735"},{"id":"R7","scene":"正在把抹布放進兩個水桶。","ask":"開始碰這些東西之前，你身上一定要有什麼？","options":[{"key":"A","text":"全套防護裝備：髮帽、護目鏡或面罩、雙層手套套緊袖口、防水隔離衣、鞋套"},{"key":"B","text":"只戴一層手套就好"},{"key":"C","text":"先不用，處理完再穿"}],"answer":"A","explain":"穿著防護裝備（第 8 項）排在準備抹布與清理之前：接觸任何可能沾到藥的東西前，全套防護要先穿好。","form_item":"8","text_hash":"042f63b8"},{"id":"R8","scene":"你正在穿防護裝備，要花幾分鐘。","ask":"這段時間，現場應該已經完成什麼？","options":[{"key":"A","text":"警戒線圍好、警示牌放好，別人不會走進來"},{"key":"B","text":"地面已經擦乾淨"},{"key":"C","text":"異常事件通報已經寫完"}],"answer":"A","explain":"表單把圍警戒線、放警示牌（第 6、7 項）排在穿防護裝備（第 8 項）之前：你專心穿裝備的時候，現場已經擋住了。","form_item":"6、7","text_hash":"96a556f9"},{"id":"R9","scene":"正在圍警戒線。","ask":"更早之前，你已經完成哪兩件事？","options":[{"key":"A","text":"戴上 N95 口罩，並在另一個空水桶泡好漂白水"},{"key":"B","text":"穿好隔離衣和雙層手套"},{"key":"C","text":"已經把地上的藥吸附完"}],"answer":"A","explain":"表單的順序是先戴 N95（第 4 項）、泡漂白水（第 5 項），再圍警戒線（第 6 項）。N95 是最先戴上、最後才脫的一件。","form_item":"4、5、6","text_hash":"92fd1194"},{"id":"R10","scene":"正在泡漂白水。","ask":"要能泡漂白水，前一步必須發生什麼？","options":[{"key":"A","text":"同仁已把溢灑處理箱和水桶拿到現場"},{"key":"B","text":"已經穿好全套防護裝備"},{"key":"C","text":"清潔人員已經來了"}],"answer":"A","explain":"沒有處理箱和水桶就泡不了漂白水。請同仁拿溢灑處理箱及水桶到現場，是表單的第 2 項。","form_item":"2、5","text_hash":"2f15bced"},{"id":"R11","scene":"同仁去拿處理箱和水桶了。","ask":"他去拿的這段時間，你在做什麼？","options":[{"key":"A","text":"留在現場指揮，限制人員走動"},{"key":"B","text":"先用衛生紙把藥擦掉"},{"key":"C","text":"跟著一起去拿，比較快"}],"answer":"A","explain":"在現場的人要指揮，限制人員在污染區走動，以免擴大污染區。你一離開，就沒有人擋了。","form_item":"3","text_hash":"81f178f4"},{"id":"R12","scene":"這一切是怎麼開始的？","ask":"第一到達現場的人，第一個動作是？","options":[{"key":"A","text":"先尋求協助"},{"key":"B","text":"先打電話完成通報"},{"key":"C","text":"先自己動手擦"}],"answer":"A","explain":"起點是先尋求協助。你不動手、不離開，才能請同仁拿裝備、自己留下來管制現場。","form_item":"1","text_hash":"804a317c"}],"D":[{"id":"D1","scene":"正在做手部衛生，處理結束。","ask":"洗手前的最後一步是？","options":[{"key":"A","text":"移除 N95 口罩"},{"key":"B","text":"脫外層手套"},{"key":"C","text":"把內層垃圾袋束口"}],"answer":"A","explain":"N95 是最後才移除的防護裝備，脫完再進行手部衛生。","form_item":"21、22","text_hash":"0bd838a8"},{"id":"D2","scene":"正在移除 N95。","ask":"在這之前，垃圾袋處理到哪一步了？","options":[{"key":"A","text":"戴一副新的乳膠手套，外層塑膠袋束緊，丟進化療廢棄物收集桶"},{"key":"B","text":"還在脫防水隔離衣"},{"key":"C","text":"已經洗完手"}],"answer":"A","explain":"戴新的乳膠手套、把外層塑膠袋束緊、連同手套丟進化療廢棄物收集桶之後，才移除 N95。","form_item":"20、21","text_hash":"2fb2a666"},{"id":"D3","scene":"戴著新的乳膠手套在綁外層袋。","ask":"為什麼要戴新手套？前一步剛做完什麼？","options":[{"key":"A","text":"剛脫掉內層手套，手上已經沒有手套了"},{"key":"B","text":"剛移除 N95"},{"key":"C","text":"剛脫掉外層手套"}],"answer":"A","explain":"內層手套已經脫掉丟進毒性廢棄物袋，所以要再戴一副新的乳膠手套才去碰外層袋。很多人漏掉這一步。","form_item":"19、20","text_hash":"a2a60b75"},{"id":"D4","scene":"正在脫內層手套。","ask":"脫之前，要先完成什麼？","options":[{"key":"A","text":"所有防護裝備都丟進袋子，內層垃圾袋已經束口"},{"key":"B","text":"已經戴上新的乳膠手套"},{"key":"C","text":"已經移除 N95"}],"answer":"A","explain":"先把所有防護裝備丟進毒物標籤雙層塑膠袋、把內層垃圾袋束口，才脫內層手套。","form_item":"18、19","text_hash":"6f18d5c6"},{"id":"D5","scene":"正在把內層垃圾袋束口。","ask":"袋子裡已經裝了哪些東西？","options":[{"key":"A","text":"用內層手套脫下的護目鏡、髮帽、防水隔離衣、鞋套"},{"key":"B","text":"還沒脫的外層手套"},{"key":"C","text":"剛移除的 N95"}],"answer":"A","explain":"以內層手套移除護目鏡、髮帽、防水隔離衣、脫除鞋套，全部丟進袋子，才把內層袋束口。","form_item":"17、18","text_hash":"8563adbb"},{"id":"D6","scene":"戴著內層手套在脫護目鏡。","ask":"這之前，第一件脫掉的是？","options":[{"key":"A","text":"外層手套"},{"key":"B","text":"N95 口罩"},{"key":"C","text":"防水隔離衣"}],"answer":"A","explain":"卸除的第一件是外層手套，丟進貼有毒物標籤的雙層塑膠袋，之後才用內層手套脫其他裝備。","form_item":"16、17","text_hash":"77d6ff7e"}]},"checklist":["與主治醫師討論是否追加藥品劑量（表單 25）","完成異常事件通報（表單 26）","若人員受傷，完成職業災害通報（表單 27）","藥品碰到皮膚：肥皂、冷水立即清洗；碰到眼睛：立即沖洗至少 15 分鐘（表單 28）"],"forward":"求援（1）→ 管制走動（3）→ 處理箱與水桶到場（2）→ N95（4）→ 泡漂白水（5）→ 警戒線與警示牌（6–7）→ 全套防護（8）→ 兩桶抹布（9–10）→ 吸附或濕擦（11–12）→ 清水由外向內（13）→ 漂白水由外向內＋靜置（14）→ 點滴架與幫浦（15）→ 卸除防護裝備（16–22）→ 儀器 10 分鐘後清水再擦（23）→ 撤警戒、一般清潔（24）→ 收尾檢查（25–28）"}</script>
 
 <script>
 (function(){
@@ -170,15 +207,38 @@ const $=id=>document.getElementById(id);
 const app=$('app');
 
 function load(){ try{ const s=JSON.parse(localStorage.getItem(KEY)||'null'); if(s&&s.ans) return Object.assign({auto:true,gans:{}},s);}catch(e){} return {ans:{},gans:{},auto:true}; }
-const xrMark=k=>{try{const p=JSON.parse(localStorage.getItem(PROG)||'{}');if(!p[k]){p[k]=Date.now();localStorage.setItem(PROG,JSON.stringify(p));}}catch(e){}};
-/* 首頁進度：區塊 A–D 題目全部作答過＝完成 */
-function markLearn(){ if(learnQ.length&&learnQ.every(q=>st.ans[q.id])) xrMark('learn'); }
+// 讀出既有 spill_xrprog 物件→只加這一欄→寫回（不覆蓋其他站的欄位）
+const xrMark=k=>{try{const p=JSON.parse(localStorage.getItem(PROG)||'{}')||{};if(!p[k]){p[k]=Date.now();localStorage.setItem(PROG,JSON.stringify(p));}}catch(e){}};
+/* 首頁進度：🔁 倒推走完（兩段＋翻正）＋區塊 A–D 題目全部作答過＝完成（倒推資料載入失敗時只看 11 題） */
+function markLearn(){ if(learnQ.length&&learnQ.every(q=>st.ans[q.id])&&(!REV||rs.done)) xrMark('learn'); }
+
+/* ── 🔁 倒推狀態：spill_reverse_v1 ──
+   stage：intro → R（清理主線）→ flipR（翻正＋收尾清單）→ D（卸除防護裝備）→ flipD → done
+   R／D：已答對的節點 id（依答對順序）；wrong：{節點 id:[答錯選項 key]}；heard：已自動播過講解的節點 */
+const RKEY='spill_reverse_v1', RAUD='rev_';
+let REV=null;
+let rs=loadRev();
+function loadRev(){ try{ const s=JSON.parse(localStorage.getItem(RKEY)||'null'); if(s&&s.stage) return Object.assign({R:[],D:[],wrong:{},heard:{},done:0},s);}catch(e){} return {stage:'intro',R:[],D:[],wrong:{},heard:{},done:0}; }
+function saveRev(){ try{ localStorage.setItem(RKEY,JSON.stringify(rs)); }catch(e){} markLearn(); }
 function save(){ try{ localStorage.setItem(KEY,JSON.stringify(st)); }catch(e){} markLearn(); }
 function el(tag,cls,html){ const e=document.createElement(tag); if(cls) e.className=cls; if(html!=null) e.innerHTML=html; return e; }
 function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 function stopAudio(){ if(curAudio){ try{curAudio.pause();}catch(e){} curAudio=null; } }
 function go(h){ location.hash=h; }
 function qid(q){ return 'q'+String(q.id).padStart(2,'0'); }
+
+/* ── 倒推鏈資料：先 fetch reverse.json，失敗讀內嵌 #rdata；都沒有＝不顯示倒推（不擋 11 題） ── */
+async function loadRevData(){
+  try{
+    const r=await fetch('../assets/data/reverse.json',{cache:'no-store'});
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    return await r.json();
+  }catch(e){
+    try{ const t=($('rdata').textContent||'').trim(); if(t) return JSON.parse(t); }catch(e2){}
+    return null;
+  }
+}
+function validRev(d){ return d&&d.chains&&Array.isArray(d.chains.R)&&d.chains.R.length&&Array.isArray(d.chains.D)&&d.chains.D.length?d:null; }
 
 /* ── 資料載入：先 fetch，失敗再讀內嵌 #qdata ── */
 async function loadData(){
@@ -276,7 +336,15 @@ function renderHome(){
   markLearn();
   stopAudio(); setHead('自學：第一時間與防護準備','← 回首頁'); setProg(false);
   app.innerHTML='';
-  app.appendChild(el('div','hint','先選答案再看講解，答對答錯各有一版講解與語音。區塊 A–D 共 '+learnQ.length+' 題，做完出總複習；⑤ 再清潔與紀錄通報是圖卡＋自我檢核，不計分。'));
+  app.appendChild(el('div','hint',(REV?'先做 🔁 倒推：從處理完成的終點倒推 '+revTotal()+' 步、推回「先求援」，再翻正成表單順序。接著':'')+'先選答案再看講解，答對答錯各有一版講解與語音。區塊 A–D 共 '+learnQ.length+' 題，做完出總複習；⑤ 再清潔與紀錄通報是圖卡＋自我檢核，不計分。'));
+  if(REV){
+    const n=revSolved(), tot=revTotal();
+    const b=el('button','tile big tR'); b.type='button';
+    let stCls='',stTxt=n?n+'／'+tot:'從這裡開始';
+    if(rs.done){ stCls='done'; stTxt='✓ 完成'; } else if(n||rs.stage!=='intro'){ stCls='part'; }
+    b.innerHTML='<span class="bl">🔁</span><span class="tx"><h2>倒推：從終點拆回起點</h2><div class="sub">清理 '+REV.chains.R.length+' 步＋脫防護裝備 '+REV.chains.D.length+' 步・做完再做 11 題</div></span><span class="st '+stCls+'">'+esc(stTxt)+'</span>';
+    b.addEventListener('click',()=>go('#rev')); app.appendChild(b);
+  }
   const grid=el('div','grid');
   TILES.forEach(t=>{
     const list=t.b==='G'?gQ:(blocks[t.b]||[]); const store=t.b==='G'?st.gans:st.ans;
@@ -405,21 +473,184 @@ function renderCards(idx){
   window.scrollTo(0,0);
 }
 
+/* ── 🔁 倒推：從終點拆回起點（資料＝reverse.json；選項 A 為正解，顯示時打亂、以位置重新標 A/B/C） ── */
+function revTotal(){ return REV?REV.chains.R.length+REV.chains.D.length:0; }
+function revSolved(){ return rs.R.length+rs.D.length; }
+function revAud(id){ return AUD+RAUD+id.replace(/^([RD])(\d)$/,'$10$2')+'.mp3'; }   // R1→rev_R01.mp3
+function nodeLabel(n){ const o=(n.options||[]).find(x=>x.key===n.answer); return o?o.text:n.scene; }
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function revProg(){ setProg(true,'🔁 倒推進度',revSolved(),revTotal()); }
+function setStage(s){ rs.stage=s; saveRev(); renderRev(); }
+function chainMeta(c){
+  return c==='R'
+    ? {title:'第一段・清理主線',anchor:'🏁 終點：'+REV.goal}
+    : {title:'第二段・脫防護裝備也倒推一次',anchor:'🏁 終點：'+(REV.chains.D[0]||{}).scene};
+}
+
+/* 倒推時間軸：由下往上長（最下＝終點，新答對的步驟接在最上面＝更早發生） */
+function timeline(c,newId,withAsk){
+  const box=el('section','card');
+  const chain=REV.chains[c], done=rs[c];
+  const h=el('div','tlhead'); h.appendChild(el('b',null,'你的倒推鏈')); h.appendChild(el('span','mut','⬆ 越上面越早發生・'+done.length+'／'+chain.length)); box.appendChild(h);
+  const ul=el('ul','tl');
+  if(withAsk) ul.appendChild(el('li','ask','❓ 前一步是什麼？'));
+  done.slice().reverse().forEach(id=>{
+    const n=chain.find(x=>x.id===id); if(!n) return;
+    const li=el('li',id===newId?'new':null,'<span class="tg">'+esc(n.id)+'・表單 '+esc(n.form_item)+'</span>'+esc(nodeLabel(n)));
+    ul.appendChild(li);
+  });
+  ul.appendChild(el('li','goal',esc(chainMeta(c).anchor)));
+  box.appendChild(ul);
+  return box;
+}
+
+function renderRev(){
+  stopAudio(); if(!REV){ go('#home'); return; }
+  setHead('🔁 倒推：從終點拆回起點','← 回首頁'); revProg(); app.innerHTML='';
+  const s=rs.stage;
+  if(s==='R'||s==='D') return revChain(s);
+  if(s==='flipR'||s==='flipD') return revFlip(s.slice(-1));
+  if(s==='done') return revDone();
+  revIntro();
+}
+
+function revIntro(){
+  const c=el('section','card');
+  c.appendChild(el('div','qno','開場・倒推'));
+  c.appendChild(el('h2','stem','先看終點：處理完成的安全畫面'));
+  const g=el('div','goalbox'); g.appendChild(el('div','gt','🏁 處理完成')); g.appendChild(el('div',null,esc(REV.goal))); c.appendChild(g);
+  c.appendChild(el('p',null,'溢灑處理的 28 項不用背。接下來每一步只問一件事：<b>要到這個畫面，前一步一定要先完成什麼？</b>一路倒回起點，再把鏈子翻過來，就是表單的順序。'));
+  c.appendChild(audioEl([{src:AUD+RAUD+'goal.mp3'}],!rs.heard.goal,'終點畫面旁白'));
+  rs.heard.goal=1; saveRev();
+  const row=el('div','row');
+  const b1=el('button','btn','開始倒推 →'); b1.type='button'; b1.addEventListener('click',()=>setStage('R'));
+  const b2=el('button','btn lite','先跳過，直接做 11 題'); b2.type='button'; b2.style.flex='1 1 100%'; b2.addEventListener('click',()=>go('#A'));
+  row.appendChild(b1); row.appendChild(b2); c.appendChild(row);
+  app.appendChild(c); window.scrollTo(0,0);
+}
+
+function revChain(c){
+  const chain=REV.chains[c], meta=chainMeta(c);
+  const i=rs[c].length;
+  if(i>=chain.length){ setStage(c==='R'?'flipR':'flipD'); return; }
+  const n=chain[i];
+  const card=el('section','card'); card.style.setProperty('--c','#0e7c86');
+  card.appendChild(el('div','qno',esc(meta.title)+'・'+esc(n.id)+'（'+(i+1)+'／'+chain.length+'）'));
+  card.appendChild(el('div','scene','<b>📍 畫面：</b>'+esc(n.scene)));
+  card.appendChild(el('h2','stem',esc(n.ask)));
+  const optsBox=el('div','opts'); card.appendChild(optsBox);
+  const wrong=rs.wrong[n.id]=rs.wrong[n.id]||[];
+  const btns=[]; let expBox=null;
+  shuffle(n.options).forEach((o,k)=>{
+    const b=el('button','opt'); b.type='button'; b.dataset.key=o.key;
+    b.innerHTML='<span class="k">'+'ABCD'[k]+'</span><span class="t">'+esc(o.text)+'</span>';
+    if(wrong.includes(o.key)){ b.disabled=true; b.classList.add('ng'); }
+    b.addEventListener('click',()=>pick(o.key,true)); optsBox.appendChild(b); btns.push(b);
+  });
+  function showExp(right,fresh){
+    if(expBox) expBox.remove(); stopAudio();
+    expBox=el('div','exp '+(right?'ok':'ng'));
+    expBox.appendChild(el('div','ttl',right?'✅ 接上了！這一步接到倒推鏈上':'❌ 不是這一步。看完講解，再選一次'));
+    expBox.appendChild(el('p',null,esc(n.explain)));
+    expBox.appendChild(el('span','formtag','📋 表單第 '+esc(n.form_item)+' 項'));
+    const auto=fresh&&!rs.heard[n.id]; rs.heard[n.id]=1;
+    expBox.appendChild(audioEl([{src:revAud(n.id)}],auto,n.id+' 講解音檔'));
+    if(right){
+      const last=i===chain.length-1; const row=el('div','row');
+      const b=el('button','btn',last?'🔃 推到起點了！翻正看看 →':'往前再推一步 →'); b.type='button';
+      b.addEventListener('click',()=>{ stopAudio(); renderRev(); });
+      row.appendChild(b); expBox.appendChild(row);
+    }
+    card.appendChild(expBox);
+    if(fresh) setTimeout(()=>expBox.scrollIntoView({behavior:'smooth',block:'nearest'}),60);
+  }
+  function pick(key,fresh){
+    if(key===n.answer){
+      btns.forEach(b=>{ b.disabled=true; if(b.dataset.key===key) b.classList.add('ok'); });
+      if(!rs[c].includes(n.id)) rs[c].push(n.id); saveRev(); revProg();
+      showExp(true,fresh);
+      const old=app.querySelector('.tlwrap'); const tl=timeline(c,n.id,false); tl.classList.add('tlwrap');
+      if(old) old.replaceWith(tl); else app.appendChild(tl);
+    }else{
+      if(!wrong.includes(key)) wrong.push(key); saveRev();
+      const b=btns.find(x=>x.dataset.key===key); if(b){ b.disabled=true; b.classList.add('ng'); }
+      showExp(false,fresh);
+    }
+  }
+  app.appendChild(card);
+  const tl=timeline(c,null,true); tl.classList.add('tlwrap'); app.appendChild(tl);
+  if(wrong.length) showExp(false,false);    // 重整回來：保留上次的錯選與講解，不自動播
+  window.scrollTo(0,0);
+}
+
+function revFlip(c){
+  const chain=REV.chains[c], meta=chainMeta(c);
+  const card=el('section','card');
+  card.appendChild(el('div','qno',esc(meta.title)+'・翻正'));
+  card.appendChild(el('h2','stem','🔃 把倒推鏈翻過來：這就是表單的順序'));
+  card.appendChild(el('p','mut',c==='R'?'剛才你從終點一路往回推到「先求援」。現在從起點往下讀，每一步都是下一步的前提。':'卸除防護裝備也一樣：從外層手套開始，最後移除 N95、做手部衛生。'));
+  const ol=el('ol','fw');
+  chain.slice().reverse().forEach((n,k)=>{
+    const li=el('li',null,'<span class="tx"><span class="formtag">表單 '+esc(n.form_item)+'</span> '+esc(nodeLabel(n))+'</span>');
+    li.style.setProperty('--d',(k*0.12)+'s'); ol.appendChild(li);
+  });
+  const end=el('li','end','<span class="tx">'+esc(meta.anchor.replace(/^🏁\s*/,''))+'</span>'); end.style.setProperty('--d',(chain.length*0.12)+'s'); ol.appendChild(end);
+  card.appendChild(ol);
+  if(c==='R'){
+    card.appendChild(el('div','fwline','<b>完整 28 項的順序：</b>'+esc(REV.forward)));
+    card.appendChild(audioEl([{src:AUD+RAUD+'forward.mp3'}],!rs.heard.forward,'翻正旁白'));
+    rs.heard.forward=1; saveRev();
+  }
+  app.appendChild(card);
+  if(c==='R') app.appendChild(checklistCard());
+  const row=el('div','row');
+  const b=el('button','btn',c==='R'?'下一段：脫防護裝備也倒推一次 →':'倒推完成，開始 11 題 →'); b.type='button';
+  b.addEventListener('click',()=>{ stopAudio(); if(c==='R') setStage('D'); else { rs.done=rs.done||Date.now(); rs.stage='done'; saveRev(); go('#A'); } });
+  row.appendChild(b); app.appendChild(row);
+  window.scrollTo(0,0);
+}
+
+function checklistCard(){
+  const k=el('section','card');
+  k.appendChild(el('div','tlhead','<b>🧾 收尾檢查清單</b><span class="mut">終點還差這些・不分先後</span>'));
+  const ul=el('ul','cklist'); (REV.checklist||[]).forEach(t=>ul.appendChild(el('li',null,esc(t)))); k.appendChild(ul);
+  return k;
+}
+
+function revDone(){
+  const c=el('section','card');
+  c.appendChild(el('div','qno','✓ 倒推完成'));
+  c.appendChild(el('h2','stem','你已經把 '+revTotal()+' 步倒推回起點，並翻正成表單順序'));
+  c.appendChild(el('div','fwline','<b>完整 28 項的順序：</b>'+esc(REV.forward)));
+  app.appendChild(c); app.appendChild(checklistCard());
+  const row=el('div','row');
+  const b1=el('button','btn','做 11 題 →'); b1.type='button'; b1.addEventListener('click',()=>go('#A'));
+  const b2=el('button','btn sec','回首頁'); b2.type='button'; b2.addEventListener('click',()=>go('#home'));
+  const b3=el('button','btn lite','重新倒推一次'); b3.type='button'; b3.style.flex='1 1 100%';
+  b3.addEventListener('click',()=>{ const d=rs.done; rs={stage:'R',R:[],D:[],wrong:{},heard:{goal:1},done:d}; saveRev(); renderRev(); });   // 保留完成時間，不影響完成標記
+  row.appendChild(b1); row.appendChild(b2); row.appendChild(b3); app.appendChild(row);
+  window.scrollTo(0,0);
+}
+
 /* ── 路由（hash） ── */
 function route(){
   const h=(location.hash||'#home').slice(1); const [a,b]=h.split('/');
+  // 第一次進來（沒有 hash、倒推未完成、11 題也還沒碰）＝直接進 🔁 倒推開場
+  if(!location.hash&&REV&&!rs.done&&!Object.keys(st.ans).length){ try{ history.replaceState(null,'','#rev'); }catch(e){} return renderRev(); }
+  if(a==='rev') return renderRev();
   if(a==='review') return renderReview();
   if(a==='redo'&&b) return renderRedo(+b);
   if(a==='G') return renderCards(b?+b-1:0);
   if(blocks[a]) return renderQuiz(a,b?+b-1:null);
   renderHome();
 }
-$('back').addEventListener('click',()=>{ stopAudio(); const h=location.hash||'#home'; if(h==='#home'){ location.href='../'; } else if(h.startsWith('#redo')){ go('#review'); } else go('#home'); });
+$('back').addEventListener('click',()=>{ stopAudio(); const h=location.hash||'#home'; if(h==='#home'||h==='#'){ location.href='../'; } else if(h.startsWith('#redo')){ go('#review'); } else go('#home'); });
 function paintAuto(){ const b=$('auto'); b.textContent=st.auto?'🔊 自動播放 開':'🔇 自動播放 關'; b.classList.toggle('off',!st.auto); b.setAttribute('aria-pressed',String(st.auto)); }
 $('auto').addEventListener('click',()=>{ st.auto=!st.auto; save(); paintAuto(); if(!st.auto) stopAudio(); });
 paintAuto();
 
-loadData().then(d=>{
+Promise.all([loadData(),loadRevData()]).then(([d,rd])=>{
+  REV=validRev(rd);
   Q=(Array.isArray(d)?d:(d.questions||[])).slice().sort((x,y)=>x.id-y.id);
   Q.forEach(q=>byId[q.id]=q);
   learnQ=Q.filter(q=>(q.use||[]).includes('learn'));
